@@ -1,0 +1,54 @@
+.tourist-spot-card {
+    display: flex;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #ffffff;
+    max-width: 400px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .image-placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  
+  .content {
+    margin-left: 16px;
+    flex: 1;
+  }
+  
+  .tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .tag {
+    font-size: 12px;
+    color: #757575;
+    background-color: #f5f5f5;
+    padding: 4px 8px;
+    border-radius: 16px;
+  }
+  
+  .tag.highlight {
+    color: #ffffff;
+    background-color: #66bb6a;
+  }
+  
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 8px;
+  }
+  
+  .description {
+    font-size: 14px;
+    color: #616161;
+    line-height: 1.6;
+  }
+  

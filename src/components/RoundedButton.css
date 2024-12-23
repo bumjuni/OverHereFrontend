@@ -1,0 +1,21 @@
+.rounded-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 16px; /* Adjust padding for size */
+    border: 1px solid #757575; /* Gray border */
+    border-radius: 999px; /* Makes it fully rounded */
+    background-color: #f9f9f9; /* Light background */
+    font-size: 14px; /* Text size */
+    color: #424242; /* Gray text */
+    font-family: Arial, sans-serif; /* Font style */
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .rounded-button:hover {
+    background-color: #f0f0f0; /* Slightly darker background on hover */
+    border-color: #616161; /* Darker border on hover */
+  }
+  

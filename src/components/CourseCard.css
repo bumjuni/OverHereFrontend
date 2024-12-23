@@ -1,0 +1,50 @@
+
+/* 카드 전체 스타일 */
+.course-card {
+    width: 300px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 카드 헤더 (태그 + 화살표) */
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* 태그 컨테이너 */
+  .tags {
+    display: flex;
+    gap: 8px;
+  }
+  
+  /* 태그 스타일 */
+  .tag {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    background-color: #e0e0e0;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* 드롭다운 화살표 아이콘 */
+  .dropdown-icon {
+    font-size: 1.2rem;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  /* 제목 스타일 */
+  .course-title {
+    margin-top: 12px;
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+  }
+  
