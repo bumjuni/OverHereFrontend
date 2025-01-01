@@ -1,5 +1,6 @@
 import React from 'react';
 import './TourCardList.css';
+//일단 더미 데이터로 되어있음
 
 const TourCard = ({ region, title, description }) => {
   return (
