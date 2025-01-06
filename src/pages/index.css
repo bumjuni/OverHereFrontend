@@ -1,0 +1,38 @@
+body{
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.search-group{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.search-input{
+    display: inline-flex;
+    border-bottom: solid 2px #4caf50;
+}
+
+.search-input input:focus{
+    outline: none;
+}
+
+.stressed{
+    font-weight: bold;
+    color: #4caf50;
+}
+
+.plus-button{
+    display: flex;
+    justify-self: center;
+    margin: 10%;
+    padding :10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 30rem;
+    font-weight: bolder;
+    text-align: center;
+    align-items: center;
+    gap: 10px;
+}
