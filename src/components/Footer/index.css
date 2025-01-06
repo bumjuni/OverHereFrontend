@@ -4,26 +4,33 @@
     font-weight: bold;
 }
 
-.footer-content{
-    padding: 1.5vw;
-}
-
 .footer-header{
-    display: inline-flex;
+    display: flex;
     flex-direction: row;
+    padding-bottom: 20px;
 }
 
 .links{
-    position: relative;
-    width: 25vw;
-    left: 60vw;
-    justify-content: space-around;
+    display: flex;
+    align-self: center;
+    gap: 10px;  
+    font-weight: bolder;
+    margin-left: auto;
 }
 
 #footer{
-    position: absolute;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 10%;
     left: 0;
     bottom: 0;
     width: 100%;
     border-top: 2px solid lightgray;
+    font-size: 12px;
+    padding: 3em;
+    padding-left: 20em;
+    padding-right: 20em;
+    gap: 5px;
+    color: #3d3d3d;
 }

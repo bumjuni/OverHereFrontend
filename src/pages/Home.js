@@ -46,8 +46,6 @@ const Banner = () => {
 const Home = () => {
   return (
     <div>
-      {/* 헤더 */}
-      <Header />
 
       {/* 메인 배너 이미지 */}
       <Banner />
