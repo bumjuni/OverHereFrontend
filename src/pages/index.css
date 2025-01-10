@@ -36,3 +36,11 @@ body{
     align-items: center;
     gap: 10px;
 }
+
+.err-msg{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1em;
+    color: #B5B9BD;
+}
