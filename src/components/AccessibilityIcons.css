@@ -32,8 +32,8 @@
   }
   
   .icon-wrapper.selected .icon {
-    background-color: #6da3b7; /* Highlighted blue background */
-    color: #ffffff; /* White icon color for selected */
+    background-color: #649BB7; /* Highlighted blue background */
+    /* color: #ffffff; White icon color for selected */
   }
   
   .icon-wrapper.selected .label {
@@ -44,3 +44,10 @@
     background-color: #e0e0e0; /* Slight hover effect */
   }
   
+  .selected .icon svg path{
+    fill: #FCFCFD;
+  }
+  
+  .none-selected .icon svg path{
+    fill: #B5B9BD;
+  }
