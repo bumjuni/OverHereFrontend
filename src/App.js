@@ -5,7 +5,6 @@ import TravelRoutes from './pages/TravelRoutesPage';
 import SearchPage from './pages/SearchPage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import SearchPage from './pages/SearchPage';
 
 const App = () => {
   return (
