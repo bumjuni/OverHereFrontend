@@ -28,7 +28,7 @@ const AccessibilityIcons = () => {
           className={`icon-wrapper ${selected === option.id ? "selected" : "none-selected"}`}
           onClick={()=> setSelected(option.id)}
         >
-          <div className="icon">{pictograms[option.id]}</div>
+          <div className="individual_icon">{pictograms[option.id]}</div>
           <div className="label">{option.label}</div>
         </div>
       ))}
