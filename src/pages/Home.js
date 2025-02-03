@@ -7,6 +7,7 @@ import RegionSelector from '../components/Home/RegionSelector';
 import AccessibilityIcons from '../components/AccessibilityIcons';
 import TourCardList from '../components/Home/TourCardList';
 import GreenBorderButton from '../components/Home/GreenBorderButton';
+import RoundedButton from '../components/RoundedButton';
 
 // Array of card data
 const cardData = [
@@ -46,7 +47,7 @@ const Banner = () => {
 const Home = () => {
   return (
     <div>
-
+      <RoundedButton>asdf</RoundedButton>
       {/* 메인 배너 이미지 */}
       <Banner />
 
