@@ -7,10 +7,23 @@ import './TravelRoutesPage.css';
 import imgBoy from "../assets/image/img_boy.jpg";
 import imgGirl from "../assets/image/img_girl.jpg";
 import InfoIcons from '../components/InfoIcons';
+import dummyImg1 from '../assets/image/dummy/dummy_img1.jpg';
+import dummyImg2 from '../assets/image/dummy/dummy_img2.jpg';
+import dummyImg3 from '../assets/image/dummy/dummy_img3.jpg';
+import dummyImg4 from '../assets/image/dummy/dummy_img4.jpg';
+import dummyImg5 from '../assets/image/dummy/dummy_img5.jpg';
+import dummyImg6 from '../assets/image/dummy/dummy_img6.jpg';
+import dummyImg7 from '../assets/image/dummy/dummy_img7.jpg';
+import {ReactComponent as Map} from '../assets/svg/Map.svg';
+import {ReactComponent as ArrowForward} from '../assets/svg/ArrowForward.svg';
+import {ReactComponent as ArrowBack} from '../assets/svg/ArrowBack.svg';
+import Badge from "../components/common/Badge";
 
+const images = [dummyImg1, dummyImg2, dummyImg3, dummyImg4, dummyImg5, dummyImg6, dummyImg7];
 
 const TravelRoutesPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [curRecCourse, setCurRecCourse] = useState(1);
   const totalPages = 5;
 
   const handleNext = () => {
@@ -25,6 +38,11 @@ const TravelRoutesPage = () => {
     }
   };
 
+  const handleCycleCards = (direc, e) => {
+    const totalCourses = images.length; // 전체 에디터 추천 코스 개수 임시로 설정
+    (direc > 0)? setCurRecCourse((curRecCourse+1) % totalCourses) :
+                 setCurRecCourse((curRecCourse-1 + totalCourses) % totalCourses);
+  }
   return (
     <div className="travel-routes">
       <div className="content-container">
@@ -90,6 +108,30 @@ const TravelRoutesPage = () => {
       </div>
 
       <h2 className="editor-pick">에디터 추천 픽 코스</h2>
+      <div className="buttons right-side">
+        <button type="button" onClick={() => handleCycleCards(-1)} className="arrow-button"> <ArrowBack /> </button>
+        <button type="button" onClick={() => handleCycleCards(1)} className="arrow-button"> <ArrowForward /> </button>
+      </div>
+      <div className="rec-card">
+        <div className="img-cropped">
+          <img src={images[curRecCourse]} alt={'dummy'} className="rec-image"></img>
+        </div>
+        <div className="rec-contents">
+          <Badge text="지역" color="gray" />
+          <Badge text="코스 유형" color="yellow" />
+          <h2>텍스트</h2>
+          <span>코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 </span>
+          <div className="badges">
+            <Badge text="관광지 이름" color="gray" />
+            <Badge text="관광지 이름" color="gray" />
+            <Badge text="관광지 이름" color="gray" />
+            <Badge text="관광지 이름" color="gray" />
+            <Badge text="관광지 이름" color="gray" />
+          </div>
+          <button className="course-button" type="button"><Map /> 코스 둘러보기</button>
+        </div>
+      </div>
+
     </div>
   );
 };

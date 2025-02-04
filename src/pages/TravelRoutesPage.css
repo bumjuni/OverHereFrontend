@@ -214,3 +214,72 @@ button:disabled {
 .recommend-button.blue:hover {
   background-color: #1e88e5;
 }
+
+.rec-card{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; 
+  padding: 3%;
+  border: 1px solid #D4D8DC;
+  border-radius: 5px;
+}
+
+/* .img-cropped{
+  position: relative;
+  width: 520px;
+  height: 316px;
+  overflow: hidden;
+} */
+
+.rec-image{
+  /* width: 520px;
+  aspect-ratio: 5 / 3; */
+  /* 가로비율만 고정하고 세로는 자유롭게 두는게 좋은지.. */
+
+  height: 316px;
+  width: 520px;
+  aspect-ratio: 5 / 3;
+  /*아님 이미지 늘어나거나 줄어들더라도 316*520이 좋은지*/
+
+  /* position: absolute;
+  max-width: 600px;
+  bottom: -20px; */
+  /*아님 크롭이 좋은지(근데 크롭하면 창크기 줄이거나 확대했을때도 크롭됨) */
+}
+
+.rec-contents{
+  position: relative;
+  padding: 2px 0 0 3%; /* 반응형 작업 시 수정 */
+}
+
+.badges{
+  padding-top: 20px;
+  padding-bottom: 60px;
+}
+
+.course-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  width: 220px;
+  height: 60px;
+  border: 1px solid #529B40;
+  border-radius: 5px;
+  color: #529B40;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.arrow-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #505458;
+}
+
+.right-side{
+  justify-content: right;
+  margin: 10px;
+}
