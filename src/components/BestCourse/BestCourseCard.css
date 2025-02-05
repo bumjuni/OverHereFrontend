@@ -1,0 +1,21 @@
+.rank{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    background-color: white;
+    height: 5%;
+    aspect-ratio: 1 / 1;
+    font-weight: bold;
+}
+
+.totalKM{
+    position: absolute;
+    right: 0;
+}
+
+.best-card{
+    display: flex;
+    justify-content: center;
+}
