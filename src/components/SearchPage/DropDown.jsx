@@ -1,7 +1,7 @@
 import react, {useState} from 'react';
 import './index.css';
-import {ReactComponent as ArrowUp} from '../../assets/image/ArrowUp.svg';
-import {ReactComponent as ArrowDown} from '../../assets/image/ArrowDown.svg';
+import {ReactComponent as ArrowUp} from '../../assets/svg/ArrowUp.svg';
+import {ReactComponent as ArrowDown} from '../../assets/svg/ArrowDown.svg';
 
 function DropDown({ title, data }){
     const [isClicked, setIsClicked] = useState(false);
