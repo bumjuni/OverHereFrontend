@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // 초기 공지사항 데이터 (20개 중 처음엔 10개만 표시)
 const initialNotices = Array(20).fill({
@@ -8,6 +9,7 @@ const initialNotices = Array(20).fill({
 });
 
 const NoticePage = () => {
+  const navigate = useNavigate();
   const [notices] = useState(initialNotices);
   const [visibleCount, setVisibleCount] = useState(10); // 처음 10개만 표시
   const [isExpanded, setIsExpanded] = useState(false); // 버튼 상태 (더보기/창 줄이기)
@@ -20,6 +22,11 @@ const NoticePage = () => {
       setVisibleCount(notices.length); // 전체 공지 보이기
     }
     setIsExpanded(!isExpanded); // 버튼 텍스트 변경
+  };
+
+  // 게시글 클릭 시 페이지 이동
+  const handleRowClick = (index) => {
+    navigate(`/notice/${index}`);
   };
 
   return (
@@ -36,7 +43,11 @@ const NoticePage = () => {
         </thead>
         <tbody>
           {notices.slice(0, visibleCount).map((notice, index) => (
-            <tr key={index} style={{ borderBottom: "1px solid #ddd" }}>
+            <tr 
+              key={index} 
+              style={{ borderBottom: "1px solid #ddd", cursor: "pointer" }}
+              onClick={() => handleRowClick(index)}
+            >
               <td style={{ padding: "10px" }}>
                 <strong style={{ marginRight: "10px" }}>{notice.category}</strong>
                 {notice.title}
@@ -58,10 +69,10 @@ const NoticePage = () => {
             border: "1px solid #ddd",
             borderRadius: "5px",
             cursor: "pointer",
-            whiteSpace: "nowrap", // 텍스트 줄바꿈 방지
-            width: "auto", // 버튼 크기 자동 조정
-            display: "inline-block", // 버튼 자체를 인라인 블록으로 설정
-            textAlign: "center", // 버튼 내부 텍스트 중앙 정렬
+            whiteSpace: "nowrap",
+            width: "auto",
+            display: "inline-block",
+            textAlign: "center",
           }}
         >
           {isExpanded ? "창 줄이기" : "더보기 +"}
