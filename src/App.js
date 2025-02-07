@@ -5,6 +5,7 @@ import TravelRoutes from './pages/TravelRoutesPage';
 import CourseDetails from './pages/CourseDetailPage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import NoticePage from "./pages/NoticePage";  // 공지사항 페이지
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/travel-routes" element={<TravelRoutes />} />
         <Route path="/course-details" element={<CourseDetails />} />
+        <Route path="/notice" element={<NoticePage />} />
       </Routes>
       <Footer />  
     </BrowserRouter>

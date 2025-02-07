@@ -1,25 +1,32 @@
 import React, { useState } from "react";
 
-const initialNotices = Array(10).fill({
+// 초기 공지사항 데이터 (20개 중 처음엔 10개만 표시)
+const initialNotices = Array(20).fill({
   category: "[공지사항]",
   title: "서울숲에 휠체어 타고 갈 수 있나요?",
   date: "2025.01.01",
 });
 
 const NoticePage = () => {
-  const [notices, setNotices] = useState(initialNotices);
-  const [visibleCount, setVisibleCount] = useState(5);
+  const [notices] = useState(initialNotices);
+  const [visibleCount, setVisibleCount] = useState(10); // 처음 10개만 표시
+  const [isExpanded, setIsExpanded] = useState(false); // 버튼 상태 (더보기/창 줄이기)
 
-  // 더보기 버튼 클릭 시 데이터 추가
-  const loadMore = () => {
-    setVisibleCount((prev) => prev + 5); // 5개씩 추가
+  // 버튼 클릭 시 10개 ↔ 20개 토글
+  const toggleView = () => {
+    if (isExpanded) {
+      setVisibleCount(10); // 다시 10개로 줄이기
+    } else {
+      setVisibleCount(notices.length); // 전체 공지 보이기
+    }
+    setIsExpanded(!isExpanded); // 버튼 텍스트 변경
   };
 
   return (
     <div style={{ fontFamily: "Arial, sans-serif", color: "#333", width: "60%", margin: "auto" }}>
-      <h2 style={{ fontWeight: "bold", fontSize: "24px", marginBottom: "20px" }}>공지사항</h2>
+      <h2 style={{ fontWeight: "bold", fontSize: "24px", marginBottom: "20px", textAlign: "center" }}>공지사항</h2>
 
-      {/* 테이블 */}
+      {/* 테이블 (스크롤 없이 전체 표시) */}
       <table style={{ width: "100%", borderCollapse: "collapse", marginBottom: "20px" }}>
         <thead>
           <tr style={{ borderBottom: "2px solid #000", textAlign: "left" }}>
@@ -40,24 +47,26 @@ const NoticePage = () => {
         </tbody>
       </table>
 
-      {/* 더보기 버튼 */}
-      {visibleCount < notices.length && (
+      {/* 더보기 / 창 줄이기 버튼 */}
+      <div style={{ textAlign: "center", marginTop: "20px", marginBottom: "20px" }}>
         <button
-          onClick={loadMore}
+          onClick={toggleView}
           style={{
-            display: "block",
-            margin: "auto",
             padding: "10px 20px",
             fontSize: "16px",
             backgroundColor: "#fff",
             border: "1px solid #ddd",
             borderRadius: "5px",
             cursor: "pointer",
+            whiteSpace: "nowrap", // 텍스트 줄바꿈 방지
+            width: "auto", // 버튼 크기 자동 조정
+            display: "inline-block", // 버튼 자체를 인라인 블록으로 설정
+            textAlign: "center", // 버튼 내부 텍스트 중앙 정렬
           }}
         >
-          더보기 +
+          {isExpanded ? "창 줄이기" : "더보기 +"}
         </button>
-      )}
+      </div>
     </div>
   );
 };
