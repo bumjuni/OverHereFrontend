@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Logo from '../../assets/image/Logo.png';
-import './index.css';
+import {ReactComponent as Logo} from '../../assets/svg/Logo.svg';
+import './Footer.css';
 
 function Footer(){
     return (
         <div id='footer'>
             {/* <h1 className='footer-header'>여기너머</h1>     */}
             <div className="footer-header">
-                <img src={Logo} alt="여기너머" width="120px"/>
+                <Logo />
                 <div className='links' style={{ display: "flex", gap: "15px" }}>
                     <Link className="normal" to="/notice">공지사항</Link>
                     <Link className='normal' to='/privacy'>개인정보취급방침</Link>

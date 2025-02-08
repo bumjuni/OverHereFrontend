@@ -25,12 +25,8 @@
     height: 10%;
     left: 0;
     bottom: 0;
-    width: 100%;
     border-top: 2px solid lightgray;
-    font-size: 12px;
-    padding: 3em;
-    padding-left: 20em;
-    padding-right: 20em;
-    gap: 5px;
-    color: #3d3d3d;
+    font-size: small;
+    padding: 3em 1em 3em 1em;
+    color: #505458;
 }
