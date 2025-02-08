@@ -10,7 +10,7 @@ function Footer(){
             <div className="footer-header">
                 <img src={Logo} alt="여기너머" width="120px"/>
                 <div className='links' style={{ display: "flex", gap: "15px" }}>
-                    <Link className="normal" to="/notice"> 공지사항</Link>
+                    <Link className="normal" to="/notice">공지사항</Link>
                     <Link className='normal' to='/privacy'>개인정보취급방침</Link>
                     <Link className='normal' to='/terms'>이용약관</Link>
                     <Link className='normal' to='/help'>고객센터</Link>
