@@ -1,10 +1,12 @@
 import react from 'react';
 import styled from 'styled-components';
 import dummy from '../../assets/image/dummy/dummy_img4.jpg';
-import {ReactComponent as Call} from '../../assets/svg/Call.svg';
-import {ReactComponent as Time} from '../../assets/svg/Time.svg';
-import {ReactComponent as Website} from '../../assets/svg/Website.svg';
-import {ReactComponent as Destination} from '../../assets/svg/Destination.svg';
+import {ReactComponent as Call} from '../../assets/svg/TravelDetails/Call.svg';
+import {ReactComponent as Time} from '../../assets/svg/TravelDetails/Time.svg';
+import {ReactComponent as Website} from '../../assets/svg/TravelDetails/Website.svg';
+import {ReactComponent as Destination} from '../../assets/svg/TravelDetails/Destination.svg';
+import {ReactComponent as Likes} from '../../assets/svg/TravelDetails/Likes.svg';
+import {ReactComponent as Share} from '../../assets/svg/TravelDetails/Share.svg';
 import Badge from '../common/Badge';
 import PictogramIcons from '../common/PictogramIcons';
 import './MainInfo.css';
@@ -36,8 +38,8 @@ function MainInfo(){
                     <div className="img-cropped">
                         <img src={dummy} alt="asdf" className="dest-img"/>
                     </div>
-                    <button> 🚩 </button>
-                    <button> 🚩 </button>
+                    <button> <Likes /> </button>
+                    <button> <Share /> </button>
                 </div>
             </div>
         </>
