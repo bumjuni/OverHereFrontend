@@ -113,9 +113,9 @@ const TravelRoutesPage = () => {
         <button type="button" onClick={() => handleCycleCards(1)} className="arrow-button"> <ArrowForward /> </button>
       </div>
       <div className="rec-card">
-        <div className="img-cropped">
+        {/* <div className="img-cropped"> */}
           <img src={images[curRecCourse]} alt={'dummy'} className="rec-image"></img>
-        </div>
+        {/* </div> */}
         <div className="rec-contents">
           <Badge text="지역" color="gray" />
           <Badge text="코스 유형" color="yellow" />
