@@ -38,7 +38,7 @@ const Banner = () => {
   return (
     <section className="banner">
       <div className="main-banner">
-        <img src={bannerImage} alt="Main banner" />
+        <img src={bannerImage} alt="Main banner" width="100%"/>
       </div>
     </section>
   );
