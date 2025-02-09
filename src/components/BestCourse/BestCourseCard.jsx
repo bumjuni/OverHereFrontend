@@ -3,6 +3,9 @@ import Badge from '../common/Badge';
 import { ReactComponent as RouteIcon } from "../../assets/image/Route_Pictogram.svg";
 import './BestCourseCard.css';
 
+import {ReactComponent as TotalDist} from '../../assets/svg/TotalDistance.svg';
+
+
 // RouteIcon svg설정 수정.. current로 변경
 
 function BestCourseCard({rank, img, name}){
@@ -26,7 +29,7 @@ function BestCourseCard({rank, img, name}){
                     <Badge text="관광지 이름" color="gray" />
                     <Badge text="관광지 이름" color="gray" />
                 </div>
-                <p className="totalKM"><RouteIcon /> 총 00KM  </p>
+                <p className="totalKM"><TotalDist /> 총 00KM  </p>
             </div>
         </div>
     );
