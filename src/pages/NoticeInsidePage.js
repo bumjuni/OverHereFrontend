@@ -1,3 +1,6 @@
+//푸터 내 공지사항 클릭 -> 공지사항 내용 확인 
+//공지사항 내용 페이지
+
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 

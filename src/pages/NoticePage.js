@@ -1,3 +1,5 @@
+//푸터 내 공지사항 페이지
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
