@@ -47,7 +47,6 @@ const Banner = () => {
 const Home = () => {
   return (
     <div>
-      <RoundedButton>asdf</RoundedButton>
       {/* 메인 배너 이미지 */}
       <Banner />
 
