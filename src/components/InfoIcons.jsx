@@ -1,8 +1,8 @@
 import React from "react";
-import { ReactComponent as RouteIcon } from "../assets/image/Route_Pictogram.svg"; // 총 00KM 아이콘
-import { ReactComponent as MapIcon } from "../assets/image/MapPos_Pictogram.svg"; // 00개 아이콘
-import { ReactComponent as VehicleIcon } from "../assets/image/Bus_Pictogram.svg"; // 이동수단 아이콘
-import { ReactComponent as DifficultyIcon } from "../assets/image/DifficultyLevel_Pictogram.svg"; // 난이도 아이콘
+import { ReactComponent as RouteIcon } from "../assets/svg/Route_Pictogram.svg"; // 총 00KM 아이콘
+import { ReactComponent as MapIcon } from "../assets/svg/MapPos_Pictogram.svg"; // 00개 아이콘
+import { ReactComponent as VehicleIcon } from "../assets/svg/Bus_Pictogram.svg"; // 이동수단 아이콘
+import { ReactComponent as DifficultyIcon } from "../assets/svg/DifficultyLevel_Pictogram.svg"; // 난이도 아이콘
 
 const infoOptions = [
   { id: 0, label: "총 00KM", icon: <RouteIcon /> },

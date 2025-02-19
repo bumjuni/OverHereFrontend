@@ -1,13 +1,11 @@
 import React from 'react';
 import bannerImage from '../assets/image/banner.jpg';
-import Header from '../components/Header/Header';
 import './Home.css';
 import Card from '../components/Home/Card';
 import RegionSelector from '../components/Home/RegionSelector';
 import AccessibilityIcons from '../components/AccessibilityIcons';
 import TourCardList from '../components/Home/TourCardList';
 import GreenBorderButton from '../components/Home/GreenBorderButton';
-import RoundedButton from '../components/RoundedButton';
 
 // Array of card data
 const cardData = [
@@ -46,46 +44,46 @@ const Banner = () => {
 
 const Home = () => {
   return (
-    <div>
+    <>
       {/* 메인 배너 이미지 */}
       <Banner />
+      
+      <div className="contents">
+        <h2>실시간 인기 급상승 여행지</h2>
+        <RegionSelector />
 
-      <h1>실시간 인기 급상승 여행지</h1>
-      <RegionSelector />
-
-      {/* 카드 컴포넌트 */}
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: '16px',
-          padding: '20px',
-        }}
-      >
-        {cardData.map((card, index) => (
-          <Card
-            key={index}
-            title={card.title}
-            description={card.description}
-            image={card.image}
-          />
-        ))}
-      </div>
-
-      <div>
-        <h1>나를 위한 맞춤 여행지</h1>
-        <AccessibilityIcons />
-        <div className="Home">
-          <TourCardList />
+        {/* 카드 컴포넌트 */}
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '16px',
+            // padding: '20px',
+          }}
+        >
+          {cardData.map((card, index) => (
+            <Card
+              key={index}
+              title={card.title}
+              description={card.description}
+              image={card.image}
+            />
+          ))}
         </div>
+      </div>
+          
+      <div className="contents">
+        <h2>나를 위한 맞춤 여행지</h2>
+        <AccessibilityIcons />
+        <TourCardList />
       </div>
 
       {/* 관광지 더 보러가기 버튼 */}
       <div className="home-container">
         <GreenBorderButton text="관광지 더 보러가기" />
       </div>
-    </div>
+    </>
   );
 };
 

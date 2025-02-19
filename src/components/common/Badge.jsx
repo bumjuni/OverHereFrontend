@@ -5,15 +5,16 @@ import styled from 'styled-components';
 
 const StyledButton = styled.span`
     display: inline-block;
-    padding: 5px 10px;
     border-radius: 10em;
-    margin: 5px; 
     font-size: small;
     font-weight: bold;
     word-break: break-all;
 
-    color: ${(props) => props.textColor || "black"};
-    background-color: ${(props) => props.backgroundColor || "#505458"};
+    padding: ${(props) => props.backgroundColor? "5px 10px" : "unset"};
+    margin: ${(props) => props.backgroundColor? "5px" : "unset"}; 
+
+    color: ${(props) => props.textColor || "#8E9398"};
+    background-color: ${(props) => props.backgroundColor || "unset"};
 `
 const backgroundColor = {"yellow": "#F0E68C", "gray": "#ECEEF0", "green": "#63A73E"};
 const textColor = {"yellow": "#B39A1D", "gray": "#505458", "green": "#FCFCFD"};

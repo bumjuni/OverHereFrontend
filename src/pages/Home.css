@@ -67,6 +67,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10vh; /* 화면 전체 높이 */
-    margin: 0;
+    /* height: 10vh; 화면 전체 높이 */
+    margin: 30px;
+  }
+
+  .contents{
+    margin: 40px 0 40px 0;
   }

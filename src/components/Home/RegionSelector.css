@@ -1,9 +1,9 @@
 .region-selector {
     display: flex;
     gap: 12px; /* Space between buttons */
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
-    padding: 20px;
+    padding-bottom: 50px;
   }
   
   .region-button {
@@ -27,6 +27,7 @@
     border-color: #2e7d32; /* Green border for selected */
     background-color: #e8f5e9; /* Light green background for selected */
     color: #2e7d32; /* Green text for selected */
+    font-weight: bold;
   }
   
   .region-button .check-icon {
