@@ -11,8 +11,8 @@ import imgGirl from "../assets/image/img_girl.jpg";
 import dummyImg1 from '../assets/image/dummy/dummy_img1.jpg';
 import dummyImg2 from '../assets/image/dummy/dummy_img2.jpg';
 import dummyImg3 from '../assets/image/dummy/dummy_img3.jpg';
-import EditorPick from '../components/Course/EditorPick';
-import MainCourse from '../components/Course/MainCourse';
+import EditorPick from '../components/TravelRoutes/EditorPick';
+import MainCourse from '../components/TravelRoutes/MainCourse';
 
 const course_data = [
   {
@@ -109,7 +109,7 @@ const TravelRoutesPage = () => {
             </button>
           </Link>
         </div>
-        
+
         <div className="recommend-card blue-card">
           <h3>지역별 추천 코스</h3>
           <p className="description">
