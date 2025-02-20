@@ -3,7 +3,7 @@ import Badge from '../common/Badge';
 import './TourCardList.css';
 //일단 더미 데이터로 되어있음
 
-const TourCard = ({ region, title, description }) => {
+const TourCard = ({ region, title}) => {
   return (
     <div className="tour-card">
       <div className="tour-image"></div>
@@ -17,23 +17,23 @@ const TourCard = ({ region, title, description }) => {
   );
 };
 
-const TourCardList = () => {
-  const tourCards = [
-    { region: '지역1', title: '관광지 이름1' },
-    { region: '지역2', title: '관광지 이름2' },
-    { region: '지역3', title: '관광지 이름3' },
-    { region: '지역4', title: '관광지 이름4' },
-    { region: '지역5', title: '관광지 이름5' },
-    { region: '지역6', title: '관광지 이름6' },
-  ];
+const TourCardList = ({data}) => {
+  // const tourCards = [
+  //   { region: '지역1', title: '관광지 이름1' },
+  //   { region: '지역2', title: '관광지 이름2' },
+  //   { region: '지역3', title: '관광지 이름3' },
+  //   { region: '지역4', title: '관광지 이름4' },
+  //   { region: '지역5', title: '관광지 이름5' },
+  //   { region: '지역6', title: '관광지 이름6' },
+  // ];
 
   return (
     <div className="tour-card-list">
-      {tourCards.map((card, index) => (
+      {data.map((item) => (
         <TourCard
-          key={index}
-          region={card.region}
-          title={card.title}
+          key={item.id}
+          region={item.id}
+          title={item.title}
           // description={card.description}
         />
       ))}

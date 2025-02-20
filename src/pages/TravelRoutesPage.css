@@ -72,7 +72,7 @@
   color: #4caf50;
 }
 
-.icon {
+.travel-icon {
   width: 48px;
   height: 48px;
   background-color: #f6f8e5;
@@ -119,7 +119,7 @@
   gap: 16px;
 }
 
-button {
+.travel-button {
   width: 40px;
   height: 40px;
   font-size: 16px;

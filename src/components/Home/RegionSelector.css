@@ -20,7 +20,7 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease; /* Smooth transition for hover and selected states */
-    min-width: 100px; /* Ensures all buttons have equal width */
+    /* min-width: 1rem; Ensures all buttons have equal width */
   }
   
   .region-button.selected {

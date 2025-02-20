@@ -36,6 +36,7 @@
   
   .icon-wrapper.selected .individual_icon {
     background-color: #649BB7; /* Highlighted blue background */
+    transition: .5s ease;
     /* color: #ffffff; White icon color for selected */
   }
   
