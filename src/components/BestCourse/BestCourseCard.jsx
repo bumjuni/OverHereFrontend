@@ -1,6 +1,6 @@
 import dummyImg from '../../assets/image/dummy/dummy_img4.jpg';
 import Badge from '../common/Badge';
-import { ReactComponent as RouteIcon } from "../../assets/svg/Route_Pictogram.svg";
+import { ReactComponent as RouteIcon } from "../../assets/svg/TravelRoutes/Route_Pictogram.svg";
 import './BestCourseCard.css';
 
 import {ReactComponent as TotalDist} from '../../assets/svg/TotalDistance.svg';
