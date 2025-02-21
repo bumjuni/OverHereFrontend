@@ -17,7 +17,7 @@ const RegionButton = () => {
           className={`region-button ${activeRegion === region ? 'active' : ''}`}
           onClick={() => handleButtonClick(region)}
         >
-          {region === '서울' && <span className="icon">📍</span>}
+          {region === '서울' && <span className="region_button">📍</span>}
           {region}
         </button>
       ))}

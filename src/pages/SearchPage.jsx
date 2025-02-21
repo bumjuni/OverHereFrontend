@@ -1,4 +1,5 @@
-import {react, useState, useEffect, useRef} from'react';
+import {react, useState, useEffect} from'react';
+import axios from 'axios';
 import TourCardList from '../components/Home/TourCardList';
 import DropDown from '../components/SearchPage/DropDown';
 import {ReactComponent as SearchIcon} from '../assets/svg/SearchIcon.svg';
@@ -11,57 +12,31 @@ import './SearchPage.css';
 const region = ['서울', '경기도', '충청도', '강원도', '전라도', '경상도', '제주'];
 const type = ['자연', '문화/역사', '음식/미식', '축제/이벤트'];
 
-const result = [    //더미데이터 -> 더보기 삭제
-    {
-        region: '충청도', 
-        title: '옥천HUB', 
-        description: '간선상차'
-    }, {
-        region: '경기도',
-        title: '이천HUB',
-        description: '분실'
-    },
-]
-
-function SearchResult(){
-    return (
-        <>
-            {result.length? 
-            <TourCardList />
-            : 
-            <div className="err-msg">
-                <SearchOff />
-                <h1>검색 결과가 없습니다.</h1>
-                <h2>다른 검색어를 입력하거나 카테고리를 선택해 보세요.</h2>
-            </div>
-        }
-        </>
-    );
-}
-
 function SearchPage(){
     const [selectedReg, setSelectedReg] = useState(null);
     const [selectedType, setSelectedType] = useState(null);
     const [searchWord, setSearchWord] = useState('');
-    const [query, setQuery] = useState([]); //useRef?
+    const [result, setResult] = useState([]); 
 
     useEffect(() => {
-        setQuery([selectedReg, selectedType]);
-    }, [selectedReg, selectedType]);
+        console.log(selectedReg, selectedType, searchWord);
+    }, [selectedReg, selectedType, searchWord]);
 
-    useEffect(() => {
-        console.log(query);
-        const filteredResult = result.filter(course => (course.region === selectedReg) && (course.type === selectedType));
-    }, [query])
+    // 검색했는데 아무 결과 없으면 안되니까 일단 필터링 없이 사용자가 검색할 때마다 백엔드에 넘겨주는걸로 구현
 
     const handleRefresh = () => {
-        setSelectedReg(null);
-        setSelectedType(null);
+        // setSelectedReg(null);
+        // setSelectedType(null);
+        // setSearchWord(null);
+        window.location.reload();
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setSearchWord(e.Key)
+        // api호출
+        axios.get('https://my-json-server.typicode.com/typicode/demo/posts')
+            .then(res => setResult(res))
+            .catch(err => alert("검색 결과를 불러오는데 실패했습니다."));
     }
 
     return (
@@ -76,12 +51,22 @@ function SearchPage(){
                     title={selectedType || '유형'} data={type} onChange={setSelectedType}
                 />
                 <form className="search-input" onSubmit={handleSubmit}>
-                    <input type="text" placeholder="검색어를 입력하세요" onKeyDown={(e)=>console.log(e.key)}></input>
+                    <input type="text" placeholder="검색어를 입력하세요" onChange={(e)=>setSearchWord(e.target.value)} value={searchWord}></input>
                     <button><SearchIcon/></button>
                 </form>
             </div>
             <h3>총 <span className="stressed">{formatTwoDigits(result.length)}</span>개</h3>
-            <SearchResult />
+            
+            {result.length? 
+            <TourCardList />
+            : 
+            <div className="err-msg">
+                <SearchOff />
+                <h1>검색 결과가 없습니다.</h1>
+                <h2>다른 검색어를 입력하거나 카테고리를 선택해 보세요.</h2>
+            </div>
+            }
+
             <button className="plus-button">더보기 <PlusIcon/> </button>
         </>
     );
