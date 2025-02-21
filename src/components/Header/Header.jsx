@@ -32,7 +32,7 @@ const Header = () => {
             placeholder="어디로 여행을 떠나시나요?"
             aria-label="Search destinations"
           />
-          <button><SearchIcon width="25" height="25"/></button>
+          <button><SearchIcon /></button>
         </div>
       </div>  
     </header>
