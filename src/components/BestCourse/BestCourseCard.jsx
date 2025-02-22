@@ -1,27 +1,57 @@
-import dummyImg from '../../assets/image/dummy/dummy_img4.jpg';
+import React from 'react';
+import styled from 'styled-components';
 import Badge from '../common/Badge';
-import { ReactComponent as RouteIcon } from "../../assets/svg/TravelRoutes/Route_Pictogram.svg";
-import './BestCourseCard.css';
-
 import {ReactComponent as TotalDist} from '../../assets/svg/TotalDistance.svg';
 
-
-// RouteIcon svg설정 수정.. current로 변경
+const Card = styled.div`
+    display: flex;
+    justify-content: center;
+    img {
+        height: 12em;
+        aspect-ratio: 1 / 0.65;
+    }
+`
+const Rank = styled.div`
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+    height: 2.3em;
+    aspect-ratio: 1 / 1;
+`
+const TotalKM = styled.p`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 4px;
+    gap: 7px;
+`
+const Content = styled.div`
+    position: relative;
+    padding: 0 1.5em;
+    font-size: 12px;
+`
 
 function BestCourseCard({rank, img, name}){
     return (
-        <div className="best-card">
+        <Card>
             <div>
-                <div className="rank">
+                <Rank>
                     Best <br /> {rank}
-                </div>
-                <img src={img} alt={name} className="best-image" height="218" width="382" />
+                </Rank>
+                <img src={img} alt={name} />
             </div>
-            <div className="rec-contents">
+            <Content>
                 <Badge text="지역" color="gray" />
                 <Badge text="코스 설명" color="yellow" />
-                <h2>텍스트</h2>
-                <p>코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 </p>
+                <h2 style={{margin: "0.5em 0"}}>텍스트</h2>
+                <p style={{fontSize: "12px"}}>코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 </p>
                 <div className="best-badges">
                     <Badge text="관광지 이름" color="gray" />
                     <Badge text="관광지 이름" color="gray" />
@@ -29,9 +59,9 @@ function BestCourseCard({rank, img, name}){
                     <Badge text="관광지 이름" color="gray" />
                     <Badge text="관광지 이름" color="gray" />
                 </div>
-                <p className="totalKM"><TotalDist /> 총 00KM  </p>
-            </div>
-        </div>
+                <TotalKM><TotalDist /> 총 00KM  </TotalKM>
+            </Content>
+        </Card>
     );
 }
 

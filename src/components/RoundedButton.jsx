@@ -5,4 +5,4 @@ const RoundedButton = ({ label }) => {
   return <div className="rounded-button">{label}</div>;
 };
 
-export default RoundedButton;
+// export default RoundedButton;

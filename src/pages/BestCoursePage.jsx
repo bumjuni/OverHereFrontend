@@ -9,19 +9,19 @@ import dummy6 from '../assets/image/dummy/dummy_img6.jpg';
 import dummy7 from '../assets/image/dummy/dummy_img7.jpg';
 import BestCourseCard from '../components/BestCourse/BestCourseCard';
 import MoreContentsButton from '../components/common/MoreContentsButton';
-import './BestCoursePage.css';
 
 const StyledUl = styled.ul`
     display: flex;
     flex-direction: column;
-    justify-contents: center;
+    justify-content: center;
     list-style-type: none;
-    margin: 20px 0 20px 0;
+    padding: 0;
+    margin: 3em 20px 20px 20px;
     `;
 
 const Divider = styled.div`
     border: 1px solid #D4D8DC;
-    margin: 5% 0 4% 0;
+    margin: 2em 0;
 `
 
 function BestCourse(){
@@ -43,7 +43,7 @@ function BestCourse(){
     ];
 
     const BestCourseList = result.map(course =>
-        <li className="best-list">
+        <li>
             <BestCourseCard
                 rank={course.rank}
                 img={course.img}
@@ -55,7 +55,7 @@ function BestCourse(){
 
     return (
         <>
-            <h1 className="best-title">여기너머의 인기 코스</h1> 
+            <h2>여기너머의 인기 코스</h2> 
             <StyledUl>{BestCourseList}</StyledUl>
             <MoreContentsButton />
         </>
