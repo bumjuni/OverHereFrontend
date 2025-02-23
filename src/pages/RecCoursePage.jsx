@@ -14,7 +14,7 @@ const dummy = [dummy1, dummy2, dummy3, dummy4, dummy5, dummy6, dummy7];
 const CardList = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 5%;
+    gap: 2em;
 `
 
 function RecCoursePage(){

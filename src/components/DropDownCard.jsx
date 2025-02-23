@@ -15,8 +15,14 @@ const Card = styled.div`
     img {
         width: 300px;
         aspect-ratio: 5 / 3;
-        padding: 5%;
+        padding: 2em;
     }
+`
+const Wrapper = styled.div`
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
 `
 const DropDownButton = styled.button`
     border: none;
@@ -31,23 +37,25 @@ function DropDownCard({src, alt}){
         <>
             <Card>
                 <img src={src} alt={alt} />
-                <div style={{display: "flex", justifyContent: "space-between"}}>
+                <Wrapper>
                     <div>
                         <div>
                             <Badge text="지역 00시" color="gray" />
                             <Badge text="총 00KM" color="gray" />
                         </div>
-                        <span> 텍스트 </span>
+                        <h2> 텍스트 </h2>
                     </div>
                     <DropDownButton onClick={() => (setClicked(!clicked))}> <ArrowDown /> </DropDownButton>
-                </div>
-            </Card> 
+                </Wrapper>
 
-            {clicked && 
+                {clicked && 
                 <div>
                     <h3> 코스 정보(디자인팀 보류) </h3>
                 </div>
-            }
+                }
+
+            </Card> 
+
         </>
     );
 }
