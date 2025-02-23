@@ -116,7 +116,7 @@ const TravelRoutesPage = () => {
             지역별로 코스를 추천받아요! 또한 원하는 코스를 찾아볼 수 있습니다.
           </p>
           <img src={imgGirl} alt="icon_girl" height="150" className="recommend-image" />
-          <Link to='/region-course'>
+          <Link to='/recommend-course'>
             <button className="recommend-button blue">
               바로 가기 <span className="arrow">→</span>
             </button>

@@ -9,20 +9,22 @@ const Card = styled.div`
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    width: 45%;
-    border: 1px solid gray;
+    max-width: 44.5%;
+    border: 1px solid #D4D8DC;
     border-radius: 10px;
+    padding: 1.5em;
+    gap: 1em;
     img {
-        width: 300px;
+        width: 100%;
         aspect-ratio: 5 / 3;
-        padding: 2em;
+        border-radius: 3px;
     }
 `
 const Wrapper = styled.div`
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 `
 const DropDownButton = styled.button`
     border: none;
@@ -43,7 +45,7 @@ function DropDownCard({src, alt}){
                             <Badge text="지역 00시" color="gray" />
                             <Badge text="총 00KM" color="gray" />
                         </div>
-                        <h2> 텍스트 </h2>
+                        <h3 style={{margin: 0}}> 텍스트 </h3>
                     </div>
                     <DropDownButton onClick={() => (setClicked(!clicked))}> <ArrowDown /> </DropDownButton>
                 </Wrapper>

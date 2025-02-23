@@ -8,20 +8,22 @@ import dummy4 from '../assets/image/dummy/dummy_img4.jpg';
 import dummy5 from '../assets/image/dummy/dummy_img5.jpg';
 import dummy6 from '../assets/image/dummy/dummy_img6.jpg';
 import dummy7 from '../assets/image/dummy/dummy_img7.jpg';
+import SearchGroup from '../components/SearchPage/SearchGroup';
 
 const dummy = [dummy1, dummy2, dummy3, dummy4, dummy5, dummy6, dummy7];
 
 const CardList = styled.div`
     display: flex;
     flex-wrap: wrap;
-    gap: 2em;
-`
+    gap: 2em 1em;
+    margin: 2em 0;
+    `
 
 function RecCoursePage(){
     return (
         <>
-            <h1> 원하는 코스 찾기 </h1>
-            {/* searchOptions -> 추후 SearchPage에서 pr 후 구현 */}
+            <h2> 원하는 코스 찾기 </h2>
+            <SearchGroup />
             <CardList>
                 {dummy.map((item) => <DropDownCard src={item} alt={"asdf"} />)} 
             </CardList>

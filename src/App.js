@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import TravelRoutes from './pages/TravelRoutesPage';
+import TravelRoutesPage from './pages/TravelRoutesPage';
 import LocalSign from './pages/LocalSign';
 import SocialSign from './pages/SocialSign';
 import BestCourse from './pages/BestCoursePage';
@@ -22,7 +22,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/travel-routes" element={<TravelRoutes />} />
+        <Route path="/travel-routes" element={<TravelRoutesPage />} />
         <Route path="/sign" element={<SocialSign />} />
         <Route path="/best-course" element={<BestCourse />} />
         <Route path="/notice" element={<NoticePage />} />
