@@ -4,8 +4,9 @@ import Home from './pages/Home';
 import TravelRoutes from './pages/TravelRoutesPage';
 import LocalSign from './pages/LocalSign';
 import SocialSign from './pages/SocialSign';
-import CourseDetails from './pages/CourseDetailPage';
 import BestCourse from './pages/BestCoursePage';
+import SearchPage from './pages/SearchPage';
+import CourseDetailPage from './pages/CourseDetailPage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import NoticePage from "./pages/NoticePage";  // 공지사항 페이지
@@ -23,7 +24,6 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/travel-routes" element={<TravelRoutes />} />
         <Route path="/sign" element={<SocialSign />} />
-        <Route path="/course-details" element={<CourseDetails />} />
         <Route path="/best-course" element={<BestCourse />} />
         <Route path="/notice" element={<NoticePage />} />
         <Route path="/notice/:id" element={<NoticeInsidePage />} />
@@ -31,6 +31,8 @@ const App = () => {
         <Route path="/terms" element={<TermsOfServicePage />} /> 
         <Route path="/help" element={<CustomerSupportPage />} /> 
         <Route path="/recommend-course" element={<RecCoursePage />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/course-details" element={<CourseDetailPage />} />
       </Routes>
       <Footer />  
     </BrowserRouter>

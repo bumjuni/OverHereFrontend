@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import {ReactComponent as AudioGuide} from '../assets/image/AudioGuide_Pictogram.svg';
-import {ReactComponent as HelpDog} from '../assets/image/HelpDog_Pictogram.svg';
-import {ReactComponent as ParkingLot} from '../assets/image/ParkingLot_Pictogram.svg';
-import {ReactComponent as Toilet} from '../assets/image/Toilet_Pictogram.svg';
-import {ReactComponent as WheelChair} from '../assets/image/WheelChair_Pictogram.svg';
+import {ReactComponent as AudioGuide} from '../assets/svg/Accessibility/AudioGuide_Pictogram.svg';
+import {ReactComponent as HelpDog} from '../assets/svg/Accessibility/HelpDog_Pictogram.svg';
+import {ReactComponent as ParkingLot} from '../assets/svg/Accessibility/ParkingLot_Pictogram.svg';
+import {ReactComponent as Toilet} from '../assets/svg/Accessibility/Toilet_Pictogram.svg';
+import {ReactComponent as WheelChair} from '../assets/svg/Accessibility/WheelChair_Pictogram.svg';
 import "./AccessibilityIcons.css";
 
 const accessibilityOptions = [

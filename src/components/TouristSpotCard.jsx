@@ -21,4 +21,4 @@ const TouristSpotCard = () => {
   );
 };
 
-export default TouristSpotCard;
+// export default TouristSpotCard;

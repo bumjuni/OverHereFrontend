@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {ReactComponent as Logo} from '../../assets/svg/Logo.svg';
-import {ReactComponent as SearchIcon} from '../../assets/svg/SearchIcon.svg';
+import {ReactComponent as SearchIcon} from '../../assets/svg/Search/SearchIcon.svg';
 import './Header.css'; // 헤더 스타일링 css
 
 const Header = () => {
@@ -32,7 +32,7 @@ const Header = () => {
             placeholder="어디로 여행을 떠나시나요?"
             aria-label="Search destinations"
           />
-          <button><SearchIcon width="25" height="25"/></button>
+          <button><SearchIcon /></button>
         </div>
       </div>  
     </header>

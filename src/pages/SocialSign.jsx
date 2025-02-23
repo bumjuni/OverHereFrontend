@@ -1,7 +1,7 @@
 import {react, useState, useEffect} from 'react';
-import {ReactComponent as Naver} from '../assets/svg/Naver.svg';
-import {ReactComponent as Kakao} from '../assets/svg/Kakao.svg';
-import {ReactComponent as Google} from '../assets/svg/Google.svg';
+import {ReactComponent as Naver} from '../assets/svg/Sign/Naver.svg';
+import {ReactComponent as Kakao} from '../assets/svg/Sign/Kakao.svg';
+import {ReactComponent as Google} from '../assets/svg/Sign/Google.svg';
 import {ReactComponent as Logo} from '../assets/svg/Logo.svg';
 import styled from 'styled-components';
 

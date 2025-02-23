@@ -14,4 +14,4 @@ const TourCard = ({ region, title, description }) => {
   );
 };
 
-export default TourCard;
+// export default TourCard;
