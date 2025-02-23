@@ -14,6 +14,7 @@ import NoticeInsidePage from "./pages/NoticeInsidePage"; // 공지사항 상세 
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/TermsOfSerivcePage';
 import CustomerSupportPage from './pages/CustomerSupportPage';
+import RecCoursePage from './pages/RecCoursePage';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
         <Route path="/terms" element={<TermsOfServicePage />} /> 
         <Route path="/help" element={<CustomerSupportPage />} /> 
+        <Route path="/recommend-course" element={<RecCoursePage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/course-details" element={<CourseDetailPage />} />
       </Routes>
