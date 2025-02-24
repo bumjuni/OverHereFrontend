@@ -1,130 +1,83 @@
 import React from "react";
+import axios from "axios";
+import styled from "styled-components";
 import CourseDetailInfo from "../components/CourseDetailInfo";
 import SimilarCourseCard from "../components/SimilarCourseCard";
+import {ReactComponent as Dist} from '../assets/svg/TravelRoutes/Route_Pictogram.svg';
+import {ReactComponent as Map} from '../assets/svg/TravelRoutes/MapPos_Pictogram.svg';
+import {ReactComponent as Difficulty} from '../assets/svg/TravelRoutes/DifficultyLevel_Pictogram.svg';
+import dummy from '../assets/image/dummy/dummy_img3.jpg';
 
 const CourseDetailPage = () => {
   return (
-    <div style={{ fontFamily: "Arial, sans-serif", color: "#333", margin: "20px" }}>
+    <Container>
       {/* Header Section */}
-      <div
-        style={{
-          width: "100%",
-          height: "300px",
-          backgroundColor: "#ccc",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      >
-        <div>
-          <p style={{ fontSize: "18px", margin: 0 }}>지역</p>
-          <h2 style={{ fontSize: "32px", margin: 0 }}>텍스트</h2>
-        </div>
-      </div>
+      <Title>
+          <p>지역</p>
+          <h1>텍스트</h1>
+      </Title>
 
       {/* Icon Info Section */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "20px",
-        }}
-      >
-        <div style={{ marginRight: "15px" }}>
-          <span>👁</span> 12,345회
-        </div>
-        <div>
-          <span>❤️</span> 9,999
-        </div>
-      </div>
+      <IconInfo>
+          <span>👁 12,345회</span> 
+          <span>❤️ 9,999</span>
+      </IconInfo>
 
       {/* Details Section */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-          marginTop: "30px",
-          padding: "20px",
-          borderTop: "1px solid #ddd",
-          borderBottom: "1px solid #ddd",
-        }}
-      >
-        <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: "18px", fontWeight: "bold" }}>총 00KM</div>
-          <p>코스 거리</p>
+      <CourseInfo>
+        <div>
+          <Dist />
+          <span>코스 거리</span> <br />
+          <span>총 00KM</span>
         </div>
-        <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: "18px", fontWeight: "bold" }}>00개</div>
-          <p>관광지 개수</p>
+        <div>
+          <Map />
+          <span>관광지 개수</span>
+          <span>00개</span>
         </div>
-        <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: "18px", fontWeight: "bold" }}>이동수단</div>
-          <p>권장 이동수단</p>
+        <div>
+          <Difficulty />
+          <span>난이도</span>
+          <span>난이도</span>
         </div>
-        <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: "18px", fontWeight: "bold" }}>난이도</div>
-          <p>난이도</p>
-        </div>
-      </div>
+      </CourseInfo>
 
       {/* Description */}
-      <div style={{ padding: "20px", lineHeight: "1.6" }}>
+      <Description>
         역사와 문화를 동시에 체험할 수 있는 특별한 관광지 코스를 소개합니다. 이 코스는 각
         지역의 고유한 매력을 살린 역사적 명소들로 구성되어 있으며, 장애인 친화적인
         시설과 서비스를 통해 모든 분들이 편리하게 즐길 수 있습니다.
-      </div>
+      </Description>
 
       {/* Placeholder Section */}
-      <div
-        style={{
-          width: "100%",
-          height: "300px",
-          backgroundColor: "#ccc",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      ></div>
+      <Image src={dummy} alt={"asdf"}/>
 
       {/* Course Details */}
       <div>
         <CourseDetailInfo
-          time="00시 00구"
+          place="00시 00구"
           title="텍스트"
+          img={dummy}
           description="관광지 설명 관광지 설명 관광지 설명 관광지 설명 관광지 설명 관광지 설명"
           icon="♿" // Replace with an actual icon or image if necessary
         />
         <CourseDetailInfo
-          time="00시 00구"
+          place="00시 00구"
           title="다른 텍스트"
+          img={dummy}
           description="다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명"
           icon="♿"
         />
         <CourseDetailInfo
-          time="00시 00구"
+          place="00시 00구"
           title="다른 텍스트"
-          description="다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명"
-          icon="♿"
-        />
-        <CourseDetailInfo
-          time="00시 00구"
-          title="다른 텍스트"
-          description="다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명"
-          icon="♿"
-        />
-        <CourseDetailInfo
-          time="00시 00구"
-          title="다른 텍스트"
+          img={dummy}
           description="다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명"
           icon="♿"
         />
       </div>
 
-      <h1>비슷한 코스 찾아보기</h1>
+      <h2>비슷한 코스 찾아보기</h2>
 
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
         <SimilarCourseCard
@@ -149,8 +102,61 @@ const CourseDetailPage = () => {
           description="다른 코스 설명 글 다른 코스 설명 글 다른 코스 설명 글 다른 코스 설명 글"
         />
       </div>
-    </div>
+    </Container>
   );
 };
 
 export default CourseDetailPage;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+const Title = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 300px;
+  color: white;
+  background-color: #ccc;
+  justify-content: center;
+  align-items: center;
+  p{
+    padding: .5em;
+    margin: 0;
+    border-bottom: 1px solid white;
+  }
+`
+const IconInfo = styled.div`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin: 1em 0;
+  gap: 1em;
+`
+const CourseInfo = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 30px;
+  padding: 20px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+`
+const DefaultInfo = styled.div`
+ style={{ textAlign: "center" }}
+ style={{ textAlign: "center" }}
+ style={{ textAlign: "center" }}
+ style={{ textAlign: "center" }}
+`
+const Description = styled.p`
+  margin: 2em 0;
+  font-size: 12px;
+`
+const Image = styled.img`
+  display: flex;
+  align-self: center;
+  width: 90%;
+  aspect-ratio: 1 / 0.7;
+  border-radius: 5px;
+`

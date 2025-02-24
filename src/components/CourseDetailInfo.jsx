@@ -1,36 +1,54 @@
 import React from "react";
+import styled from "styled-components";
+import {ReactComponent as Marker} from '../assets/svg/Marker.svg';
 
-const CourseDetailInfo = ({ time, title, description, icon }) => {
+const CourseDetailInfo = ({ place, title, img, description, icon }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        margin: "20px 0",
-        fontFamily: "Arial, sans-serif",
-        color: "#333",
-      }}
-    >
+    <Container>
+      <MarkerWrapper>
+        <Marker />
+      </MarkerWrapper>
       {/* Image Placeholder */}
-      <div
-        style={{
-          width: "120px",
-          height: "120px",
-          backgroundColor: "#EDEFF1",
-          borderRadius: "10px",
-          marginRight: "20px",
-        }}
-      ></div>
+      <Image src={img} alt={title} />
 
       {/* Text Content */}
-      <div>
-        <div style={{ fontSize: "14px", color: "#666", marginBottom: "5px" }}>{time}</div>
-        <h3 style={{ fontSize: "18px", margin: "0 0 10px 0", fontWeight: "bold" }}>{title}</h3>
-        <p style={{ fontSize: "14px", margin: "0 0 10px 0", lineHeight: "1.6" }}>{description}</p>
-        <div style={{ fontSize: "24px", color: "#6AA84F" }}>{icon}</div>
-      </div>
-    </div>
+      <Details>
+        <p>{place}</p>
+        <h4>{title}</h4>
+        <p>{description}</p>
+        <p>{description}</p>
+        <div>{icon}</div>
+      </Details>
+    </Container>
   );
 };
 
 export default CourseDetailInfo;
+
+const Container = styled.div`
+  display: flex;
+  margin: 2em 0;
+  color: #333;
+  gap: 1em;
+`
+const Image = styled.img`
+  height: 9em;
+  aspect-ratio: 1 / 0.7;
+  border-radius: 4px;
+`
+const Details = styled.div`
+  
+  p {
+    font-size: 12px;
+    margin: 0;
+    line-height: 1.5;
+  }
+  h4{
+    margin: .3em 0;
+    font-weight: bolder;
+  }
+`
+const MarkerWrapper = styled.div`
+  align-self: center;
+  margin-right: 2.5em;
+`
