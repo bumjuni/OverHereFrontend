@@ -55,7 +55,7 @@ const pick_data = [
     "region": "region1",
     "courseType": "courseType1",
     "title": "title1",
-    "description": "description1description1description1description1description1description1description1",
+    "description": "description1description1description1description1description1dedescrdescrdescrdescrdescrdescrdescrdescrscription1description1",
     "attractions": ["attracion1", "attracion2", "attracion3", "attracion4", "attracion5"],
     "image": dummyImg1,
   },
@@ -98,7 +98,7 @@ const TravelRoutesPage = () => {
 
       <div className="recommend-section">
         <div className="recommend-card green-card">
-          <h3>베스트 코스 찾기</h3>
+          <h2>베스트 코스 찾기</h2>
           <p className="description">
             여기너머에서 인기가 많은 코스를 함께 찾아봐요. 자연 경관과 즐길거리 모두 포함한 좋은 코스들이 있습니다!
           </p>
@@ -111,7 +111,7 @@ const TravelRoutesPage = () => {
         </div>
 
         <div className="recommend-card blue-card">
-          <h3>지역별 추천 코스</h3>
+          <h2>지역별 추천 코스</h2>
           <p className="description">
             지역별로 코스를 추천받아요! 또한 원하는 코스를 찾아볼 수 있습니다.
           </p>
@@ -124,7 +124,7 @@ const TravelRoutesPage = () => {
         </div>
       </div>
 
-      <h2 className="editor-pick">에디터 추천 픽 코스</h2>
+      <h1 className="editor-pick">에디터 추천 픽 코스</h1>
       <EditorPick data={pick_data}/>
     </div>
   );

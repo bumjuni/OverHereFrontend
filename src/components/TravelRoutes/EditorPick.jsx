@@ -10,32 +10,73 @@ function EditorPick({data}){
     
     return (
         <>
-            <div className="buttons right-side">
+            <ButtonContainer>
                 <ArrowButton onChange={setCurRecCourse} currentPage={curRecCourse} totalPages={data.length}/>
-            </div>
+            </ButtonContainer>
             
-            <div className="rec-card">
+            <CardContainer>
                 {/* <div className="img-cropped"> */}
                 <img src={data[curRecCourse].image} alt={data[curRecCourse].title} className="rec-image"></img>
                 {/* </div> */}
-                <div className="rec-contents">
+                <Contents>
                     <Badge text="지역" color="gray" />
                     <Badge text="코스 유형" color="yellow" />
-                    <h3>{data[curRecCourse].title}</h3>
-                    <span className="description">
+                    <h2>{data[curRecCourse].title}</h2>
+                    <Description>
                         {data[curRecCourse].description} 
-                    </span>
+                    </Description>
                     <div className="badges">
                         {data[curRecCourse].attractions.map(item => 
                             <Badge text={item} color="gray" />
                         )}
                     </div>
                 {/* useNavigate로 구현 */}
-                        <button className="course-button" type="button"><Map /> 코스 둘러보기</button>
-                </div>
-            </div>
+                    <CourseButton type="button"><Map /> 코스 둘러보기</CourseButton>
+                </Contents>
+            </CardContainer>
         </>
         );
     }
 
 export default EditorPick;
+
+const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    justify-content: right;
+    margin-bottom: 1em;
+`
+const CardContainer = styled.div`
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+    //   flex-wrap: wrap;
+    padding: 2em;
+    border: 1px solid #D4D8DC;
+    border-radius: 5px;
+    gap: 1.5em;
+`
+const CourseButton = styled.button`
+    position: absolute;
+    right: 2em;
+    bottom: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    font-weight: bold;
+    border: 1px solid #529B40;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #529B40;
+    padding: 0.8em 1.5em;
+    gap: 1em;
+`
+const Contents = styled.div`
+    max-width: 50%;
+`
+const Description = styled.span`
+    word-break: break-word;
+`

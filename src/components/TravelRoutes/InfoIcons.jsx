@@ -7,7 +7,7 @@ import { ReactComponent as DifficultyIcon } from "../../assets/svg/TravelRoutes/
 const infoOptions = [
   { id: 0, label: "총 00KM", icon: <RouteIcon /> },
   { id: 1, label: "00개", icon: <MapIcon /> },
-  { id: 2, label: "이동수단", icon: <VehicleIcon /> },
+  // { id: 2, label: "이동수단", icon: <VehicleIcon /> },
   { id: 3, label: "난이도", icon: <DifficultyIcon /> },
 ];
 
@@ -18,9 +18,9 @@ const InfoIcons = () => {
         display: "flex",
         justifyContent: "space-around",
         alignItems: "center",
-        padding: "20px",
+        padding: "2em",
         borderRadius: "8px",
-        gap: "1.5em",
+        gap: "2.5em",
       }}
     >
       {infoOptions.map((option) => (
@@ -39,6 +39,7 @@ const InfoIcons = () => {
           </div>
           <div
             style={{
+              fontSize: "1.3em",
               fontWeight: "600",
               whiteSpace: "nowrap"
             }}

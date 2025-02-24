@@ -36,9 +36,7 @@
 
 .stats {
   display: flex;
-  /* justify-content: center; */
-  padding: 10px;
-  margin: 16px 10px;
+  padding: 1em;
 }
 
 .stat {
@@ -67,15 +65,14 @@
 }
 
 .page-info {
-  font-size: 12px;
   color: #555;
 }
 
 .progress-bar {
-  width: 50%;
-  height: 6px;
+  width: 45%;
+  height: .7em;
   background-color: #ECEEF0;
-  border-radius: 4px;
+  border-radius: 1em;
   overflow: hidden;
   
 }
@@ -91,29 +88,7 @@
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 8px;
-}
-
-.travel-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 33px;
-  height: 33px;
-  background-color: unset;
-  border: 1px solid #505458;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-
-  &:hover{
-    background-color: #eaeaea;
-  }
-
-  &:disabled{
-    opacity: .5;
-    cursor: not-allowed;
-  }
+  gap: 1em;
 }
 
 .recommend-section {
@@ -125,9 +100,10 @@
 
 .recommend-card {
   position: relative;
+  height: 18em;
   flex: 1;
   border: 1px solid #ddd;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 10px 30px 0 30px;
   text-align: left;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -142,6 +118,11 @@
   border: 2px solid #2196f3;
 }
 
+.recommend-image{
+  position: absolute;
+  bottom: 0;
+}
+
 .recommend-button {
   position: absolute;
   bottom: 10%;
@@ -150,13 +131,13 @@
   align-items: center; 
   justify-content: center; 
   gap: 8px; 
-  padding: 0.7em 1em; 
-  font-size: 16px; 
+  padding: .9em 1.5em; 
+  font-size: 18px; 
   font-weight: bold; 
   background-color: #28a745; 
   color: #ffffff; 
   border: none; 
-  border-radius: 25px; 
+  border-radius: 30px; 
   cursor: pointer; 
   white-space: nowrap; 
   transition: background-color 0.3s ease;
@@ -171,7 +152,6 @@
 }
 
 .description{
-  font-size: 12px;
   color: #505458;
 }
 
@@ -193,16 +173,7 @@
   background-color: #1e88e5;
 }
 
-.rec-card{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  /* flex-wrap: wrap;  */
-  padding: 3%;
-  border: 1px solid #D4D8DC;
-  border-radius: 5px;
-  gap: 1.5em;
-}
+
 
 /* .img-cropped{
   position: relative;
@@ -227,31 +198,10 @@
   /*아님 크롭이 좋은지(크롭하면 창크기 줄이거나 확대했을때도 크롭됨) */
 }
 
-.rec-contents{
-  position: relative;
-}
+
 
 .badges{
   padding-top: 1em;
   padding-bottom: 5em;
 }
 
-.course-button{
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: large;
-  border: 1px solid #529B40;
-  border-radius: 5px;
-  color: #529B40;
-  bottom: 0;
-  right: 0;
-  padding: 0.8em 1.5em;
-  gap: 1em;
-}
-
-.right-side{
-  justify-content: right;
-  margin-bottom: 1em;
-}

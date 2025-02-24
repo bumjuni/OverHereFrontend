@@ -4,7 +4,26 @@ import {ReactComponent as ArrowBack} from '../../assets/svg/ArrowBack.svg';
 import {ReactComponent as ArrowForward} from '../../assets/svg/ArrowForward.svg';
 
 const StyledButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.2em;
+  height: 3.2em;
+  background-color: unset;
+  border: 2px solid #505458;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
+  &:hover{
+    background-color: #eaeaea;
+  }
+
+  &:disabled{
+    border: 1px solid #505458;
+    opacity: .5;
+    cursor: not-allowed;
+  }
 `
 
 function ArrowButton({onChange, currentPage, totalPages}){
@@ -22,12 +41,12 @@ function ArrowButton({onChange, currentPage, totalPages}){
 
     return (
         <>
-            <button className="travel-button" onClick={handlePrev} disabled={currentPage === 0}>
+            <StyledButton onClick={handlePrev} disabled={currentPage === 0}>
                 <ArrowBack />
-            </button>
-            <button className="travel-button" onClick={handleNext} disabled={currentPage === totalPages-1}>
+            </StyledButton>
+            <StyledButton onClick={handleNext} disabled={currentPage === totalPages-1}>
                 <ArrowForward />
-            </button>                  
+            </StyledButton>                  
         </>
     );
 }
