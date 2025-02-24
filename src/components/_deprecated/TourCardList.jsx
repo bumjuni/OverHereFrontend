@@ -39,4 +39,4 @@ const TourCardList = () => {
   );
 };
 
-export default TourCardList;
+// export default TourCardList;

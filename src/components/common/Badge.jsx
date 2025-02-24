@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const StyledButton = styled.span`
     display: inline-block;
     border-radius: 10em;
-    font-size: 10px;
+    font-size: 1em;
     font-weight: bold;
     word-break: break-all;
     white-space: nowrap; 

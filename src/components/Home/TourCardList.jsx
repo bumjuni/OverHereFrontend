@@ -10,7 +10,7 @@ const TourCard = ({ region, title}) => {
       <div className="tour-info">
         {/* <h4 className="region">{region}</h4> */}
         <Badge text={region} />
-        <div className="title">{title}</div>
+        <h3 className="title">{title}</h3>
         {/* <p className="description">{description}</p> */}
       </div>
     </div>

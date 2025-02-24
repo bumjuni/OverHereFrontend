@@ -9,36 +9,14 @@ import AccessibilityIcons from '../components/Home/AccessibilityIcons';
 import TourCardList from '../components/Home/TourCardList';
 import GreenBorderButton from '../components/Home/GreenBorderButton';
 
-// Array of card data
-// const cardData = [
-//   {
-//     title: '관광지 이름 1',
-//     description: '관광지 설명 1',
-//     image: 'https://via.placeholder.com/200x200',
-//   },
-//   {
-//     title: '관광지 이름 2',
-//     description: '관광지 설명 2',
-//     image: 'https://via.placeholder.com/200x200',
-//   },
-//   {
-//     title: '관광지 이름 3',
-//     description: '관광지 설명 3',
-//     image: 'https://via.placeholder.com/200x200',
-//   },
-//   {
-//     title: '관광지 이름 4',
-//     description: '관광지 설명 4',
-//     image: 'https://via.placeholder.com/200x200',
-//   },
-// ];
+const temp = [true, true, true, true, true];
 
 // Banner Section 컴포넌트
 const Banner = () => {
   return (
     <section className="banner">
       <div className="main-banner">
-        <img src={bannerImage} alt="Main banner" width="100%"/>
+        <img src={bannerImage} alt="Main banner"/>
       </div>
     </section>
   );
@@ -72,7 +50,7 @@ const Home = () => {
       <Banner />
       
       <div className="contents">
-        <h2>실시간 인기 급상승 여행지</h2>
+        <h1>실시간 인기 급상승 여행지</h1>
         <RegionSelector />
 
         {/* 카드 컴포넌트 */}
@@ -91,14 +69,14 @@ const Home = () => {
               title={card.title}
               // description={card.description}
               image={card.image}
-              nonObstacle={card.nonObstacle}  //무장애정보 리스트
+              nonObstacle={temp}  //무장애정보 리스트
             />
           ))}
         </div>
       </div>
           
       <div className="contents">
-        <h2>나를 위한 맞춤 여행지</h2>
+        <h1>나를 위한 맞춤 여행지</h1>
         <AccessibilityIcons />
         <TourCardList 
           data={tourCardData}

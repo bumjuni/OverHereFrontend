@@ -7,11 +7,11 @@ import {ReactComponent as WheelChair} from '../../assets/svg/Accessibility/Wheel
 import "./AccessibilityIcons.css";
 
 const accessibilityOptions = [
-  { id: 0, label: "안내견 동반", icon: <HelpDog />},
-  { id: 1, label: "음성 가이드", icon: <AudioGuide />},
-  { id: 2, label: "휠체어 대여", icon: <WheelChair/>},
-  { id: 3, label: "장애인 화장실", icon: <Toilet />},
-  { id: 4, label: "장애인 주차장", icon: <ParkingLot />},
+  { id: 0, label: "안내견 동반", icon: <HelpDog width="100" height="100"/>},
+  { id: 1, label: "음성 가이드", icon: <AudioGuide width="100" height="100"/>},
+  { id: 2, label: "휠체어 대여", icon: <WheelChair width="100" height="100"/>},
+  { id: 3, label: "장애인 화장실", icon: <Toilet width="100" height="100"/>},
+  { id: 4, label: "장애인 주차장", icon: <ParkingLot width="100" height="100"/>},
 ];
 
 const AccessibilityIcons = () => {

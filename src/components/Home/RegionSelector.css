@@ -1,5 +1,6 @@
 .region-selector {
     display: flex;
+    flex-wrap: wrap;
     gap: 12px; /* Space between buttons */
     /* justify-content: center; */
     align-items: center;
