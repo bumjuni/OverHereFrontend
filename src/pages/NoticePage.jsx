@@ -72,9 +72,8 @@ const NoticePage = () => {
   };
 
   // 게시글 클릭 시 페이지 이동
-  const handleRowClick = (index) => {
-    console.log(index);
-    navigate(`/notice/${index}`);
+  const handleRowClick = (id) => {
+    navigate(`/notice/${id}`);
   };
 
   useEffect(() => {
