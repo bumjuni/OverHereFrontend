@@ -18,15 +18,6 @@ const TourCard = ({ region, title}) => {
 };
 
 const TourCardList = ({data}) => {
-  // const tourCards = [
-  //   { region: '지역1', title: '관광지 이름1' },
-  //   { region: '지역2', title: '관광지 이름2' },
-  //   { region: '지역3', title: '관광지 이름3' },
-  //   { region: '지역4', title: '관광지 이름4' },
-  //   { region: '지역5', title: '관광지 이름5' },
-  //   { region: '지역6', title: '관광지 이름6' },
-  // ];
-
   return (
     <div className="tour-card-list">
       {data.map((item) => (

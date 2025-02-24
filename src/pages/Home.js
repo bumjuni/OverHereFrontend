@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import bannerImage from '../assets/image/banner.jpg';
 import './Home.css';
-import Card from '../components/Home/Card';
+import Card from '../components/common/Card';
 import RegionSelector from '../components/Home/RegionSelector';
-import AccessibilityIcons from '../components/AccessibilityIcons';
+import AccessibilityIcons from '../components/Home/AccessibilityIcons';
 import TourCardList from '../components/Home/TourCardList';
 import GreenBorderButton from '../components/Home/GreenBorderButton';
 
