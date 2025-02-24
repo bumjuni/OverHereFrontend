@@ -6,25 +6,24 @@ import {ReactComponent as Toilet} from '../../assets/svg/Accessibility/Toilet_Pi
 import {ReactComponent as WheelChair} from '../../assets/svg/Accessibility/WheelChair_Pictogram.svg';
 import {ReactComponent as ParkingLot} from '../../assets/svg/Accessibility/ParkingLot_Pictogram.svg';
 
+const icon = [
+    <HelpDog width="50" height="50"/>, 
+    <AudioGuide width="50" height="50"/>,
+    <Toilet width="50" height="50"/>,
+    <WheelChair width="50" height="50"/>, 
+    <ParkingLot width="50" height="50"/>
+]
+
 function NonObstacleIcon({ data }) {
     console.log(data);
     return (
         <Container>
-            <IconWrapper>
-                {data[0] && <HelpDog width="50" height="50"/>}
-            </IconWrapper>
-            <IconWrapper>
-                {data[1] && <AudioGuide width="50" height="50"/>}
-            </IconWrapper>
-            <IconWrapper>
-                {data[2] && <Toilet width="50" height="50"/>}
-            </IconWrapper>
-            <IconWrapper>
-                {data[3] && <WheelChair width="50" height="50"/>}
-            </IconWrapper>
-            <IconWrapper>
-                {data[4] && <ParkingLot width="50" height="50"/>}
-            </IconWrapper>
+            {data.map((bool, index) => (
+                bool && 
+                <IconWrapper>
+                    {icon[index]}    
+                </IconWrapper>
+            ))}
         </Container>
     );
 }

@@ -6,11 +6,12 @@ const StyledButton = styled.button`
     display: flex;
     justify-self: center;
     margin-bottom: 3.5em;
-    padding :10px 20px;
+    padding: .8em 1.5em;
     border-radius: 30rem;
     background-color: unset;
     border: 1px solid #529B40;
     color: #529B40;
+    font-size: large;
     font-weight: bolder;
     text-align: center;
     align-items: center;

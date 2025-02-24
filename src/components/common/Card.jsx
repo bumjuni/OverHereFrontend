@@ -9,9 +9,9 @@ const Card = ({key, title, region, image, nonObstacle}) => {
     <div className="card">
       <div className="card-image"></div>
       <div className="text-content">
+        {region && <Badge text={region} />}
         <h3 className="card-title">{title}</h3>
         {/* <p className="description">관광지 설명</p> */}
-        {region && <Badge text={region} />}
       </div>
       <div className="icon">
         <span className="accessibility-icon">

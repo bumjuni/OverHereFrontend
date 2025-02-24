@@ -9,8 +9,8 @@ import Card from '../components/common/Card';
 
 const initialData = [
     {
-        "title": "string",
-        "areaCode": "string",
+        "title": "관광지 이름",
+        "areaCode": "지역",
         "overView": "string",
         "contentId": 0,
         "contentTypeId": "string",
@@ -18,8 +18,8 @@ const initialData = [
         "helpdog": true,
         "parking": true,
         "wheelchair": true,
-        "restroom": true,
-        "audioguide": true,
+        "restroom": false,
+        "audioguide": false,
         "exits": "string"
     }, {
         "title": "string",
@@ -73,21 +73,23 @@ function SearchPage(){
             <SearchGroup handleSubmit={handleSubmit}/>
             <h3>총 <span style={{color: "#4caf50"}}>{formatTwoDigits(result.length)}</span>개</h3>
             
-            {result.length? 
-                result.map(item => 
-                <Card 
-                    title={item.title}
-                    region={item.areaCode}
-                    image={item.thumbnailUrl}
-                    nonObstacle={[item.helpdog, item.audioguide, item.wheelchair, item.restroom, item.parking]}
-                />
-                ) :  
-                <NoOutcome>
-                    <SearchOff />
-                    <h1>검색 결과가 없습니다.</h1>
-                    <h2>다른 검색어를 입력하거나 카테고리를 선택해 보세요.</h2>
-                </NoOutcome>
-            }
+            <CardList>
+                {result.length? 
+                    result.map(item => 
+                    <Card 
+                        title={item.title}
+                        region={item.areaCode}
+                        image={item.thumbnailUrl}
+                        nonObstacle={[item.helpdog, item.audioguide, item.wheelchair, item.restroom, item.parking]}
+                    />
+                    ) :  
+                    <NoOutcome>
+                        <SearchOff />
+                        <h1>검색 결과가 없습니다.</h1>
+                        <h2>다른 검색어를 입력하거나 카테고리를 선택해 보세요.</h2>
+                    </NoOutcome>
+                }
+            </CardList>
 
             <MoreContentsButton />
         </>
@@ -96,6 +98,12 @@ function SearchPage(){
 
 export default SearchPage;
 
+const CardList = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    margin: 2em 0 5em 0;
+`
 const NoOutcome = styled.div`
     display: flex;
     flex-direction: column;
