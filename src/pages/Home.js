@@ -1,4 +1,5 @@
 import {React, useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import bannerImage from '../assets/image/banner.jpg';
 import './Home.css';
@@ -105,9 +106,11 @@ const Home = () => {
       </div>
 
       {/* 관광지 더 보러가기 버튼 */}
-      <div className="home-container">
-        <GreenBorderButton text="관광지 더 보러가기" />
-      </div>
+      <Link to='/search'>
+        <div className="home-container">
+          <GreenBorderButton text="관광지 더 보러가기" />
+        </div>
+      </Link>
     </>
   );
 };
