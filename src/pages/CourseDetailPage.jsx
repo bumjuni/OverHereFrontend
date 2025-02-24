@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
 import styled from "styled-components";
-import CourseDetailInfo from "../components/CourseDetailInfo";
-import SimilarCourseCard from "../components/SimilarCourseCard";
+import CourseDetailInfo from "../components/CourseDetail/CourseDetailInfo";
+import SimilarCourseCard from "../components/CourseDetail/SimilarCourseCard";
 import {ReactComponent as Dist} from '../assets/svg/TravelRoutes/Route_Pictogram.svg';
 import {ReactComponent as Map} from '../assets/svg/TravelRoutes/MapPos_Pictogram.svg';
 import {ReactComponent as Difficulty} from '../assets/svg/TravelRoutes/DifficultyLevel_Pictogram.svg';
@@ -81,7 +81,7 @@ const CourseDetailPage = () => {
 
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
         <SimilarCourseCard
-          image={null}
+          image={dummy}
           region="지역"
           type="코스 유형"
           title="텍스트"

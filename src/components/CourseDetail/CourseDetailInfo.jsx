@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {ReactComponent as Marker} from '../assets/svg/Marker.svg';
+import {ReactComponent as Marker} from '../../assets/svg/Marker.svg';
 
 const CourseDetailInfo = ({ place, title, img, description, icon }) => {
   return (
