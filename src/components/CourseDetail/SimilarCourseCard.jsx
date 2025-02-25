@@ -35,6 +35,7 @@ export default SimilarCourseCard;
 
 const Container = styled.div`
   width: 15em;
+  margin: 2em 0;
   `
 const Title = styled.h3`
   margin: .3em 0 .5em 0;
@@ -51,7 +52,6 @@ const Image = styled.img`
 const DummyImage = () => <Image as="div" />
 
 const Description = styled.p`
-  font-size: 12px;
   margin: 0; 
   color: #505458;
 `

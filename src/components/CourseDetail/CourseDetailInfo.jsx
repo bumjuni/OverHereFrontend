@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import {ReactComponent as Marker} from '../../assets/svg/Marker.svg';
+import NonObstacleIcon from "../common/NonObstacleIcon";
 
-const CourseDetailInfo = ({ place, title, img, description, icon }) => {
+// dummy
+const dummy = [true, true, true, true, true];
+
+const CourseDetailInfo = ({ place, title, img, description, nonObstacle }) => {
   return (
     <Container>
       <MarkerWrapper>
@@ -14,10 +18,9 @@ const CourseDetailInfo = ({ place, title, img, description, icon }) => {
       {/* Text Content */}
       <Details>
         <p>{place}</p>
-        <h4>{title}</h4>
-        <p>{description}</p>
-        <p>{description}</p>
-        <div>{icon}</div>
+        <h2>{title}</h2>
+        <p>{description}{description}</p>
+        <NonObstacleIcon data={dummy} />
       </Details>
     </Container>
   );
@@ -27,25 +30,22 @@ export default CourseDetailInfo;
 
 const Container = styled.div`
   display: flex;
-  margin: 2em 0;
+  margin: 5em 0;
   color: #333;
   gap: 1em;
 `
 const Image = styled.img`
-  height: 9em;
+  height: 12em;
   aspect-ratio: 1 / 0.7;
   border-radius: 4px;
 `
 const Details = styled.div`
-  
   p {
-    font-size: 12px;
     margin: 0;
     line-height: 1.5;
   }
-  h4{
+  h2{
     margin: .3em 0;
-    font-weight: bolder;
   }
 `
 const MarkerWrapper = styled.div`

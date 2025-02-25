@@ -16,11 +16,9 @@ function MainCourse({data}) {
             <Badge text={data[currentPage].courseType} color="yellow" />
           </div>
           <h1>{data[currentPage].title}</h1>
-          <div className="stats">
-            <div className="stat">
-              <InfoIcons data={data[currentPage].courseInfo}/>
-            </div>
-          </div>
+          <DefaultInfo>
+            <InfoIcons data={data[currentPage].courseInfo}/>
+          </DefaultInfo>
           
           <div className="navigation">
             <span className="page-info">
@@ -51,3 +49,11 @@ function MainCourse({data}) {
 }
 
 export default MainCourse;
+
+const DefaultInfo = styled.div`
+  display: flex;
+  gap: 3em;
+  width: 100%;
+  padding: 1em 3em;
+  align-items: center;
+`

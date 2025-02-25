@@ -32,6 +32,7 @@ const DropDownMenu = styled.div`
     margin: 15px;
     box-shadow: 0px 0px 5px #B5B9BD;
     right: -90%;
+    z-index: 1;
 `
 const Wrapper = styled.div`
     position: relative;

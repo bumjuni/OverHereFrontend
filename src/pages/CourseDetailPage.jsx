@@ -1,14 +1,37 @@
-import React from "react";
+import {React, useState} from "react";
 import axios from "axios";
 import styled from "styled-components";
 import CourseDetailInfo from "../components/CourseDetail/CourseDetailInfo";
 import SimilarCourseCard from "../components/CourseDetail/SimilarCourseCard";
-import {ReactComponent as Dist} from '../assets/svg/TravelRoutes/Route_Pictogram.svg';
-import {ReactComponent as Map} from '../assets/svg/TravelRoutes/MapPos_Pictogram.svg';
-import {ReactComponent as Difficulty} from '../assets/svg/TravelRoutes/DifficultyLevel_Pictogram.svg';
+import {ReactComponent as View} from '../assets/svg/CourseDetail/View.svg';
+import {ReactComponent as Like} from '../assets/svg/CourseDetail/Like.svg';
+import {ReactComponent as ShareButton} from '../assets/svg/ShareButton.svg';
+import {ReactComponent as LikeButton} from '../assets/svg/LikeButton.svg';
 import dummy from '../assets/image/dummy/dummy_img3.jpg';
+import InfoIcons from "../components/TravelRoutes/InfoIcons";
+import UserSatisfaction from "../components/CourseDetail/UserSatisfaction";
+
+const initCardData = [
+  {
+    place: "00시 00구",
+    title: "텍스트",
+    img: dummy,
+    description: "관광지 설명 관광지 설명 관광지 설명 관광지 설명 관광지 설명 관광지 설명",
+  }, {          
+    place: "00시 00구",
+    title: "다른 텍스트",
+    img: dummy,
+    description: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
+  }, {          
+    place: "00시 00구",
+    title: "다른 텍스트",
+    img: dummy,
+    description: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
+  }
+]
 
 const CourseDetailPage = () => {
+  const [cardData, setCardData] = useState(initCardData);
   return (
     <Container>
       {/* Header Section */}
@@ -18,28 +41,21 @@ const CourseDetailPage = () => {
       </Title>
 
       {/* Icon Info Section */}
-      <IconInfo>
-          <span>👁 12,345회</span> 
-          <span>❤️ 9,999</span>
-      </IconInfo>
+      <Participations>
+        <div>
+          <span> <View /> 12,345회</span> 
+          <span> <Like /> 9,999</span>
+        </div>
+        <div>
+          <ShareButton />
+          <LikeButton />
+        </div>
+      </Participations>
+
 
       {/* Details Section */}
       <CourseInfo>
-        <div>
-          <Dist />
-          <span>코스 거리</span> <br />
-          <span>총 00KM</span>
-        </div>
-        <div>
-          <Map />
-          <span>관광지 개수</span>
-          <span>00개</span>
-        </div>
-        <div>
-          <Difficulty />
-          <span>난이도</span>
-          <span>난이도</span>
-        </div>
+        <InfoIcons mode="detail"/>
       </CourseInfo>
 
       {/* Description */}
@@ -53,31 +69,21 @@ const CourseDetailPage = () => {
       <Image src={dummy} alt={"asdf"}/>
 
       {/* Course Details */}
-      <div>
-        <CourseDetailInfo
-          place="00시 00구"
-          title="텍스트"
-          img={dummy}
-          description="관광지 설명 관광지 설명 관광지 설명 관광지 설명 관광지 설명 관광지 설명"
-          icon="♿" // Replace with an actual icon or image if necessary
-        />
-        <CourseDetailInfo
-          place="00시 00구"
-          title="다른 텍스트"
-          img={dummy}
-          description="다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명"
-          icon="♿"
-        />
-        <CourseDetailInfo
-          place="00시 00구"
-          title="다른 텍스트"
-          img={dummy}
-          description="다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명"
-          icon="♿"
-        />
-      </div>
+      <CardsContainer>
+        <MarkerLine count={cardData.length}/>
+        <Cards>
+          {cardData.map((item) => 
+            <CourseDetailInfo
+              place={item.place}
+              title={item.title}
+              img={item.img}
+              description={item.description}
+            />
+          )}
+        </Cards>
+      </CardsContainer>
 
-      <h2>비슷한 코스 찾아보기</h2>
+      <h1>비슷한 코스 찾아보기</h1>
 
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
         <SimilarCourseCard
@@ -102,6 +108,7 @@ const CourseDetailPage = () => {
           description="다른 코스 설명 글 다른 코스 설명 글 다른 코스 설명 글 다른 코스 설명 글"
         />
       </div>
+      <UserSatisfaction />
     </Container>
   );
 };
@@ -116,9 +123,10 @@ const Title = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 300px;
+  height: 25em;
   color: white;
-  background-color: #ccc;
+  background-color: #232323;
+  opacity: .3;
   justify-content: center;
   align-items: center;
   p{
@@ -128,30 +136,40 @@ const Title = styled.div`
   }
 `
 const IconInfo = styled.div`
-  display: flex;
+  display: inline-flex;
   justify-content: left;
   align-items: center;
-  margin: 1em 0;
   gap: 1em;
+  span{
+    display: flex;
+    gap: 5px;
+  }
+`
+const Participations = styled.div`
+  display: inline-flex;
+  justify-content: space-between;
+  margin: 1em 0;
+
+  div{
+    display: flex;
+    gap: 1em;
+  }
+  div span {
+    display: flex;
+    gap: 5px;
+  }
+  
 `
 const CourseInfo = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   margin-top: 30px;
   padding: 20px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-`
-const DefaultInfo = styled.div`
- style={{ textAlign: "center" }}
- style={{ textAlign: "center" }}
- style={{ textAlign: "center" }}
- style={{ textAlign: "center" }}
+  border-bottom: 2px solid #ddd;
 `
 const Description = styled.p`
   margin: 2em 0;
-  font-size: 12px;
 `
 const Image = styled.img`
   display: flex;
@@ -160,3 +178,18 @@ const Image = styled.img`
   aspect-ratio: 1 / 0.7;
   border-radius: 5px;
 `
+const CardsContainer = styled.div`
+  position: relative;
+`
+const Cards = styled.div`
+  z-index: 1;
+`
+const MarkerLine = styled.div`
+  position: absolute;
+  height: calc(100% - 160px - 86px * 2 - 17px);
+  width: 0;
+  border: 2px dashed #B5B9BD;
+  z-index: -1;
+  left: 15px;
+  top: calc(80px + 86px + 8px);
+  `

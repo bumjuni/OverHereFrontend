@@ -14,6 +14,7 @@ const icon = [
     <ParkingLot width="50" height="50"/>
 ]
 
+//data로 들어오는 것은 boolean 5개
 function NonObstacleIcon({ data }) {
     console.log(data);
     return (
@@ -36,6 +37,7 @@ const Container = styled.div`
     flex-wrap: wrap;
     flex-direction: row;
     gap: .5em;
+    margin: .5em 0;
 `
 const IconWrapper = styled.div`
     background-color: #85B8D0;
