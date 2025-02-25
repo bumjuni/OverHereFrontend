@@ -10,19 +10,6 @@ import dummy7 from '../assets/image/dummy/dummy_img7.jpg';
 import BestCourseCard from '../components/BestCourse/BestCourseCard';
 import MoreContentsButton from '../components/common/MoreContentsButton';
 
-const StyledUl = styled.ul`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    list-style-type: none;
-    padding: 0;
-    margin: 3em 20px 20px 20px;
-    `;
-
-const Divider = styled.div`
-    border: 1px solid #D4D8DC;
-    margin: 2.5em 0;
-`
 
 function BestCourse(){
     const result = [
@@ -42,25 +29,33 @@ function BestCourse(){
     }
     ];
 
-    const BestCourseList = result.map(course =>
-        <li>
-            <BestCourseCard
-                rank={course.rank}
-                img={course.img}
-                name={course.name}
-            />
-            <Divider />
-        </li>
-    )
-
     return (
         <>
             <h1>여기너머의 인기 코스</h1> 
-            <StyledUl>{BestCourseList}</StyledUl>
+            <StyledUl>
+                {result.map(course => 
+                    <li>
+                    <BestCourseCard
+                        rank={course.rank}
+                        img={course.img}
+                        name={course.name}
+                    />
+                </li>
+                )}
+            </StyledUl>
             <MoreContentsButton />
         </>
     );
 }
 
 export default BestCourse;
+
+const StyledUl = styled.ul`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 3em 20px 20px 20px;
+    `;
 
