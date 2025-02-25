@@ -7,8 +7,9 @@ const Card = styled.div`
     display: flex;
     justify-content: center;
     img {
-        height: 12em;
-        aspect-ratio: 1 / 0.65;
+        height: 14em;
+        aspect-ratio: 1 / 0.6;
+        object-fit: cover;
     }
 `
 const Rank = styled.div`
@@ -21,6 +22,7 @@ const Rank = styled.div`
     background-color: white;
     height: 2.3em;
     aspect-ratio: 1 / 1;
+    font-weight: bold;
 `
 const TotalKM = styled.p`
     display: flex;
@@ -35,7 +37,9 @@ const TotalKM = styled.p`
 const Content = styled.div`
     position: relative;
     padding: 0 1.5em;
-    font-size: 12px;
+    h2 {
+        margin: 0.5em 0;
+    }
 `
 
 function BestCourseCard({rank, img, name}){
@@ -50,8 +54,8 @@ function BestCourseCard({rank, img, name}){
             <Content>
                 <Badge text="지역" color="gray" />
                 <Badge text="코스 설명" color="yellow" />
-                <h2 style={{margin: "0.5em 0"}}>텍스트</h2>
-                <p style={{fontSize: "12px"}}>코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 </p>
+                <h2>텍스트</h2>
+                <p>코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 </p>
                 <div className="best-badges">
                     <Badge text="관광지 이름" color="gray" />
                     <Badge text="관광지 이름" color="gray" />

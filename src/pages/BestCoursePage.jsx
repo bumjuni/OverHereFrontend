@@ -21,7 +21,7 @@ const StyledUl = styled.ul`
 
 const Divider = styled.div`
     border: 1px solid #D4D8DC;
-    margin: 2em 0;
+    margin: 2.5em 0;
 `
 
 function BestCourse(){
@@ -55,7 +55,7 @@ function BestCourse(){
 
     return (
         <>
-            <h2>여기너머의 인기 코스</h2> 
+            <h1>여기너머의 인기 코스</h1> 
             <StyledUl>{BestCourseList}</StyledUl>
             <MoreContentsButton />
         </>
