@@ -1,10 +1,9 @@
 //푸터 내 공지사항 페이지
 
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import formatDate from '../components/common/formatDate';
+import NoticeTable from "../components/Notice/NoticeTable";
 
 // 초기 공지사항 데이터 (20개 중 처음엔 10개만 표시)
 const initialNotices = Array(20).fill({
@@ -14,34 +13,7 @@ const initialNotices = Array(20).fill({
   createdAt: "2025.01.01",
 });
 
-const StyledTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin: 2em 0;
-`
-const StyledTHead = styled.thead`
-  border-top: 2px solid #000;
-  text-align: left;
-  height: 3.5em;
-  .date {
-    text-align: right;
-  }
-`
-const BodyTr = styled.tr`
-  border-block: 1px solid #ddd;
-  cursor: pointer;
-  td { 
-    height: 3.5em; 
-  }
-  .category { 
-    width: 8em; 
-    font-weight: bold;
-  }
-  .date { 
-    width: 5em; 
-    color: #8E9398;
-  }
-`
+
 const StyledButton = styled.button`
   padding: 10px 20px;
   font-size: 16px;
@@ -56,7 +28,6 @@ const StyledButton = styled.button`
 `
 
 const NoticePage = () => {
-  const navigate = useNavigate();
   const [notices, setNotices] = useState(initialNotices);
   const [visibleCount, setVisibleCount] = useState(10); // 처음 10개만 표시
   const [isExpanded, setIsExpanded] = useState(false); // 버튼 상태 (더보기=0/창 줄이기=1)
@@ -72,9 +43,7 @@ const NoticePage = () => {
   };
 
   // 게시글 클릭 시 페이지 이동
-  const handleRowClick = (id) => {
-    navigate(`/notice/${id}`);
-  };
+
 
   useEffect(() => {
     axios.get('api/v1/notices')
@@ -90,25 +59,10 @@ const NoticePage = () => {
       <h2>공지사항</h2>
 
       {/* 테이블 (스크롤 없이 전체 표시) */}
-      <StyledTable>
-        <StyledTHead>
-          <th> </th>
-          <th>상담제목</th>
-          <th className="date">작성일</th>
-        </StyledTHead>
-        <tbody>
-          {notices.slice(0, visibleCount).map((notice) => (
-            <BodyTr 
-              key={notice.id} 
-              onClick={() => handleRowClick(notice.id)}
-            >
-              <td className="category"> [공지사항] </td>
-              <td> {notice.title} </td>
-              <td className="date"> {formatDate(notice.createdAt)} </td>
-            </BodyTr>
-          ))}
-        </tbody>
-      </StyledTable>
+      <NoticeTable 
+        data={notices} 
+        visibleCount={visibleCount} 
+      />
 
       {/* 더보기 / 창 줄이기 버튼 */}
       <div style={{ textAlign: "center", marginTop: "20px", marginBottom: "20px" }}>
