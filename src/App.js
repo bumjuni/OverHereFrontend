@@ -15,6 +15,7 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/TermsOfSerivcePage';
 import CustomerSupportPage from './pages/CustomerSupportPage';
 import RecCoursePage from './pages/RecCoursePage';
+import IntegrateSearch from './pages/IntegrateSearch';
 
 const App = () => {
   return (
@@ -31,7 +32,8 @@ const App = () => {
         <Route path="/terms" element={<TermsOfServicePage />} /> 
         <Route path="/help" element={<CustomerSupportPage />} /> 
         <Route path="/recommend-course" element={<RecCoursePage />} />
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/tourist-attractionn-search" element={<SearchPage />} />
+        <Route path="/search" element={<IntegrateSearch />} />
         <Route path="/course-details" element={<CourseDetailPage />} />
       </Routes>
       <Footer />  
