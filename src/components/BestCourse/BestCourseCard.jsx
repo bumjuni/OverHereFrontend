@@ -3,13 +3,56 @@ import styled from 'styled-components';
 import Badge from '../common/Badge';
 import {ReactComponent as TotalDist} from '../../assets/svg/TotalDistance.svg';
 
+
+function BestCourseCard(props){
+    return (
+        <>
+            <Card>
+                <div>
+                    {props.rank && 
+                    <Rank>
+                        Best <br /> {props.rank}
+                    </Rank>
+                    }
+                    {props.img?
+                     <Image src={props.img} alt={props.title} />
+                     : <DummyImage />
+                    }
+                </div>
+
+                <Content>
+                    <Badge text="지역" color="gray" />      {/* 백엔드 부재 */}
+                    <Badge text={props.courseType} color="yellow" />
+                    <h2>{props.title}</h2>
+                    <p>{props.description}</p>
+                    <div className="best-badges">           {/* 백엔드 부재 */}
+                        <Badge text="관광지 이름" color="gray" />
+                        <Badge text="관광지 이름" color="gray" />
+                        <Badge text="관광지 이름" color="gray" />
+                        <Badge text="관광지 이름" color="gray" />
+                        <Badge text="관광지 이름" color="gray" />
+                    </div>
+                    <TotalKM> <TotalDist /> 총 {props.distance}KM </TotalKM> 
+                </Content>
+            </Card>
+            <Divider />
+        </>
+
+    );
+}
+
+export default BestCourseCard;
+
 const Card = styled.div`
     display: flex;
     justify-content: center;
-    img {
-        height: 12em;
-        aspect-ratio: 1 / 0.65;
-    }
+`
+const Image = styled.img`
+    height: 14em;
+    aspect-ratio: 1 / 0.6;
+    object-fit: cover;
+    border-radius: 5px;
+    background-color: #ECEEF0;
 `
 const Rank = styled.div`
     position: absolute;
@@ -21,6 +64,7 @@ const Rank = styled.div`
     background-color: white;
     height: 2.3em;
     aspect-ratio: 1 / 1;
+    font-weight: bold;
 `
 const TotalKM = styled.p`
     display: flex;
@@ -35,34 +79,16 @@ const TotalKM = styled.p`
 const Content = styled.div`
     position: relative;
     padding: 0 1.5em;
-    font-size: 12px;
+    width: 100%;
+    h2 {
+        margin: 0.5em 0;
+    }
+    p {
+        text-overflow: ellipsis;
+    }
 `
-
-function BestCourseCard({rank, img, name}){
-    return (
-        <Card>
-            <div>
-                <Rank>
-                    Best <br /> {rank}
-                </Rank>
-                <img src={img} alt={name} />
-            </div>
-            <Content>
-                <Badge text="지역" color="gray" />
-                <Badge text="코스 설명" color="yellow" />
-                <h2 style={{margin: "0.5em 0"}}>텍스트</h2>
-                <p style={{fontSize: "12px"}}>코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 코스 설명글 </p>
-                <div className="best-badges">
-                    <Badge text="관광지 이름" color="gray" />
-                    <Badge text="관광지 이름" color="gray" />
-                    <Badge text="관광지 이름" color="gray" />
-                    <Badge text="관광지 이름" color="gray" />
-                    <Badge text="관광지 이름" color="gray" />
-                </div>
-                <TotalKM><TotalDist /> 총 00KM  </TotalKM>
-            </Content>
-        </Card>
-    );
-}
-
-export default BestCourseCard;
+const Divider = styled.div`
+    border: 1px solid #D4D8DC;
+    margin: 2.5em 0;
+`
+const DummyImage = () => <Image as="div" />
