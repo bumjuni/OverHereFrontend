@@ -56,28 +56,3 @@
   color: #8E9398;
 }
 
-.search-bar{
-  display: flex;
-  border: 2px solid #529B40;
-  border-radius: 30em;
-  padding: 5px 15px 5px 20px;
-  width: 20vw;
-  height: 2em;
-  justify-content: space-between;
-  align-items: center;
-
-  input {
-    border: none;
-  }
-  input:focus{
-    border: 0px;
-  }
-  button {
-    border: none;
-    background-color: unset;
-  }
-  button:hover{
-    background-color: unset;
-    cursor: pointer;
-  }
-}

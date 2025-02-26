@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {ReactComponent as Logo} from '../../assets/svg/Logo.svg';
-import {ReactComponent as SearchIcon} from '../../assets/svg/Search/SearchIcon.svg';
+import SearchBar from '../common/SearchBar';
 import './Header.css'; // 헤더 스타일링 css
 
 const Header = () => {
@@ -26,14 +26,7 @@ const Header = () => {
             </li>
           </ul>
         </nav>
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="어디로 여행을 떠나시나요?"
-            aria-label="Search destinations"
-          />
-          <button><SearchIcon /></button>
-        </div>
+        <SearchBar />
       </div>  
     </header>
   );
