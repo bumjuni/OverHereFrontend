@@ -28,6 +28,7 @@ const Container = styled.div`
 `
 const Input = styled.input`
     border: none;
+    width: 100%;
 
     &:focus{
         outline: none;

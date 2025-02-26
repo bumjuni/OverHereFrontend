@@ -1,11 +1,15 @@
-import React from "react";
+import {React, useState, useEffect} from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SearchBar from "../components/common/SearchBar";
 import Card from "../components/common/Card";
 import MoreContentsButton from "../components/common/MoreContentsButton";
 import BestCourseCard from "../components/BestCourse/BestCourseCard";
+import NoticeTable from '../components/Notice/NoticeTable';
+import {ReactComponent as ArrowCircle} from '../assets/svg/ArrowCircle.svg';
+import axios from "axios";
 
-const tourCardData = [
+const initTourData = [
     {
         title: "관광지 이름", 
         region: "지역", 
@@ -20,8 +24,51 @@ const tourCardData = [
         nonObstacle: [true, true, true, false, true],
     }
 ]
+const initCourseData = [
+    {
+        "courseId": 0,
+        "courseType": "string",
+        "title": "string",
+        "briefDescription": "stringstringstringstringstringstringstringstringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringststringstringstringstringstringstringstringringstringstringstringstringstringstring",
+        "overView": "string",
+        "difficulty": "string",
+        "distance": 0,
+      }, {
+          "courseId": 0,
+          "courseType": "string",
+          "title": "string",
+          "briefDescription": "string",
+          "overView": "string",
+          "difficulty": "string",
+          "distance": 0,
+      }
+  
+]
+const initNoticeData = Array(20).fill({
+        "id": 2,
+        "title": "서울숲에 휠체어 타고 갈 수 있나요?",
+        "createdAt": "2025-01-01T00:00:00",
+    });
 
 function IntegrateSearch() {
+    const [keyword, setKeyword] = useState();
+    const [tourData, setTourData] = useState(initTourData);
+    const [courseData, setCourseData] = useState(initCourseData);
+    const [noticeData, setNoticeData] = useState(initNoticeData);
+    
+    useEffect(() => {
+        //기본적으로 가나다순으로 검색 API날리기?
+    }, )
+    
+    const handleSearch = () => {
+        axios.get(`/api/v1/search/tourist-attraction/searchParam=${keyword}`)
+            .then(res => setTourData(res.data))
+            .catch(err => alert("관광지 정보를 검색하는데 실패했습니다"));
+        axios.get(`/api/v1/search/course/searchQuery=${keyword}`)
+            .then(res => setCourseData(res.data))
+            .catch(err => alert("코스 정보를 검색하는데 실패했습니다"));
+    }
+
     return (
         <>
         <SearchOptions>
@@ -39,21 +86,41 @@ function IntegrateSearch() {
         </SearchOptions>    
 
             <h1>관광지</h1>
-            <CardContainer>
-                {tourCardData.map((item) => 
+            <TourContainer>
+                {initTourData.map((item) => 
                     <Card 
                         title={item.title}
                         region={item.region}
                         nonObstacle={item.nonObstacle}
                     />
                 )}
-            </CardContainer>
+            </TourContainer>
             <MoreContentsButton />
             <h1>여행 코스</h1>
-            <BestCourseCard />
-            <Button>더 보러가기</Button>
+            <CourseContainer>
+            {initCourseData.map((item) => 
+                <BestCourseCard 
+                    courseId={item.courseId}
+                    courseType={item.courseType}
+                    title={item.title}
+                    description={item.briefDescription}
+                    distance={item.distance}
+                    img={item.img}
+                />
+            )}
+            </CourseContainer>
+            <Link to='/recommend-course'>
+                <Button>더 보러가기 <ArrowCircle /> </Button>
+            </Link>
+
             <h1>공지사항</h1>
-            <Button>더 보러가기</Button>
+            <NoticeTable
+                data={initNoticeData}
+                visibleCount={5}
+            />
+            <Link to='/notice'>
+                <Button>더 보러가기 <ArrowCircle /> </Button>
+            </Link>
         </>
     );
 }
@@ -93,18 +160,24 @@ const RecButtons = styled.div`
         border: 1px solid #505458;
         border-radius: 2em;
         font-size: medium;
+        cursor: pointer;
     }
 `
-const CardContainer = styled.div`
+const TourContainer = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1em;
     margin: 3em 0;
 `
+const CourseContainer = styled.div`
+    word-break: break-word;
+    margin: 5em 0;
+`
 const Button = styled.button`
-    display: block;
+    display: flex;
     justify-self: center;
+    align-items: center;
     padding: .8em 3em;
     margin: 3em;
     color: #505458;
@@ -113,4 +186,6 @@ const Button = styled.button`
     font-weight: bold;
     border: 1px solid #505458;
     border-radius: 5px;
+    gap: .5em;
+    cursor: pointer;
 `
