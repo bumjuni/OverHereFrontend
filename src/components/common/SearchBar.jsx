@@ -2,13 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import {ReactComponent as SearchIcon} from '../../assets/svg/Search/SearchIcon.svg';
 
-function SearchBar(){
+function SearchBar({keyword, onChange}){
     return (
         <Container className="inIntegrated">
             <Input
-            type="text"
-            placeholder="어디로 여행을 떠나시나요?"
-            aria-label="Search destinations"
+                type="text"
+                placeholder="어디로 여행을 떠나시나요?"
+                aria-label="Search destinations"
+                value={keyword}
+                onChange={(e) => onChange(e.target.value)}
             />
             <Button><SearchIcon /></Button>
         </Container>

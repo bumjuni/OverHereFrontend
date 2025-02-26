@@ -1,5 +1,5 @@
 import {React, useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import SearchBar from "../components/common/SearchBar";
 import Card from "../components/common/Card";
@@ -9,6 +9,9 @@ import NoticeTable from '../components/Notice/NoticeTable';
 import {ReactComponent as ArrowCircle} from '../assets/svg/ArrowCircle.svg';
 import axios from "axios";
 
+const initRecKeyword = [
+    "여행 코스", "여행 코스", "여행 코스", "여행 코스", "여행 코스", "여행 코스", "여행 코스"
+];
 const initTourData = [
     {
         title: "관광지 이름", 
@@ -23,7 +26,7 @@ const initTourData = [
         region: "지역", 
         nonObstacle: [true, true, true, false, true],
     }
-]
+];
 const initCourseData = [
     {
         "courseId": 0,
@@ -43,7 +46,7 @@ const initCourseData = [
           "distance": 0,
       }
   
-]
+];
 const initNoticeData = Array(20).fill({
         "id": 2,
         "title": "서울숲에 휠체어 타고 갈 수 있나요?",
@@ -52,15 +55,25 @@ const initNoticeData = Array(20).fill({
 
 function IntegrateSearch() {
     const [keyword, setKeyword] = useState();
+    const [recKeyword, setRecKeyword] = useState(initRecKeyword);
     const [tourData, setTourData] = useState(initTourData);
     const [courseData, setCourseData] = useState(initCourseData);
     const [noticeData, setNoticeData] = useState(initNoticeData);
     
     useEffect(() => {
         //기본적으로 가나다순으로 검색 API날리기?
-    }, )
+    }, [])
     
-    const handleSearch = () => {
+    const handleClick = (e) => {
+        // 추천검색어 클릭 시
+        console.log(e);
+        console.log(e.target.value);
+        setKeyword(e.target.value);
+        handleSearch(e);
+    }
+    
+    const handleSearch = (e) => {
+        e.preventDefault();
         axios.get(`/api/v1/search/tourist-attraction/searchParam=${keyword}`)
             .then(res => setTourData(res.data))
             .catch(err => alert("관광지 정보를 검색하는데 실패했습니다"));
@@ -72,17 +85,15 @@ function IntegrateSearch() {
     return (
         <>
         <SearchOptions>
-            <SearchBar />
-                <RecKeyword>추천 검색어</RecKeyword>
+            <form onSubmit={handleSearch}>
+                <SearchBar keyword={keyword} onChange={setKeyword} />
+            </form>
+            <RecKeyword>추천 검색어</RecKeyword>
                 <RecButtons>
-                    <button>여행 코스</button>
-                    <button>여행 코스</button>
-                    <button>여행 코스</button>
-                    <button>여행 코스</button>
-                    <button>여행 코스</button>
-                    <button>여행 코스</button>
-                    <button>여행 코스</button>
-                </RecButtons>
+                    {recKeyword.map((item) => 
+                    <button onClick={handleClick} value={item}>{item}</button>
+                    )}
+            </RecButtons>
         </SearchOptions>    
 
             <h1>관광지</h1>
