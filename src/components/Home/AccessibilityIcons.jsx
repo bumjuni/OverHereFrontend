@@ -14,17 +14,15 @@ const accessibilityOptions = [
   { id: 4, label: "장애인 주차장", icon: <ParkingLot width="100" height="100"/>},
 ];
 
-const AccessibilityIcons = () => {
-  const [selected, setSelected] = useState(3); // Default selection
-  
+const AccessibilityIcons = ({selectedIcon, handleClick}) => {
 
   return (
     <div className="accessibility-icons">
       {accessibilityOptions.map((option) => (
         <div
           key={option.id}
-          className={`icon-wrapper ${selected === option.id ? "selected" : "none-selected"}`}
-          onClick={()=> setSelected(option.id)}
+          className={`icon-wrapper ${selectedIcon === option.id ? "selected" : "none-selected"}`}
+          onClick={()=> handleClick(option.id)}
         >
           <div className="individual_icon">{option.icon}</div>
           <div className="label">{option.label}</div>

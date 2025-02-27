@@ -2,6 +2,7 @@ import React from 'react';
 import Badge from '../common/Badge';
 import dummyImg from '../../assets/svg/dummy.svg';
 import './TourCardList.css';
+import getRegion from '../common/getRegion';
 
 const TourCard = ({ contentId, contentTypeId, region, title, image }) => {
   const imgSrc = image? image: dummyImg;
@@ -11,7 +12,7 @@ const TourCard = ({ contentId, contentTypeId, region, title, image }) => {
       <img src={imgSrc} alt={title} className="tour-image" />
       <div className="tour-info">
         {/* <h4 className="region">{region}</h4> */}
-        <Badge text={region} />
+        <Badge text={getRegion(region)} />
         <h3 className="title">{title}</h3>
         {/* <p className="description">{description}</p> */}
       </div>

@@ -1,4 +1,4 @@
-import {React, useState, useEffect} from 'react';
+import {React, useState, useEffect, useRef} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import bannerImage from '../assets/image/banner.jpg';
@@ -66,10 +66,15 @@ const Banner = () => {
 };
 
 const Home = () => {
-  const [cardData, setCardData] = useState(initCardData);
-  const [tourCardData, setTourCardData] = useState(initTourData);
-  const [filteredCardData, setFilteredCardData] = useState(cardData);
+  // const [cardData, setCardData] = useState(initCardData);
+  // const [tourCardData, setTourCardData] = useState(initTourData);
+
+  const cardData = useRef(initCardData);
+  const tourData = useRef(initTourData);
+  const [filteredCardData, setFilteredCardData] = useState(cardData.current);
   const [selectedRegion, setSelectedRegion] = useState(0); // Default selected region
+  const [filteredTourData, setFilteredTourData] = useState(tourData.current);
+  const [selectedIcon, setSelectedIcon] = useState(0);
 
   // useEffect(() => {
   //   axios.get('/api/v1/attraction/popular')
@@ -92,9 +97,14 @@ const Home = () => {
   // }, []);
 
   useEffect(() => {
-    const newCardData = cardData.filter((item) => item.areaCode === selectedRegion);
+    const newCardData = cardData.current.filter((item) => item.areaCode === selectedRegion);
     setFilteredCardData(newCardData);
   }, [selectedRegion])
+
+  useEffect(() => {
+    const newTourData = tourData.current.slice(selectedIcon*6, (selectedIcon+1)*6);
+    setFilteredTourData(newTourData);
+  }, [selectedIcon])
 
   return (
     <>
@@ -131,9 +141,9 @@ const Home = () => {
           
       <div className="contents">
         <h1>나를 위한 맞춤 여행지</h1>
-        <AccessibilityIcons />
+        <AccessibilityIcons selectedIcon={selectedIcon} handleClick={setSelectedIcon}/>
         <TourCardList 
-          data={tourCardData}
+          data={filteredTourData}
         />
       </div>
 
