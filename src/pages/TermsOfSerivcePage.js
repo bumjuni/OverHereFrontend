@@ -56,8 +56,8 @@ const termsOfServiceText = {
 
 const TermsOfServicePage = () => {
   return (
-    <div style={{ fontFamily: "Arial, sans-serif", color: "#333", width: "80%", margin: "auto", padding: "20px" }}>
-      <h1 style={{ fontWeight: "bold", fontSize: "24px", marginBottom: "20px" }}>{termsOfServiceText.title}</h1>
+    <div style={{ fontFamily: "Arial, sans-serif", color: "#333", width: "80%"}}>
+      <h1 style={{}}>{termsOfServiceText.title}</h1>
       <p>{termsOfServiceText.introduction}</p>
       <p>{termsOfServiceText.effectiveDate}</p>
       {termsOfServiceText.sections.map((section, index) => (
