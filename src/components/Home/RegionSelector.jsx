@@ -6,7 +6,6 @@ import "./RegionSelector.css";
 const regions = ["서울", "경기도", "강원도", "전라도", "충청도", "경상도", "제주도"];
 
 const RegionSelector = ({selectedRegion, handleClick}) => {
-  console.log(selectedRegion);
   return (
     <div className="region-selector">
       {regions.map((region, index) => (

@@ -68,6 +68,7 @@ const Banner = () => {
 const Home = () => {
   const [cardData, setCardData] = useState(initCardData);
   const [tourCardData, setTourCardData] = useState(initTourData);
+  const [filteredCardData, setFilteredCardData] = useState(cardData);
   const [selectedRegion, setSelectedRegion] = useState(0); // Default selected region
 
   // useEffect(() => {
@@ -91,10 +92,9 @@ const Home = () => {
   // }, []);
 
   useEffect(() => {
-    console.log("asdf")
     const newCardData = cardData.filter((item) => item.areaCode === selectedRegion);
-    setCardData(cardData);
-  }, selectedRegion)
+    setFilteredCardData(newCardData);
+  }, [selectedRegion])
 
   return (
     <>
@@ -115,7 +115,7 @@ const Home = () => {
             // padding: '20px',
           }}
         >
-          {cardData.map((card, index) => (
+          {filteredCardData.map((card, index) => (
             <Card
               key={index}
               contentId={card.touristAttractionId}
