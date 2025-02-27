@@ -1,13 +1,16 @@
 import React from "react";
 import Badge from './Badge';
 import NonObstacleIcon from './NonObstacleIcon';
+import dummyImage from '../../assets/svg/dummy.svg';
 import "./Card.css";
 
-const Card = ({key, title, region, image, nonObstacle}) => {
-  console.log(title, region, image, nonObstacle);
+const Card = ({key, contentId, title, region, image, nonObstacle}) => {
+  const imgSrc = (image)? image : dummyImage;
+
   return (
     <div className="card">
-      <div className="card-image"></div>
+        <img src={imgSrc} className="card-image" alt={title} />
+        {/* <div className="card-image"></div> */}
       <div className="text-content">
         {region && <Badge text={region} />}
         <h3 className="card-title">{title}</h3>

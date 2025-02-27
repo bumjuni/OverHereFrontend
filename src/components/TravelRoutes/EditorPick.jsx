@@ -3,10 +3,12 @@ import styled from "styled-components";
 import Badge from "../common/Badge";
 import ArrowButton from "./ArrowButton";
 import {ReactComponent as Map} from '../../assets/svg/Map.svg';
+import dummyImg from '../../assets/svg/dummy.svg';
 
 
 function EditorPick({data}){
     const [curRecCourse, setCurRecCourse] = useState(0);
+    const imgSrc = data[curRecCourse].image? data[curRecCourse].image : dummyImg;
     
     return (
         <>
@@ -16,7 +18,7 @@ function EditorPick({data}){
             
             <CardContainer>
                 {/* <div className="img-cropped"> */}
-                <img src={data[curRecCourse].image} alt={data[curRecCourse].title} className="rec-image"></img>
+                <Image src={imgSrc} alt={data[curRecCourse].title} />
                 {/* </div> */}
                 <Contents>
                     <Badge text="지역" color="gray" />
@@ -61,7 +63,7 @@ const CardContainer = styled.div`
 const CourseButton = styled.button`
     position: absolute;
     right: 2em;
-    bottom: 10%;
+    bottom: 2em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,4 +81,10 @@ const Contents = styled.div`
 `
 const Description = styled.span`
     word-break: break-word;
+`
+const Image = styled.img`
+    height: 17em;
+    aspect-ratio: 5 / 3;
+    border-radius: 8px;
+    object-fit: cover;
 `

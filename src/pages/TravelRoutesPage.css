@@ -15,20 +15,6 @@
   flex: 1; 
 }
 
-.image-section {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.placeholder-image {
-  width: 100%;
-  height: 100%;
-  background-color: #e0e0e0;
-  border-radius: 5px;
-}
-
 .travelroutespageheader {
   display: flex;
   margin-bottom: 10px;
@@ -55,16 +41,16 @@
 }
 
 .page-info {
+  white-space: nowrap;
   color: #555;
 }
 
 .progress-bar {
-  width: 45%;
+  width: 17em;
   height: .7em;
   background-color: #ECEEF0;
   border-radius: 1em;
   overflow: hidden;
-  
 }
 
 .progress {
@@ -162,33 +148,6 @@
 .recommend-button.blue:hover {
   background-color: #1e88e5;
 }
-
-
-
-/* .img-cropped{
-  position: relative;
-  width: 520px;
-  height: 316px;
-  overflow: hidden;
-} */
-
-.rec-image{
-  /* width: 520px;
-  aspect-ratio: 5 / 3; */
-  /* 가로비율만 고정하고 세로는 자유롭게 두는게 좋은지 */
-
-  height: 17em;
-  aspect-ratio: 5 / 3;
-  border-radius: 8px;
-  /*아님 이미지 늘어나거나 줄어들더라도 316*520이 좋은지*/
-
-  /* position: absolute;
-  max-width: 600px;
-  bottom: -20px; */
-  /*아님 크롭이 좋은지(크롭하면 창크기 줄이거나 확대했을때도 크롭됨) */
-}
-
-
 
 .badges{
   padding-top: 1em;

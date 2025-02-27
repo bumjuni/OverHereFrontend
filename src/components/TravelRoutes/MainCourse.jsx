@@ -3,9 +3,11 @@ import styled from "styled-components";
 import ArrowButton from "./ArrowButton";
 import Badge from "../common/Badge";
 import InfoIcons from "./InfoIcons";
+import dummyImg from '../../assets/svg/dummy.svg';
 
 function MainCourse({data}) {
     const [currentPage, setCurrentPage] = useState(0);
+    const imgSrc = data[currentPage].image? data[currentPage].image : dummyImg;
     
     return (
         <div className="content-container">
@@ -41,8 +43,7 @@ function MainCourse({data}) {
 
         {/* Right Column */}
         <div className="image-section">
-          <div className="placeholder-image"></div>
-          {/* ??? */}
+          <Image src={imgSrc} alt={data[currentPage].title} />
         </div>
       </div>
     );
@@ -56,4 +57,12 @@ const DefaultInfo = styled.div`
   width: 100%;
   padding: 1em 3em;
   align-items: center;
+  margin: 2.5em 0;
+`
+const Image = styled.img`
+  height: 22em;
+  aspect-ratio: 1 / 0.65;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  object-fit: cover;
 `

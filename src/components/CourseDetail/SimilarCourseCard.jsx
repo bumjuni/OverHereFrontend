@@ -1,23 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import Badge from '../common/Badge';
+import dummyImg from '../../assets/svg/dummy.svg';
 
 const SimilarCourseCard = ({ image, region, type, title, description }) => {
+  const imgSrc = image? image : dummyImg;
+
   return (
     <Container>
       {/* Image Placeholder */}
-      {image ? (
-        <Image
-          src={image}
-          alt="Course"
-        />
-        ) : <DummyImage />
-      }
+      <Image src={imgSrc} alt={title} />
 
       {/* Tags */}
       <div>
-        <Badge text="지역" color="gray" />
-        <Badge text="코스 유형" color="yellow" />
+        <Badge text={region} color="gray" />
+        <Badge text={type} color="yellow" />
       </div>
 
       {/* Title */}
@@ -42,10 +39,10 @@ const Title = styled.h3`
 `
 const Image = styled.img`
   width: 100%; 
-  aspect-ratio: 1 / 0.7;
+  aspect-ratio: 1 / 0.75;
   object-fit: cover;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   margin-bottom: 10px;
   background-color: #ECEEF0;
 `

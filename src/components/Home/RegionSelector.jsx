@@ -5,20 +5,20 @@ import "./RegionSelector.css";
 
 const regions = ["서울", "경기도", "강원도", "전라도", "충청도", "경상도", "제주도"];
 
-const RegionSelector = () => {
-  const [selectedRegion, setSelectedRegion] = useState("서울"); // Default selected region
-
+const RegionSelector = ({selectedRegion, handleClick}) => {
+  console.log(selectedRegion);
   return (
     <div className="region-selector">
-      {regions.map((region) => (
+      {regions.map((region, index) => (
         <button
           key={region}
+          value={index}
           className={`region-button ${
-            selectedRegion === region ? "selected" : ""
+            selectedRegion === index ? "selected" : ""
           }`}
-          onClick={() => setSelectedRegion(region)}
+          onClick={(e) => handleClick(index)}
         >
-          {selectedRegion === region && 
+          {selectedRegion === index && 
             <Location/>
           }
           <span>{region}</span>

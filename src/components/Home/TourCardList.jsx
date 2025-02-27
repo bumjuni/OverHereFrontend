@@ -1,12 +1,14 @@
 import React from 'react';
 import Badge from '../common/Badge';
+import dummyImg from '../../assets/svg/dummy.svg';
 import './TourCardList.css';
-//일단 더미 데이터로 되어있음
 
-const TourCard = ({ region, title}) => {
+const TourCard = ({ contentId, contentTypeId, region, title, image }) => {
+  const imgSrc = image? image: dummyImg;
   return (
     <div className="tour-card">
-      <div className="tour-image"></div>
+      {/* <div className="tour-image"></div> */}
+      <img src={imgSrc} alt={title} className="tour-image" />
       <div className="tour-info">
         {/* <h4 className="region">{region}</h4> */}
         <Badge text={region} />
@@ -22,9 +24,11 @@ const TourCardList = ({data}) => {
     <div className="tour-card-list">
       {data.map((item) => (
         <TourCard
-          key={item.id}
-          region={item.id}
+          contentId={item.contentId}
+          contentTypeId={item.contentTypeId}
+          region={item.areaCode}
           title={item.title}
+          image={item.thumbnailUrl}
           // description={card.description}
         />
       ))}

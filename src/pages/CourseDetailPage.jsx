@@ -31,6 +31,7 @@ const initCardData = [
 ]
 
 const CourseDetailPage = () => {
+  // API연결 후 더미이미지 작업
   const [cardData, setCardData] = useState(initCardData);
   return (
     <Container>
@@ -175,8 +176,9 @@ const Image = styled.img`
   display: flex;
   align-self: center;
   width: 90%;
-  aspect-ratio: 1 / 0.7;
+  aspect-ratio: 1 / 0.55;
   border-radius: 5px;
+  object-fit: cover;
 `
 const CardsContainer = styled.div`
   position: relative;
@@ -186,10 +188,10 @@ const Cards = styled.div`
 `
 const MarkerLine = styled.div`
   position: absolute;
-  height: calc(100% - 160px - 86px * 2 - 17px);
+  height: calc(100% - 21em);
   width: 0;
-  border: 2px dashed #B5B9BD;
+  border-left: 2px dashed #B5B9BD;
   z-index: -1;
-  left: 15px;
-  top: calc(80px + 86px + 8px);
+  left: 16px;
+  top: 11em;
   `

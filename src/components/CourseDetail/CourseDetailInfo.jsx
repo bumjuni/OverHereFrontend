@@ -2,18 +2,21 @@ import React from "react";
 import styled from "styled-components";
 import {ReactComponent as Marker} from '../../assets/svg/Marker.svg';
 import NonObstacleIcon from "../common/NonObstacleIcon";
+import dummyImg from '../../assets/svg/dummy.svg';
 
 // dummy
 const dummy = [true, true, true, true, true];
 
 const CourseDetailInfo = ({ place, title, img, description, nonObstacle }) => {
+  const imgSrc = img? img : dummyImg;
+
   return (
     <Container>
       <MarkerWrapper>
         <Marker />
       </MarkerWrapper>
       {/* Image Placeholder */}
-      <Image src={img} alt={title} />
+      <Image src={imgSrc} alt={title} />
 
       {/* Text Content */}
       <Details>
@@ -29,6 +32,7 @@ const CourseDetailInfo = ({ place, title, img, description, nonObstacle }) => {
 export default CourseDetailInfo;
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   margin: 5em 0;
   color: #333;
@@ -38,6 +42,8 @@ const Image = styled.img`
   height: 12em;
   aspect-ratio: 1 / 0.7;
   border-radius: 4px;
+  object-fit: cover;
+  margin-left: calc(2.5em + 33px);
 `
 const Details = styled.div`
   p {
@@ -49,6 +55,8 @@ const Details = styled.div`
   }
 `
 const MarkerWrapper = styled.div`
-  align-self: center;
+  // align-self: center;
+  position: absolute;
   margin-right: 2.5em;
+  top: calc(6em - 12px);
 `

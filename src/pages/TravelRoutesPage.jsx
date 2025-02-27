@@ -46,7 +46,6 @@ const course_data = [
       "number": "30",
       "difficulty": "하",
     },
-    "image": dummyImg3,
   },
 ]
 
@@ -55,7 +54,7 @@ const pick_data = [
     "region": "region1",
     "courseType": "courseType1",
     "title": "title1",
-    "description": "description1description1description1description1description1dedescrdescrdescrdescrdescrdescrdescrdescrscription1description1",
+    "description": "description1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1description1dedescrdescrdescrdescrdescrdescrdescrdescrscription1description1",
     "attractions": ["attracion1", "attracion2", "attracion3", "attracion4", "attracion5"],
     "image": dummyImg1,
   },
@@ -65,7 +64,6 @@ const pick_data = [
     "title": "title2",
     "description": "description2description2description2description2description2description2description2",
     "attractions": ["attracion2", "attracion3", "attracion4", "attracion5"],
-    "image": dummyImg2,
   },
   {
     "region": "region3",
@@ -79,8 +77,8 @@ const pick_data = [
 
 
 const TravelRoutesPage = () => {
-  const [courseData, setCourseData] = useState([]);
-  const [recCourseData, setRecCourseData] = useState([]);
+  const [courseData, setCourseData] = useState(course_data);
+  const [recCourseData, setRecCourseData] = useState(pick_data);
 
   useEffect(() => {
     axios.get('https://my-json-server.typicode.com/typicode/demo/posts')

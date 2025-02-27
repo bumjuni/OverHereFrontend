@@ -2,9 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import Badge from '../common/Badge';
 import {ReactComponent as TotalDist} from '../../assets/svg/TotalDistance.svg';
+import dummyImage from '../../assets/svg/dummy.svg';
 
 
 function BestCourseCard(props){
+    const imgSrc = props.img? props.img : dummyImage;
+
     return (
         <>
             <Card>
@@ -14,10 +17,7 @@ function BestCourseCard(props){
                         Best <br /> {props.rank}
                     </Rank>
                     }
-                    {props.img?
-                     <Image src={props.img} alt={props.title} />
-                     : <DummyImage />
-                    }
+                    <Image src={imgSrc} alt={props.title} />
                 </div>
 
                 <Content>
@@ -91,4 +91,3 @@ const Divider = styled.div`
     border: 1px solid #D4D8DC;
     margin: 2.5em 0;
 `
-const DummyImage = () => <Image as="div" />

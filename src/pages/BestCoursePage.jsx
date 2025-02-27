@@ -2,12 +2,6 @@ import {react, useState, useEffect} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import dummy1 from '../assets/image/dummy/dummy_img1.jpg';
-import dummy2 from '../assets/image/dummy/dummy_img2.jpg';
-import dummy3 from '../assets/image/dummy/dummy_img3.jpg';
-import dummy4 from '../assets/image/dummy/dummy_img4.jpg';
-import dummy5 from '../assets/image/dummy/dummy_img5.jpg';
-import dummy6 from '../assets/image/dummy/dummy_img6.jpg';
-import dummy7 from '../assets/image/dummy/dummy_img7.jpg';
 import BestCourseCard from '../components/BestCourse/BestCourseCard';
 import MoreContentsButton from '../components/common/MoreContentsButton';
 

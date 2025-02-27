@@ -16,7 +16,6 @@ const icon = [
 
 //data로 들어오는 것은 boolean 5개
 function NonObstacleIcon({ data }) {
-    console.log(data);
     return (
         <Container>
             {data.map((bool, index) => (
@@ -36,7 +35,7 @@ const Container = styled.div`
     width: 100%;
     flex-wrap: wrap;
     flex-direction: row;
-    gap: .5em;
+    gap: .4em;
     margin: .5em 0;
 `
 const IconWrapper = styled.div`
