@@ -2,7 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import termsOfService from'../assets/doc/TermsOfService.json'
+import termsOfService from'../assets/docs/TermsOfService.json'
 
 
 const TermsOfServicePage = () => {
