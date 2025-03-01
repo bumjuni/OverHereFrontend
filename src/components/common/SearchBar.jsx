@@ -1,8 +1,14 @@
-import React from "react";
+import {React, useState, useEffect} from "react";
 import styled from "styled-components";
 import {ReactComponent as SearchIcon} from '../../assets/svg/Search/SearchIcon.svg';
 
 function SearchBar({keyword, onChange}){
+
+    // useEffect(() => {
+    //     console.log('tq')
+    //     setInputText(keyword);
+    // }, [keyword]);
+
     return (
         <Container className="inIntegrated">
             <Input
@@ -12,7 +18,7 @@ function SearchBar({keyword, onChange}){
                 value={keyword}
                 onChange={(e) => onChange(e.target.value)}
             />
-            <Button><SearchIcon /></Button>
+            <Button type="submit"><SearchIcon /></Button>
         </Container>
     )
 }

@@ -1,5 +1,5 @@
 import {React, useState, useEffect} from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import SearchBar from "../components/common/SearchBar";
 import Card from "../components/common/Card";
@@ -54,26 +54,32 @@ const initNoticeData = Array(20).fill({
     });
 
 function IntegrateSearch() {
-    const [keyword, setKeyword] = useState();
+    const location = useLocation();
+    const headerKeyWord = location.state? location.state.keyword : undefined;
+    const [keyword, setKeyword] = useState(location.state?.keyword);
     const [recKeyword, setRecKeyword] = useState(initRecKeyword);
     const [tourData, setTourData] = useState(initTourData);
     const [courseData, setCourseData] = useState(initCourseData);
     const [noticeData, setNoticeData] = useState(initNoticeData);
-    
+
     useEffect(() => {
-        //기본적으로 가나다순으로 검색 API날리기?
-    }, [])
+        // header에서 검색 시시
+        setKeyword(headerKeyWord);
+        Search(headerKeyWord);
+    }, [headerKeyWord])
     
     const handleClick = (e) => {
         // 추천검색어 클릭 시
-        console.log(e);
-        console.log(e.target.value);
         setKeyword(e.target.value);
-        handleSearch(e);
+        Search(e.target.value);
     }
     
-    const handleSearch = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
+        Search(keyword);
+    }
+
+    const Search = (keyword) => {
         axios.get(`/api/v1/search/tourist-attraction/searchParam=${keyword}`)
             .then(res => setTourData(res.data))
             .catch(err => alert("관광지 정보를 검색하는데 실패했습니다"));
@@ -85,7 +91,7 @@ function IntegrateSearch() {
     return (
         <>
         <SearchOptions>
-            <form onSubmit={handleSearch}>
+            <form onSubmit={handleSubmit}>
                 <SearchBar keyword={keyword} onChange={setKeyword} />
             </form>
             <RecKeyword>추천 검색어</RecKeyword>

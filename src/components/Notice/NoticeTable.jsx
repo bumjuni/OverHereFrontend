@@ -20,7 +20,6 @@ function NoticeTable({data, visibleCount}) {
             <tbody>
             {data.slice(0, visibleCount).map((notice) => (
                 <BodyTr 
-                key={notice.id} 
                 onClick={() => handleRowClick(notice.id)}
                 >
                 <td className="category"> [공지사항] </td>
