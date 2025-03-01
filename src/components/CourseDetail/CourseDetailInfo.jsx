@@ -1,14 +1,17 @@
-import React from "react";
+import {React} from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {ReactComponent as Marker} from '../../assets/svg/Marker.svg';
 import NonObstacleIcon from "../common/NonObstacleIcon";
 import dummyImg from '../../assets/svg/dummy.svg';
 
-// dummy
-const dummy = [true, true, true, true, true];
-
-const CourseDetailInfo = ({ place, title, img, description, nonObstacle }) => {
+const CourseDetailInfo = ({ contentId, place, title, img, description, nonObstacle }) => {
   const imgSrc = img? img : dummyImg;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/tourist-attractions/${contentId}`);
+  }
 
   return (
     <Container>
@@ -16,14 +19,14 @@ const CourseDetailInfo = ({ place, title, img, description, nonObstacle }) => {
         <Marker />
       </MarkerWrapper>
       {/* Image Placeholder */}
-      <Image src={imgSrc} alt={title} />
+      <Image src={imgSrc} alt={title} onClick={handleClick} />
 
       {/* Text Content */}
-      <Details>
+      <Details onClick={handleClick}>
         <p>{place}</p>
         <h2>{title}</h2>
-        <p>{description}{description}</p>
-        <NonObstacleIcon data={dummy} />
+        <p>{description}</p>
+        <NonObstacleIcon data={nonObstacle} />
       </Details>
     </Container>
   );
@@ -44,8 +47,10 @@ const Image = styled.img`
   border-radius: 4px;
   object-fit: cover;
   margin-left: calc(2.5em + 33px);
+  cursor: pointer;
 `
 const Details = styled.div`
+  cursor: pointer;
   p {
     margin: 0;
     line-height: 1.5;

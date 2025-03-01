@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Badge from '../common/Badge';
 import {ReactComponent as TotalDist} from '../../assets/svg/TotalDistance.svg';
@@ -6,18 +7,21 @@ import dummyImage from '../../assets/svg/dummy.svg';
 
 
 function BestCourseCard(props){
-    const imgSrc = props.img? props.img : dummyImage;
+    const navigate = useNavigate();
+    const toDetails = () => {
+        navigate(`/course-details/${props.courseId}`);
+    }
 
     return (
         <>
-            <Card>
+            <Card onClick={toDetails}>
                 <div>
                     {props.rank && 
                     <Rank>
                         Best <br /> {props.rank}
                     </Rank>
                     }
-                    <Image src={imgSrc} alt={props.title} />
+                    <Image src={props.img || dummyImage} alt={props.title} />
                 </div>
 
                 <Content>
@@ -46,6 +50,7 @@ export default BestCourseCard;
 const Card = styled.div`
     display: flex;
     justify-content: center;
+    cursor: pointer;
 `
 const Image = styled.img`
     height: 14em;

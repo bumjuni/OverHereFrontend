@@ -52,14 +52,25 @@ const initialData = [
 
 function SearchPage(){
     const page = useRef(0);
+    const [selectedReg, setSelectedReg] = useState();
+    const [selectedType, setSelectedType] = useState();
+    const [searchWord, setSearchWord] = useState();
+
     const [result, setResult] = useState(initialData); 
 
-    const handleSubmit = (e, selectedRegion, selectedType, searchWord) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(selectedRegion, selectedType, searchWord);
-        // 검색 당시에는 무조건 page=1, 더보기 버튼 호출 시 같은 조건에서 page 수 늘려서 호출
-        axios.get(`/api/v1/search/tourist-attraction&areacode=${selectedRegion}&type=${selectedType}&searchParam=${searchWord}&page=1`)
+        page.current = 0;
+        // 검색 당시에는 무조건 page=0, 더보기 버튼 호출 시 같은 조건에서 page 수 늘려서 호출
+        axios.get(`/api/v1/search/tourist-attraction&areacode=${selectedReg}&type=${selectedType}&searchParam=${searchWord}&page=${page.current}`)
             .then(res => setResult(res.data))
+            .catch(err => alert("검색 결과를 불러오는데 실패했습니다."));
+    }
+
+    const handleMoreContents = () => {
+        page.current += 1;
+        axios.get(`/api/v1/search/tourist-attraction&areacode=${selectedReg}&type=${selectedType}&searchParam=${searchWord}&page=${page.current}`)
+            .then(res => setResult(...res.data))
             .catch(err => alert("검색 결과를 불러오는데 실패했습니다."));
     }
 
@@ -70,7 +81,15 @@ function SearchPage(){
     return (
         <>
             <h1>관광지 찾기</h1>
-            <SearchGroup handleSubmit={handleSubmit}/>
+            <SearchGroup 
+                handleSubmit={handleSubmit}
+                selectedReg={selectedReg}
+                setSelectedReg={setSelectedReg}
+                selectedType={selectedType}
+                setSelectedType={setSelectedType}  
+                searchWord={searchWord}
+                setSearchWord={setSearchWord}  
+            />
             <h3>총 <span style={{color: "#4caf50"}}>{formatTwoDigits(result.length)}</span>개</h3>
             
             <CardList>
@@ -91,7 +110,7 @@ function SearchPage(){
                 }
             </CardList>
 
-            <MoreContentsButton />
+            <MoreContentsButton onClick={handleMoreContents} />
         </>
     );
 }

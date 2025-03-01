@@ -8,6 +8,7 @@
   font-family: Arial, sans-serif;
   position: relative;
   width: calc((100% - 16px * 3) / 4);
+  cursor: pointer;
 }
 
 .card-image {

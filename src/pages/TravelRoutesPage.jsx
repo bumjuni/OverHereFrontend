@@ -8,9 +8,6 @@ import { Link } from 'react-router-dom';
 import './TravelRoutesPage.css';
 import imgBoy from "../assets/image/img_boy.jpg";
 import imgGirl from "../assets/image/img_girl.jpg";
-import dummyImg1 from '../assets/image/dummy/dummy_img1.jpg';
-import dummyImg2 from '../assets/image/dummy/dummy_img2.jpg';
-import dummyImg3 from '../assets/image/dummy/dummy_img3.jpg';
 import EditorPick from '../components/TravelRoutes/EditorPick';
 import MainCourse from '../components/TravelRoutes/MainCourse';
 
@@ -24,7 +21,6 @@ const course_data = [
       "number": "3",
       "difficulty": "상",
     },
-    "image": dummyImg1,
   },
   {
     "region": "region2",
@@ -35,7 +31,6 @@ const course_data = [
       "number": "332",
       "difficulty": "중",
     },
-    "image": dummyImg2,
   },
   {
     "region": "region3",
@@ -56,7 +51,6 @@ const pick_data = [
     "title": "title1",
     "description": "description1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1description1dedescrdescrdescrdescrdescrdescrdescrdescrscription1description1",
     "attractions": ["attracion1", "attracion2", "attracion3", "attracion4", "attracion5"],
-    "image": dummyImg1,
   },
   {
     "region": "region2",
@@ -71,7 +65,6 @@ const pick_data = [
     "title": "title3",
     "description": "description3description3description3description3description3description3description3",
     "attractions": ["attracion3", "attracion4", "attracion5"],
-    "image": dummyImg3,
   },
 ]
 
@@ -81,11 +74,11 @@ const TravelRoutesPage = () => {
   const [recCourseData, setRecCourseData] = useState(pick_data);
 
   useEffect(() => {
-    axios.get('https://my-json-server.typicode.com/typicode/demo/posts')
+    axios.get(`/api/v1/course/popular`)
       .then(res => setCourseData(res.data))
       .catch(err => alert("코스 정보를 불러오는 데 실패했습니다"));
 
-    axios.get('https://my-json-server.typicode.com/typicode/demo/posts')
+    axios.get(`/api/v1/course/popular`)
       .then(res => setRecCourseData(res.data))
       .catch(err => alert("에디터 추천 픽 코스 정보를 불러오는 데 실패했습니다"));
   }, []);

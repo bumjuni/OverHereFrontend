@@ -25,24 +25,41 @@ const initData = {
       title: "string",
       detailInfo: "string",
       imageUrl: "string",
-      place: "백엔드 부재" 
+      place: "백엔드 부재" ,
+      nonObstacleinfo: {helpdog: true, parking: true, wheelchair: true, restroom: true, audioguide: true}
     }, {          
       place: "00시 00구",
       title: "다른 텍스트",
       imgUrl: dummy,
       detailInfo: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
+      nonObstacleinfo: {helpdog: true, parking: true, wheelchair: true, restroom: true, audioguide: false}
     }, {          
       place: "00시 00구",
       title: "다른 텍스트",
       imgUrl: dummy,
       detailInfo: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
+      nonObstacleinfo: {helpdog: true, parking: false, wheelchair: false, restroom: false, audioguide: true}
     }
   ]
 }
+const initSimilarData = [
+  {
+    region: "지역",
+    type: "코스 유형",
+    title: "텍스트",
+    description: "코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글"
+  },  {
+    region: "지역",
+    type: "코스 유형",
+    title: "텍스트",
+    description: "코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글"
+  }
+]
 
 const CourseDetailPage = ({courseId}) => {
   // API연결 후 더미이미지 작업
   const [data, setData] = useState(initData);
+  const [simData, setSimData] = useState(initSimilarData);  // API 없음음
   
   useEffect(() => {
     axios.get(`/api/v1/course/detail/courseId=${courseId}`)
@@ -95,6 +112,12 @@ const CourseDetailPage = ({courseId}) => {
               title={item.title}
               img={item.imgUrl || dummy}
               description={item.detailInfo}
+              nonObstacle={[item.nonObstacleinfo.helpdog,
+                            item.nonObstacleinfo.audioguide,
+                            item.nonObstacleinfo.wheelchair,
+                            item.nonObstacleinfo.restroom,
+                            item.nonObstacleinfo.parking
+               ]}
             />
           )}
         </Cards>
@@ -103,27 +126,16 @@ const CourseDetailPage = ({courseId}) => {
       <h1>비슷한 코스 찾아보기</h1>
 
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-        <SimilarCourseCard
-          image={dummy}
-          region="지역"
-          type="코스 유형"
-          title="텍스트"
-          description="코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글"
-        />
-        <SimilarCourseCard
-          image={null}
-          region="다른 지역"
-          type="다른 코스"
-          title="다른 텍스트"
-          description="다른 코스 설명 글 다른 코스 설명 글 다른 코스 설명 글 다른 코스 설명 글"
-        />
-        <SimilarCourseCard
-          image={null}
-          region="다른 지역"
-          type="다른 코스"
-          title="다른 텍스트"
-          description="다른 코스 설명 글 다른 코스 설명 글 다른 코스 설명 글 다른 코스 설명 글"
-        />
+        {simData.map((item) => 
+          <SimilarCourseCard 
+            image={item.image}
+            region={item.region}
+            type={item.type}
+            title={item.title}
+            description={item.description}
+          />
+
+        )}
       </div>
       <UserSatisfaction />
     </Container>

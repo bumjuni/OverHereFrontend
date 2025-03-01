@@ -19,22 +19,19 @@ const region = ['서울', '경기도', '충청도', '강원도', '전라도', '�
 const type = ['자연', '문화/역사', '음식/미식', '축제/이벤트'];
 
 
-function SearchGroup({handleSubmit}) {
-    const [selectedReg, setSelectedReg] = useState(null);
-    const [selectedType, setSelectedType] = useState(null);
-    const [searchWord, setSearchWord] = useState(null);
+function SearchGroup(props) {
 
     return (
         <Wrapper>
             <RefreshButton />
-            <SearchForm onSubmit={(e) => handleSubmit(e, selectedReg, selectedType, searchWord)}>
+            <SearchForm onSubmit={props.handleSubmit}>
                 <DropDown 
-                    title={selectedReg || '지역'} data={region} onChange={setSelectedReg}
+                    title={props.selectedReg || '지역'} data={region} onChange={props.setSelectedReg}
                 />
                 <DropDown 
-                    title={selectedType || '유형'} data={type} onChange={setSelectedType}
+                    title={props.selectedType || '유형'} data={type} onChange={props.setSelectedType}
                 />
-                <SearchInput onChange={setSearchWord} searchWord={searchWord} />
+                <SearchInput searchWord={props.searchWord} onChange={props.setSearchWord} />
             </SearchForm>
         </Wrapper>
     );

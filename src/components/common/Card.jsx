@@ -3,13 +3,17 @@ import Badge from './Badge';
 import NonObstacleIcon from './NonObstacleIcon';
 import dummyImage from '../../assets/svg/dummy.svg';
 import "./Card.css";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({key, contentId, title, region, image, nonObstacle}) => {
-  const imgSrc = (image)? image : dummyImage;
+  const navigate = useNavigate();
+  const toDetails = () => {
+    navigate(`/tourist-attractions/${contentId}`);
+  }
 
   return (
-    <div className="card">
-        <img src={imgSrc} className="card-image" alt={title} />
+    <div className="card" onClick={toDetails}>
+        <img src={image || dummyImage} className="card-image" alt={title} />
         {/* <div className="card-image"></div> */}
       <div className="text-content">
         {region && <Badge text={region} />}

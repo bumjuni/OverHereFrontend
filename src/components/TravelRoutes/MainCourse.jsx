@@ -4,10 +4,14 @@ import ArrowButton from "./ArrowButton";
 import Badge from "../common/Badge";
 import InfoIcons from "./InfoIcons";
 import dummyImg from '../../assets/svg/dummy.svg';
+import { useNavigate } from "react-router-dom";
 
 function MainCourse({data}) {
     const [currentPage, setCurrentPage] = useState(0);
-    const imgSrc = data[currentPage].image? data[currentPage].image : dummyImg;
+    const navigate = useNavigate();
+    const toDetails = () => {
+      navigate(`/course-details/${data.courseId}`);
+    }
     
     return (
         <div className="content-container">
@@ -43,7 +47,11 @@ function MainCourse({data}) {
 
         {/* Right Column */}
         <div className="image-section">
-          <Image src={imgSrc} alt={data[currentPage].title} />
+          <Image 
+            src={data[currentPage].image || dummyImg} 
+            alt={data[currentPage].title} 
+            onClick={toDetails}
+          />
         </div>
       </div>
     );
@@ -65,4 +73,5 @@ const Image = styled.img`
   background-color: #e0e0e0;
   border-radius: 5px;
   object-fit: cover;
+  cursor: pointer;
 `

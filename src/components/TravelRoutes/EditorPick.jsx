@@ -1,4 +1,5 @@
-import {React, useState, useNavigate} from "react";
+import {React, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Badge from "../common/Badge";
 import ArrowButton from "./ArrowButton";
@@ -8,8 +9,11 @@ import dummyImg from '../../assets/svg/dummy.svg';
 
 function EditorPick({data}){
     const [curRecCourse, setCurRecCourse] = useState(0);
-    const imgSrc = data[curRecCourse].image? data[curRecCourse].image : dummyImg;
-    
+    const navigate = useNavigate();
+    const toDetails = () => {
+        navigate(`/course-details/${data.courseId}`);
+    }
+
     return (
         <>
             <ButtonContainer>
@@ -18,7 +22,7 @@ function EditorPick({data}){
             
             <CardContainer>
                 {/* <div className="img-cropped"> */}
-                <Image src={imgSrc} alt={data[curRecCourse].title} />
+                <Image src={data[curRecCourse].image || dummyImg} alt={data[curRecCourse].title} />
                 {/* </div> */}
                 <Contents>
                     <Badge text="지역" color="gray" />
@@ -32,8 +36,10 @@ function EditorPick({data}){
                             <Badge text={item} color="gray" />
                         )}
                     </div>
-                {/* useNavigate로 구현 */}
-                    <CourseButton type="button"><Map /> 코스 둘러보기</CourseButton>
+
+                    <CourseButton type="button" onClick={toDetails}>
+                        <Map /> 코스 둘러보기
+                    </CourseButton>
                 </Contents>
             </CardContainer>
         </>
@@ -75,6 +81,7 @@ const CourseButton = styled.button`
     color: #529B40;
     padding: 0.8em 1.5em;
     gap: 1em;
+    cursor: pointer;    
 `
 const Contents = styled.div`
     max-width: 50%;
