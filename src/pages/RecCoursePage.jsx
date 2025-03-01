@@ -1,15 +1,9 @@
-import {react, useState, useEffect} from 'react';
+import {react, useState, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import DropDownCard from '../components/DropDownCard';
-import dummy1 from '../assets/image/dummy/dummy_img1.jpg';
-import dummy2 from '../assets/image/dummy/dummy_img2.jpg';
-import dummy3 from '../assets/image/dummy/dummy_img3.jpg';
-import dummy4 from '../assets/image/dummy/dummy_img4.jpg';
-import dummy5 from '../assets/image/dummy/dummy_img5.jpg';
-import dummy6 from '../assets/image/dummy/dummy_img6.jpg';
-import dummy7 from '../assets/image/dummy/dummy_img7.jpg';
+import DropDownCard from '../components/RecCourse/DropDownCard';
 import SearchGroup from '../components/SearchPage/SearchGroup';
+import MoreContentsButton from '../components/common/MoreContentsButton';
 
 const dummy = [
     {
@@ -20,7 +14,6 @@ const dummy = [
         "overView": "string",
         "difficulty": "string",
         "distance": 0,
-        "image": dummy1,
         "attractions": [{
             "title": "string"
         }, {
@@ -40,7 +33,6 @@ const dummy = [
         "overView": "string",
         "difficulty": "string",
         "distance": 0,
-        "image": dummy4,
         "attractions": [{
             "title": "string"
         }, {
@@ -83,7 +75,6 @@ const dummy = [
         "overView": "string",
         "difficulty": "string",
         "distance": 0,
-        "image": dummy7,
     }, {
         "courseId": 0,
         "courseType": "string",
@@ -97,6 +88,15 @@ const dummy = [
 
 function RecCoursePage(){
     const [data, setData] = useState(dummy);
+    const [selectedReg, setSelectedReg] = useState();
+    const [selectedType, setSelectedType] = useState();
+    const page = useRef(0);
+    
+    useEffect(() => {
+        axios.get(`/api/v1/course/recommend/areacode&areacode=${selectedReg}&courseType=${selectedType}&page=${page}`)
+            .then(res => setData(res.data))
+            .catch(err => alert("지역별 추천 코스 정보를 불러오는데 실패했습니다"))
+    }, [])
 
     return (
         <>
@@ -105,6 +105,7 @@ function RecCoursePage(){
             <CardList>
                 {dummy.map((item) => <DropDownCard data={item} />)} 
             </CardList>
+            <MoreContentsButton />
         </>
     );
 }

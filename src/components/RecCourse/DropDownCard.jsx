@@ -1,12 +1,10 @@
 import {react, useState} from 'react';
 import styled from 'styled-components';
-import Badge from './common/Badge';
-import {ReactComponent as ArrowDown} from '../assets/svg/ArrowDown.svg';
-import {ReactComponent as Marker} from '../assets/svg/Marker.svg';
-import dummyImg from '../assets/svg/dummy.svg';
-import DropDown from './SearchPage/DropDown';
-import InfoIcons from './TravelRoutes/InfoIcons';
-import CourseDetailInfo from './CourseDetail/CourseDetailInfo';
+import Badge from '../common/Badge';
+import {ReactComponent as ArrowDown} from '../../assets/svg/ArrowDown.svg';
+import {ReactComponent as Marker} from '../../assets/svg/Marker.svg';
+import dummyImg from '../../assets/svg/dummy.svg';
+import InfoIcons from '../TravelRoutes/InfoIcons';
 
 function DropDownCard({ data }){
     const [clicked, setClicked] = useState(false);
@@ -50,15 +48,11 @@ function DropDownCard({ data }){
 export default DropDownCard;
 
 const Container = styled.div`
-    // display: flex;
-    // flex-direction: column;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    // flex-wrap: wrap;
-    // width: calc((100% - 1em) / 2);
     gap: 1em;
-    transition: height 0.3s ease-in-out;
     overflow: hidden;
-
 `
 const Image = styled.img`
     object-fit: cover;
@@ -67,11 +61,10 @@ const Image = styled.img`
     border-radius: 3px;
 `
 const Card = styled.div`
-    // position: relative;
     border: 1px solid #D4D8DC;
     border-radius: 3px;
     padding: 1.5em;
-    width: calc(100% - 3em);
+    width: calc(100% - 3em - 2px);
 `
 const Wrapper = styled.div`
     display: flex;
@@ -89,7 +82,7 @@ const DropDownPosition = styled.div`
     position: relative;
     overflow: hidden;
     grid-row: span 2;
-    // width: 100%;
+    width: 100%;
 `
 const Details = styled.div`
     display: flex;
@@ -98,10 +91,7 @@ const Details = styled.div`
     margin:  2px 0;
     border: 1px solid #D4D8DC;
     border-radius: 3px;
-    // width: 100%;    
-    // animation: smoothEmerge 2s ease-in-out;
-    max-height: 0;
-    transition: max-height 0.3s ease-in-out;
+    animation: smoothEmerge 1s ease;
     overflow: hidden;
     
     @keyframes smoothEmerge {

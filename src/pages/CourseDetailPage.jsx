@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import {React, useState, useEffect} from "react";
 import axios from "axios";
 import styled from "styled-components";
 import CourseDetailInfo from "../components/CourseDetail/CourseDetailInfo";
@@ -30,9 +30,16 @@ const initCardData = [
   }
 ]
 
+const initialData = {
+  
+}
+
 const CourseDetailPage = () => {
-  // API연결 후 더미이미지 작업
-  const [cardData, setCardData] = useState(initCardData);
+  const [courseData, setCourseData] = useState(initCardData);
+  useEffect(() => {
+
+  }, [])
+
   return (
     <Container>
       {/* Header Section */}
@@ -71,9 +78,9 @@ const CourseDetailPage = () => {
 
       {/* Course Details */}
       <CardsContainer>
-        <MarkerLine count={cardData.length}/>
+        <MarkerLine count={courseData.length}/>
         <Cards>
-          {cardData.map((item) => 
+          {courseData.map((item) => 
             <CourseDetailInfo
               place={item.place}
               title={item.title}
@@ -170,7 +177,8 @@ const CourseInfo = styled.div`
   border-bottom: 2px solid #ddd;
 `
 const Description = styled.p`
-  margin: 2em 0;
+  margin: 3em 0;
+  font-size: 14px;
 `
 const Image = styled.img`
   display: flex;
