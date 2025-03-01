@@ -1,4 +1,4 @@
-import {React, useState} from "react";
+import {React, useState, useEffect} from "react";
 import axios from "axios";
 import styled from "styled-components";
 import CourseDetailInfo from "../components/CourseDetail/CourseDetailInfo";
@@ -7,45 +7,62 @@ import {ReactComponent as View} from '../assets/svg/CourseDetail/View.svg';
 import {ReactComponent as Like} from '../assets/svg/CourseDetail/Like.svg';
 import {ReactComponent as ShareButton} from '../assets/svg/ShareButton.svg';
 import {ReactComponent as LikeButton} from '../assets/svg/LikeButton.svg';
-import dummy from '../assets/image/dummy/dummy_img3.jpg';
+import dummy from '../assets/svg/dummy.svg';
 import InfoIcons from "../components/TravelRoutes/InfoIcons";
 import UserSatisfaction from "../components/CourseDetail/UserSatisfaction";
 
-const initCardData = [
-  {
-    place: "00시 00구",
-    title: "텍스트",
-    img: dummy,
-    description: "관광지 설명 관광지 설명 관광지 설명 관광지 설명 관광지 설명 관광지 설명",
-  }, {          
-    place: "00시 00구",
-    title: "다른 텍스트",
-    img: dummy,
-    description: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
-  }, {          
-    place: "00시 00구",
-    title: "다른 텍스트",
-    img: dummy,
-    description: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
-  }
-]
+const initData = {
+  courseId: 0,
+  courseType: "string",
+  likeNumber: 9999,
+  title: "텍스트",
+  overView: "역사와 문화를 동시에 체험할 수 있는 특별한 관광지 코스를 소개합니다. 이 코스는 각 지역의 고유한 매력을 살린 역사적 명소들로 구성되어 있으며, 장애인 친화적인 시설과 서비스를 통해 모든 분들이 편리하게 즐길 수 있습니다.",
+  difficulty: "string",
+  distance: 0,
+  touristSummary: [
+    {
+      touristId: 0,
+      title: "string",
+      detailInfo: "string",
+      imageUrl: "string",
+      place: "백엔드 부재" 
+    }, {          
+      place: "00시 00구",
+      title: "다른 텍스트",
+      imgUrl: dummy,
+      detailInfo: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
+    }, {          
+      place: "00시 00구",
+      title: "다른 텍스트",
+      imgUrl: dummy,
+      detailInfo: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
+    }
+  ]
+}
 
-const CourseDetailPage = () => {
+const CourseDetailPage = ({courseId}) => {
   // API연결 후 더미이미지 작업
-  const [cardData, setCardData] = useState(initCardData);
+  const [data, setData] = useState(initData);
+  
+  useEffect(() => {
+    axios.get(`/api/v1/course/detail/courseId=${courseId}`)
+      .then (res => setData(res.data))
+      .catch (err => alert(`${err.status}: 코스 상세 데이터를 불러오늗데 실패했습니다`));
+  }, [])
+
   return (
     <Container>
       {/* Header Section */}
       <Title>
-          <p>지역</p>
-          <h1>텍스트</h1>
+          <p>지역(백엔드 부재)</p>       {/* 백엔드 부재 */}
+          <h1>{data.title}</h1>
       </Title>
 
       {/* Icon Info Section */}
       <Participations>
         <div>
-          <span> <View /> 12,345회</span> 
-          <span> <Like /> 9,999</span>
+          <span> <View /> 12,345회 (백엔드 부재)</span> 
+          <span> <Like /> {data.likeNumber.toLocaleString()}</span>
         </div>
         <div>
           <ShareButton />
@@ -56,29 +73,28 @@ const CourseDetailPage = () => {
 
       {/* Details Section */}
       <CourseInfo>
-        <InfoIcons mode="detail"/>
+        <InfoIcons mode="detail" distance={data.distance} count={data.touristSummary.length} difficulty={data.difficulty}/>
       </CourseInfo>
 
       {/* Description */}
       <Description>
-        역사와 문화를 동시에 체험할 수 있는 특별한 관광지 코스를 소개합니다. 이 코스는 각
-        지역의 고유한 매력을 살린 역사적 명소들로 구성되어 있으며, 장애인 친화적인
-        시설과 서비스를 통해 모든 분들이 편리하게 즐길 수 있습니다.
+        {data.overView}
       </Description>
 
-      {/* Placeholder Section */}
-      <Image src={dummy} alt={"asdf"}/>
+      {/* Placeholder Section */}     {/*백엔드 부재*/}
+      <Image src={data.imgUrl || dummy} alt={data.title}/>
 
       {/* Course Details */}
       <CardsContainer>
-        <MarkerLine count={cardData.length}/>
+        <MarkerLine />
         <Cards>
-          {cardData.map((item) => 
+          {data.touristSummary.map((item) => 
             <CourseDetailInfo
+              contentId={item.touristId}
               place={item.place}
               title={item.title}
-              img={item.img}
-              description={item.description}
+              img={item.imgUrl || dummy}
+              description={item.detailInfo}
             />
           )}
         </Cards>

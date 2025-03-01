@@ -5,14 +5,15 @@ import { ReactComponent as MapIcon } from "../../assets/svg/TravelRoutes/MapPos_
 import { ReactComponent as VehicleIcon } from "../../assets/svg/TravelRoutes/Bus_Pictogram.svg"; // 이동수단 아이콘
 import { ReactComponent as DifficultyIcon } from "../../assets/svg/TravelRoutes/DifficultyLevel_Pictogram.svg"; // 난이도 아이콘
 
-const infoOptions = [
-  { id: 0, label: "코스 거리", value: "총 00KM", icon: <RouteIcon /> },
-  { id: 1, label: "관광지 개수", value: "00개", icon: <MapIcon /> },
-  // { id: 2, value: "이동수단", icon: <VehicleIcon /> },
-  { id: 3, label: "난이도", value: "난이도", icon: <DifficultyIcon /> },
-];
 
-const InfoIcons = ({mode}) => {
+const InfoIcons = ({mode, distance, count, difficulty}) => {
+  const infoOptions = [
+    { id: 0, label: "코스 거리", value: `총 ${distance}KM`, icon: <RouteIcon /> },
+    { id: 1, label: "관광지 개수", value: `${count}개`, icon: <MapIcon /> },
+    // { id: 2, value: "이동수단", icon: <VehicleIcon /> },
+    { id: 3, label: "난이도", value: `${difficulty}`, icon: <DifficultyIcon /> },
+  ];
+  
   return (
     <>
       {infoOptions.map((option) => (
