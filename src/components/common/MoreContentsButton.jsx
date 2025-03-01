@@ -26,7 +26,7 @@ const StyledButton = styled.button`
 
 function MoreContentsButton(props){
     return (
-        <StyledButton>더보기 <PlusIcon /></StyledButton>
+        <StyledButton onClick={() => props.onClick(props.params)}>더보기 <PlusIcon /></StyledButton>
     );
 }
 

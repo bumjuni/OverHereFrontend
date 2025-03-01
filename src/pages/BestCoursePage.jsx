@@ -1,4 +1,4 @@
-import {react, useState, useEffect} from 'react';
+import {react, useState, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import dummy1 from '../assets/image/dummy/dummy_img1.jpg';
@@ -11,7 +11,6 @@ const initData = [
       "courseType": "string",
       "title": "string",
       "briefDescription": "stringstringstringstringstringstringstringstringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringststringstringstringstringstringstringstringringstringstringstringstringstringstring",
-      "overView": "string",
       "difficulty": "string",
       "distance": 0,
       "img": dummy1
@@ -20,26 +19,31 @@ const initData = [
         "courseType": "string",
         "title": "string",
         "briefDescription": "string",
-        "overView": "string",
         "difficulty": "string",
         "distance": 0,
     }
 ];
 
 function BestCourse(){
-    const [data, setData] = useState(initData);
+    const data = useRef(initData);
+    const [visibleData, setVisibleData] = useState(10);
     // 처음에 백엔드에서 30개 다 넘겨주고 더보기 버튼 누르면 API호출 없이 랜더링만
     useEffect(() => {
         axios.get(`/api/v1/course/best`)
-            .then(res => setData(res.data))
+            .then(res => data.current = res.data)
             .catch(err => alert("베스트 코스 데이터를 가져오는데 실패했습니다."));
     }, [])
 
+    const handleMoreContents = () => setVisibleData(visibleData + 10);
+
+    useEffect(() => {
+        console.log(visibleData);
+    }, [visibleData])
     return (
         <>
             <h1>여기너머의 인기 코스</h1> 
             <StyledUl>
-                {data.map((item, index) => 
+                {data.current.slice(0, visibleData).map((item, index) => 
                     <li>
                     <BestCourseCard
                         courseId={item.courseId}
@@ -53,7 +57,11 @@ function BestCourse(){
                     </li>
                 )}
             </StyledUl>
-            <MoreContentsButton />
+            
+            {visibleData>=30 ? 
+                <></> : 
+                <MoreContentsButton onClick={handleMoreContents}/>
+            }
         </>
     );
 }
