@@ -11,7 +11,7 @@ const initialData = {
   id: 0,
   title: "[공지사항] 여기너머 시스템 점검 안내(0214~)",
   content: "null",
-  createdAt: "2025-01-01T00:00:00",
+  createdAt: "2025-01-01T00:00:00"
 }
 
 const NoticeInsidePage = () => {
@@ -32,7 +32,7 @@ const NoticeInsidePage = () => {
   return (
     <Container>
       <Title>
-        <h4>{noticeData.title}</h4>
+        <h3>{noticeData.title}</h3>
         <p>{formatDate(noticeData.createdAt)}</p>
       </Title>
       <Contents>
@@ -66,7 +66,7 @@ const NoticeListButton = styled.button`
 `
 const Title = styled.div`
   border-bottom: 1px solid #505458;
-  h4 {
+  h3 {
     margin: 0;
   }
   p {
@@ -77,5 +77,5 @@ const Title = styled.div`
   }
 `
 const Contents = styled.p`
-  font-size: 12px;
+  font-size: 14px;
 `
