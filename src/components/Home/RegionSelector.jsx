@@ -1,24 +1,25 @@
 import React, { useState } from "react";
+import {ReactComponent as Location} from '../../assets/svg/Location.svg';
+
 import "./RegionSelector.css";
 
-const regions = ["서울", "경기도", "강원도", "전라도", "경상도", "제주도"];
+const regions = ["서울", "경기도", "강원도", "전라도", "충청도", "경상도", "제주도"];
 
-const RegionSelector = () => {
-  const [selectedRegion, setSelectedRegion] = useState("서울"); // Default selected region
-
+const RegionSelector = ({selectedRegion, handleClick}) => {
   return (
     <div className="region-selector">
-      {regions.map((region) => (
+      {regions.map((region, index) => (
         <button
           key={region}
+          value={index}
           className={`region-button ${
-            selectedRegion === region ? "selected" : ""
+            selectedRegion === index ? "selected" : ""
           }`}
-          onClick={() => setSelectedRegion(region)}
+          onClick={(e) => handleClick(index)}
         >
-          <span className="check-icon">
-            {selectedRegion === region && "✔"}
-          </span>
+          {selectedRegion === index && 
+            <Location/>
+          }
           <span>{region}</span>
         </button>
       ))}

@@ -1,38 +1,42 @@
 import React from 'react';
+import Badge from '../common/Badge';
+import dummyImg from '../../assets/svg/dummy.svg';
 import './TourCardList.css';
-//일단 더미 데이터로 되어있음
+import getRegion from '../common/getRegion';
+import { useNavigate } from 'react-router-dom';
 
-const TourCard = ({ region, title, description }) => {
+const TourCard = ({ contentId, contentTypeId, region, title, image }) => {
+  const navigate = useNavigate();
+  
+  const toDetails = () => {
+    navigate(`/tourist-attractions/${contentId}`);
+  }
+  
   return (
-    <div className="tour-card">
-      <div className="image-placeholder"></div>
+    <div className="tour-card" onClick={toDetails}>
+      {/* <div className="tour-image"></div> */}
+      <img src={image || dummyImg} alt={title} className="tour-image" />
       <div className="tour-info">
-        <h4 className="region">{region}</h4>
+        {/* <h4 className="region">{region}</h4> */}
+        <Badge text={getRegion(region)} />
         <h3 className="title">{title}</h3>
-        <p className="description">{description}</p>
+        {/* <p className="description">{description}</p> */}
       </div>
     </div>
   );
 };
 
-const TourCardList = () => {
-  const tourCards = [
-    { region: '지역1', title: '관광지 이름1', description: '관광지 설명1 관광지 설명1 관광지 설명1' },
-    { region: '지역2', title: '관광지 이름2', description: '관광지 설명2 관광지 설명2 관광지 설명2' },
-    { region: '지역3', title: '관광지 이름3', description: '관광지 설명3 관광지 설명3 관광지 설명3' },
-    { region: '지역4', title: '관광지 이름4', description: '관광지 설명4 관광지 설명4 관광지 설명4' },
-    { region: '지역5', title: '관광지 이름5', description: '관광지 설명5 관광지 설명5 관광지 설명5' },
-    { region: '지역6', title: '관광지 이름6', description: '관광지 설명6 관광지 설명6 관광지 설명6' },
-  ];
-
+const TourCardList = ({data}) => {
   return (
     <div className="tour-card-list">
-      {tourCards.map((card, index) => (
+      {data.map((item) => (
         <TourCard
-          key={index}
-          region={card.region}
-          title={card.title}
-          description={card.description}
+          contentId={item.contentId}
+          contentTypeId={item.contentTypeId}
+          region={item.areaCode}
+          title={item.title}
+          image={item.thumbnailUrl}
+          // description={card.description}
         />
       ))}
     </div>

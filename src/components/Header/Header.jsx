@@ -1,10 +1,22 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import {React, useState} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import {ReactComponent as Logo} from '../../assets/svg/Logo.svg';
-import {ReactComponent as SearchIcon} from '../../assets/svg/SearchIcon.svg';
+import SearchBar from '../common/SearchBar';
 import './Header.css'; // 헤더 스타일링 css
 
 const Header = () => {
+  const [submitted, setSubmitted] = useState(0); // 자식 컴포넌트(SearchBar) 리렌더링 용도
+  const [keyword, setKeyword] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    // IntegrateSearch로 넘어가되 검색어는 그대로 유지
+    e.preventDefault();
+    navigate(`/search`, {state: {keyword: keyword}});
+    setKeyword('');
+    setSubmitted(submitted+1);  // 자식 컴포넌트(SearchBar) 리렌더링 유발발
+  }
+
   return (
     <header className="header">
       <div id="contents">
@@ -26,14 +38,9 @@ const Header = () => {
             </li>
           </ul>
         </nav>
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="어디로 여행을 떠나시나요?"
-            aria-label="Search destinations"
-          />
-          <button><SearchIcon width="25" height="25"/></button>
-        </div>
+        <form key={submitted} onSubmit={handleSubmit}>
+          <SearchBar onChange={setKeyword} value={keyword} />
+        </form>
       </div>  
     </header>
   );

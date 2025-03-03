@@ -1,9 +1,10 @@
 .region-selector {
     display: flex;
+    flex-wrap: wrap;
     gap: 12px; /* Space between buttons */
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
-    padding: 20px;
+    padding-bottom: 50px;
   }
   
   .region-button {
@@ -20,13 +21,14 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease; /* Smooth transition for hover and selected states */
-    min-width: 100px; /* Ensures all buttons have equal width */
+    /* min-width: 1rem; Ensures all buttons have equal width */
   }
   
   .region-button.selected {
     border-color: #2e7d32; /* Green border for selected */
     background-color: #e8f5e9; /* Light green background for selected */
     color: #2e7d32; /* Green text for selected */
+    font-weight: bold;
   }
   
   .region-button .check-icon {

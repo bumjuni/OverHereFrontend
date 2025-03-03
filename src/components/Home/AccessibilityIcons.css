@@ -1,0 +1,58 @@
+.accessibility-icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 20px;
+  }
+  
+  .icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .individual_icon {
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    background-color: #ECEEF0; /* Default light gray */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px; /* Icon size */
+    margin: .7em;
+    transition: all 0.3s ease; /* Smooth transition */
+  }
+  
+  .label {
+    margin-top: 8px;
+    color: #B5B9BD; /* Default text color */
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+
+  .icon-wrapper:hover .individual_icon {
+    background-color: #e0e0e0; /* Slight hover effect */
+  }
+  
+  .icon-wrapper.selected .individual_icon {
+    background-color: #649BB7; /* Highlighted blue background */
+    transition: .5s ease;
+    /* color: #ffffff; White icon color for selected */
+  }
+  
+  .icon-wrapper.selected .label {
+    color: #212121; /* Darker text color for selected */
+  }
+  
+  .selected .individual_icon svg path{
+    fill: #FCFCFD;
+  }
+  
+  .none-selected .individual_icon svg path{
+    fill: #B5B9BD;
+  }
+
+ 

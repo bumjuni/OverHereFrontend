@@ -1,156 +1,225 @@
-import React from "react";
-import CourseDetailInfo from "../components/CourseDetailInfo";
-import SimilarCourseCard from "../components/SimilarCourseCard";
+import {React, useState, useEffect} from "react";
+import axios from "axios";
+import styled from "styled-components";
+import CourseDetailInfo from "../components/CourseDetail/CourseDetailInfo";
+import SimilarCourseCard from "../components/CourseDetail/SimilarCourseCard";
+import {ReactComponent as View} from '../assets/svg/CourseDetail/View.svg';
+import {ReactComponent as Like} from '../assets/svg/CourseDetail/Like.svg';
+import {ReactComponent as ShareButton} from '../assets/svg/ShareButton.svg';
+import {ReactComponent as LikeButton} from '../assets/svg/LikeButton.svg';
+import dummy from '../assets/svg/dummy.svg';
+import InfoIcons from "../components/TravelRoutes/InfoIcons";
+import UserSatisfaction from "../components/CourseDetail/UserSatisfaction";
 
-const CourseDetailPage = () => {
+const initData = {
+  courseId: 0,
+  courseType: "string",
+  likeNumber: 9999,
+  title: "텍스트",
+  overView: "역사와 문화를 동시에 체험할 수 있는 특별한 관광지 코스를 소개합니다. 이 코스는 각 지역의 고유한 매력을 살린 역사적 명소들로 구성되어 있으며, 장애인 친화적인 시설과 서비스를 통해 모든 분들이 편리하게 즐길 수 있습니다.",
+  difficulty: "string",
+  distance: 0,
+  touristSummary: [
+    {
+      touristId: 0,
+      title: "string",
+      detailInfo: "string",
+      imageUrl: "string",
+      place: "백엔드 부재" ,
+      nonObstacleinfo: {helpdog: true, parking: true, wheelchair: true, restroom: true, audioguide: true}
+    }, {          
+      place: "00시 00구",
+      title: "다른 텍스트",
+      imgUrl: dummy,
+      detailInfo: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
+      nonObstacleinfo: {helpdog: true, parking: true, wheelchair: true, restroom: true, audioguide: false}
+    }, {          
+      place: "00시 00구",
+      title: "다른 텍스트",
+      imgUrl: dummy,
+      detailInfo: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
+      nonObstacleinfo: {helpdog: true, parking: false, wheelchair: false, restroom: false, audioguide: true}
+    }
+  ]
+}
+const initSimilarData = [
+  {
+    region: "지역",
+    type: "코스 유형",
+    title: "텍스트",
+    description: "코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글"
+  },  {
+    region: "지역",
+    type: "코스 유형",
+    title: "텍스트",
+    description: "코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글"
+  }
+]
+
+const CourseDetailPage = ({courseId}) => {
+  // API연결 후 더미이미지 작업
+  const [data, setData] = useState(initData);
+  const [simData, setSimData] = useState(initSimilarData);  // API 없음음
+  
+  useEffect(() => {
+    axios.get(`/api/v1/course/detail/courseId=${courseId}`)
+      .then (res => setData(res.data))
+      .catch (err => alert(`${err.status}: 코스 상세 데이터를 불러오늗데 실패했습니다`));
+  }, [])
+
   return (
-    <div style={{ fontFamily: "Arial, sans-serif", color: "#333", margin: "20px" }}>
+    <Container>
       {/* Header Section */}
-      <div
-        style={{
-          width: "100%",
-          height: "300px",
-          backgroundColor: "#ccc",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      >
-        <div>
-          <p style={{ fontSize: "18px", margin: 0 }}>지역</p>
-          <h2 style={{ fontSize: "32px", margin: 0 }}>텍스트</h2>
-        </div>
-      </div>
+      <Title>
+          <p>지역(백엔드 부재)</p>       {/* 백엔드 부재 */}
+          <h1>{data.title}</h1>
+      </Title>
 
       {/* Icon Info Section */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "20px",
-        }}
-      >
-        <div style={{ marginRight: "15px" }}>
-          <span>👁</span> 12,345회
+      <Participations>
+        <div>
+          <span> <View /> 12,345회 (백엔드 부재)</span> 
+          <span> <Like /> {data.likeNumber.toLocaleString()}</span>
         </div>
         <div>
-          <span>❤️</span> 9,999
+          <ShareButton />
+          <LikeButton />
         </div>
-      </div>
+      </Participations>
+
 
       {/* Details Section */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-          marginTop: "30px",
-          padding: "20px",
-          borderTop: "1px solid #ddd",
-          borderBottom: "1px solid #ddd",
-        }}
-      >
-        <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: "18px", fontWeight: "bold" }}>총 00KM</div>
-          <p>코스 거리</p>
-        </div>
-        <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: "18px", fontWeight: "bold" }}>00개</div>
-          <p>관광지 개수</p>
-        </div>
-        <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: "18px", fontWeight: "bold" }}>이동수단</div>
-          <p>권장 이동수단</p>
-        </div>
-        <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: "18px", fontWeight: "bold" }}>난이도</div>
-          <p>난이도</p>
-        </div>
-      </div>
+      <CourseInfo>
+        <InfoIcons mode="detail" distance={data.distance} count={data.touristSummary.length} difficulty={data.difficulty}/>
+      </CourseInfo>
 
       {/* Description */}
-      <div style={{ padding: "20px", lineHeight: "1.6" }}>
-        역사와 문화를 동시에 체험할 수 있는 특별한 관광지 코스를 소개합니다. 이 코스는 각
-        지역의 고유한 매력을 살린 역사적 명소들로 구성되어 있으며, 장애인 친화적인
-        시설과 서비스를 통해 모든 분들이 편리하게 즐길 수 있습니다.
-      </div>
+      <Description>
+        {data.overView}
+      </Description>
 
-      {/* Placeholder Section */}
-      <div
-        style={{
-          width: "100%",
-          height: "300px",
-          backgroundColor: "#ccc",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-        }}
-      ></div>
+      {/* Placeholder Section */}     {/*백엔드 부재*/}
+      <Image src={data.imgUrl || dummy} alt={data.title}/>
 
       {/* Course Details */}
-      <div>
-        <CourseDetailInfo
-          time="00시 00구"
-          title="텍스트"
-          description="관광지 설명 관광지 설명 관광지 설명 관광지 설명 관광지 설명 관광지 설명"
-          icon="♿" // Replace with an actual icon or image if necessary
-        />
-        <CourseDetailInfo
-          time="00시 00구"
-          title="다른 텍스트"
-          description="다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명"
-          icon="♿"
-        />
-        <CourseDetailInfo
-          time="00시 00구"
-          title="다른 텍스트"
-          description="다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명"
-          icon="♿"
-        />
-        <CourseDetailInfo
-          time="00시 00구"
-          title="다른 텍스트"
-          description="다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명"
-          icon="♿"
-        />
-        <CourseDetailInfo
-          time="00시 00구"
-          title="다른 텍스트"
-          description="다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명"
-          icon="♿"
-        />
-      </div>
+      <CardsContainer>
+        <MarkerLine />
+        <Cards>
+          {data.touristSummary.map((item) => 
+            <CourseDetailInfo
+              contentId={item.touristId}
+              place={item.place}
+              title={item.title}
+              img={item.imgUrl || dummy}
+              description={item.detailInfo}
+              nonObstacle={[item.nonObstacleinfo.helpdog,
+                            item.nonObstacleinfo.audioguide,
+                            item.nonObstacleinfo.wheelchair,
+                            item.nonObstacleinfo.restroom,
+                            item.nonObstacleinfo.parking
+               ]}
+            />
+          )}
+        </Cards>
+      </CardsContainer>
 
       <h1>비슷한 코스 찾아보기</h1>
 
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-        <SimilarCourseCard
-          image={null}
-          region="지역"
-          type="코스 유형"
-          title="텍스트"
-          description="코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글"
-        />
-        <SimilarCourseCard
-          image={null}
-          region="다른 지역"
-          type="다른 코스"
-          title="다른 텍스트"
-          description="다른 코스 설명 글 다른 코스 설명 글 다른 코스 설명 글 다른 코스 설명 글"
-        />
-        <SimilarCourseCard
-          image={null}
-          region="다른 지역"
-          type="다른 코스"
-          title="다른 텍스트"
-          description="다른 코스 설명 글 다른 코스 설명 글 다른 코스 설명 글 다른 코스 설명 글"
-        />
+        {simData.map((item) => 
+          <SimilarCourseCard 
+            image={item.image}
+            region={item.region}
+            type={item.type}
+            title={item.title}
+            description={item.description}
+          />
+
+        )}
       </div>
-    </div>
+      <UserSatisfaction />
+    </Container>
   );
 };
 
 export default CourseDetailPage;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+const Title = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 25em;
+  color: white;
+  background-color: #232323;
+  opacity: .3;
+  justify-content: center;
+  align-items: center;
+  p{
+    padding: .5em;
+    margin: 0;
+    border-bottom: 1px solid white;
+  }
+`
+const IconInfo = styled.div`
+  display: inline-flex;
+  justify-content: left;
+  align-items: center;
+  gap: 1em;
+  span{
+    display: flex;
+    gap: 5px;
+  }
+`
+const Participations = styled.div`
+  display: inline-flex;
+  justify-content: space-between;
+  margin: 1em 0;
+
+  div{
+    display: flex;
+    gap: 1em;
+  }
+  div span {
+    display: flex;
+    gap: 5px;
+  }
+  
+`
+const CourseInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  padding: 20px;
+  border-bottom: 2px solid #ddd;
+`
+const Description = styled.p`
+  margin: 2em 0;
+`
+const Image = styled.img`
+  display: flex;
+  align-self: center;
+  width: 90%;
+  aspect-ratio: 1 / 0.55;
+  border-radius: 5px;
+  object-fit: cover;
+`
+const CardsContainer = styled.div`
+  position: relative;
+`
+const Cards = styled.div`
+  z-index: 1;
+`
+const MarkerLine = styled.div`
+  position: absolute;
+  height: calc(100% - 21em);
+  width: 0;
+  border-left: 2px dashed #B5B9BD;
+  z-index: -1;
+  left: 16px;
+  top: 11em;
+  `
