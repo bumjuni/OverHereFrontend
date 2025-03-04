@@ -48,7 +48,5 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     font-size: larger;
-    // gap: 0.7em;
     padding: 0.7em 0.5em 0.7em 0.5em;
-    // padding: calc((100vw / 4) - 280px);
 `
