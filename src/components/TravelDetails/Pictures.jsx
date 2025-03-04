@@ -2,11 +2,24 @@ import {react, useState} from 'react';
 import styled from 'styled-components';
 import {ReactComponent as ZoomIn} from '../../assets/svg/TravelDetails/ZoomIn.svg';
 
+function Pictures({src, index, onClick}){
+
+    return (
+        <Wrapper>
+            <BackGround>
+                <Picture src={src} id={index} onClick={onClick} />
+                <ZoomIn />
+            </BackGround>
+        </Wrapper>
+    );
+}
+
+export default Pictures;
+
 const BackGround = styled.div`
     position: relative;
-    width: 280px;
-    height: 200px;
-    border-radius: 0.5em;
+    aspect-ratio: 1 / 0.7;
+    border-radius: 4px;
     overflow: hidden;
     background-color: #000000;
     svg{
@@ -22,8 +35,9 @@ const BackGround = styled.div`
     }
 `
 const Picture = styled.img`
-    width: 300px;
-    aspect-ratio: 3 / 2;
+    width: 100%;
+    aspect-ratio: 1 / 0.7;
+    object-fit: cover;
     cursor: pointer;
     &:hover{
         opacity: .5;
@@ -37,23 +51,4 @@ const Wrapper = styled.div`
     // gap: 0.7em;
     padding: 0.7em 0.5em 0.7em 0.5em;
     // padding: calc((100vw / 4) - 280px);
-
-    
 `
-
-function Pictures({src, name, handleClick}){
-
-    return (
-        <Wrapper>
-            <BackGround>
-            <div onClick={()=>handleClick(name)}>
-                <Picture src={src} />
-                <ZoomIn />
-            </div>
-            </BackGround>
-            <span> {name} </span>
-        </Wrapper>
-    );
-}
-
-export default Pictures;

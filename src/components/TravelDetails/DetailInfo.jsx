@@ -1,4 +1,4 @@
-import {react, useState} from 'react';
+import {react, useState, useRef, useEffect} from 'react';
 import styled from 'styled-components';
 import ConvenienceIcons from './ConvenienceIcons';
 import dummy1 from '../../assets/image/dummy/dummy_img3.jpg';
@@ -10,60 +10,28 @@ import dummy6 from '../../assets/image/dummy/dummy_img4.jpg';
 import dummy7 from '../../assets/image/dummy/dummy_img6.jpg';
 import Pictures from './Pictures';
 import Modal from './Modal';
+import KakaoMap from './KakaoMap';
 
-const Navigation = styled.nav`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    a {
-        color: black;
-        font-size: 1.3em;
-        font-weight: bold;
-        padding: 15px 30px 15px 30px;
-        border-bottom: 3px solid #FFFFFF; 
-    }
-    a:hover{
-        color: #1A661B;
-        text-decoration: none;
-        border-bottom: 3px solid #1A661B;
-    }
-`
-const Indent = styled.div`
-    padding: 0 15px 0 15px;
-    margin: 0 0 50px 0;
-`
-const Gallery = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    // justify-content: space-between;
-`
 const result = [
     {
         src: dummy1,
-        name: "asdf",
     }, {
         src: dummy2, 
-        name: "asdf",
     }, { 
         src: dummy3,
-        name: "asdf",
     }, {
         src: dummy4,
-        name: "asdf",
     }, {
         src: dummy5,
-        name: "asdf",
     }, {
         src: dummy6,
-        name: "asdf"
     }, {
         src: dummy7,
-        name: "asdf"
     }];
 
 function DetailInfo(){
-    const [clickedImg, setClickedImg] = useState(0);
-    const [openModal, setOpenMoal] = useState(true);
+    const [clickedImg, setClickedImg] = useState(-1);
+    const [openModal, setOpenModal] = useState(false);
 
     return (
         <>
@@ -93,24 +61,66 @@ function DetailInfo(){
 
             <h2 id="편의시설"> 편의시설 </h2>
             <Indent>
-            <div className="pictograms">
-                <ConvenienceIcons 
-                    activate={[1, 1, 1, 1, 1, 0, 0, 1, 0]}
-                />
-                </div>
+                <PictogramBox>
+                    <ConvenienceIcons 
+                        activate={[1, 1, 1, 1, 1, 0]}
+                    />
+                </PictogramBox>
             </Indent>
             
             <h2 id="갤러리"> 갤러리 </h2>
             <Gallery>
-                {result.map((image) => <Pictures src={image.src} name={image.name} handleClick={setClickedImg}/>)}
+                {result.map((image, index) => 
+                <Pictures 
+                    src={image.src} 
+                    index={index} 
+                    onClick={(e)=>setClickedImg(e.target.id)}/> 
+                )}
             </Gallery>
-            <Modal src={result[0]} open={clickedImg} handleClick={setClickedImg}/>
-
-            
+            {clickedImg>=0 && 
+                <Modal 
+                    src={result[clickedImg].src} 
+                    cur={clickedImg}
+                    totalPages={result.length}
+                    handleClick={setClickedImg} />
+            }
 
             <h2 id="오시는 길"> 오시는 길 </h2>
+            <KakaoMap />
          </>
     );
 }
 
 export default DetailInfo;
+
+const Navigation = styled.nav`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    a {
+        color: black;
+        font-size: 1.3em;
+        font-weight: bold;
+        padding: 15px 30px 15px 30px;
+        border-bottom: 3px solid #FFFFFF; 
+    }
+    a:hover{
+        color: #1A661B;
+        text-decoration: none;
+        border-bottom: 3px solid #1A661B;
+    }
+`
+const Indent = styled.div`
+    padding: 0 1em;
+    margin-bottom: 3em;
+`
+const PictogramBox = styled.div`
+    display: flex;
+    gap: 15px;
+`
+const Gallery = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    flex-wrap: wrap;
+    // justify-content: space-between;
+`
