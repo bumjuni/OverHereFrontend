@@ -1,21 +1,21 @@
 /* Header 전체 레이아웃 */
 .header {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
   background-color: #fff; /* 배경색 흰색 */
-  border-bottom: 2px solid #add8e6; /* 아래쪽 파란 테두리 */
-  
+  /* border-bottom: 2px solid #add8e6; /* 아래쪽 파란 테두리 */
 }
 
 /* 로고 스타일 */
-.logo h1 {
+/* .logo h1 {
   margin: 0;
   font-size: 1.8em;
-  color: #2c7a1f; /* 초록색 텍스트 */
+  color: #2c7a1f; 
   font-weight: bold;
-}
+} */
 
 /* 네비게이션 스타일 */
 .nav ul {
@@ -23,12 +23,8 @@
   display: flex;
   margin: 0;
   padding: 0;
- 
-}
-
-.nav ul li {
-  margin-left: 20px; /* 아이템 간격 */
-  
+  font-weight: bold;
+  gap: 20px;
 }
 
 .nav ul li a {
@@ -40,3 +36,23 @@
 .nav ul li a:hover {
   text-decoration: underline;
 }
+
+#contents{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  padding: 10px;
+}
+
+.auth-links a{
+  text-decoration: none;
+  font-size: small;
+  color: #8E9398;
+}
+
+.auth-links a:visited {
+  text-decoration: none;
+  color: #8E9398;
+}
+

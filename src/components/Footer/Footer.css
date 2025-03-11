@@ -1,0 +1,32 @@
+.normal{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.footer-header{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 20px;
+}
+
+.links{
+    display: flex;
+    align-self: center;
+    gap: 10px;  
+    font-weight: bolder;
+    margin-left: auto;
+}
+
+#footer{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 10%;
+    left: 0;
+    bottom: 0;
+    border-top: 2px solid lightgray;
+    font-size: small;
+    padding: 3em 1em 3em 1em;
+    color: #505458;
+}

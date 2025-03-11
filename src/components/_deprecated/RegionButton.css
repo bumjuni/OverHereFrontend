@@ -1,0 +1,42 @@
+/* 버튼 컨테이너 */
+.buttons-container {
+    display: flex;
+    gap: 12px; /* 버튼 간 간격 */
+    flex-wrap: wrap; /* 화면 크기에 따라 줄 바꿈 */
+    padding: 20px;
+  }
+  
+  /* 기본 버튼 스타일 */
+  .region-button {
+    padding: 8px 16px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    background-color: #fff;
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* 아이콘과 텍스트 간 간격 */
+    transition: all 0.3s ease;
+  }
+  
+  /* 활성화된 버튼 스타일 */
+  .region-button.active {
+    border-color: #2c7a1f;
+    color: #2c7a1f;
+    background-color: #f9f9f9;
+    font-weight: bold;
+  }
+  
+  /* 호버 시 스타일 */
+  .region-button:hover {
+    border-color: #2c7a1f;
+    color: #2c7a1f;
+  }
+  
+  /* 아이콘 스타일 */
+  .region_button {
+    font-size: 1.2rem;
+  }
+  

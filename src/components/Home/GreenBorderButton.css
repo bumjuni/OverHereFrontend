@@ -1,0 +1,31 @@
+.green-border-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 1em 4em;
+    margin-bottom: 3em;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #4CAF50;
+    background-color: #ffffff;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .green-border-button:hover {
+    background-color: #4CAF50;
+    color: #ffffff;
+  }
+
+  a {
+    text-decoration: none;
+  }
+  
+  .arrow-icon {
+    font-size: 18px;
+  }
+  
