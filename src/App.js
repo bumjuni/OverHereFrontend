@@ -29,7 +29,7 @@ const App = () => {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path={`${process.env.PUBLIC_URL}/`} element={<Home />} />
         <Route path="/travel-routes" element={<TravelRoutesPage />} />
         <Route path="/sign" element={<SocialSign />} />
         <Route path="/best-course" element={<BestCourse />} />
