@@ -16,6 +16,13 @@ import TermsOfServicePage from './pages/TermsOfSerivcePage';
 import CustomerSupportPage from './pages/CustomerSupportPage';
 import RecCoursePage from './pages/RecCoursePage';
 import IntegrateSearch from './pages/IntegrateSearch';
+import MyPage from './pages/MyPage/MyPage';
+import FavAttraction from './pages/MyPage/FavAttraction';
+import FavCourse from './pages/MyPage/FavCourse';
+import MyQnA from './pages/MyPage/MyQnA';
+import FrequentQnA from './pages/MyPage/FrequentQnA';
+import PersonalQnA from './pages/MyPage/PersonalQnA';
+import MyInfo from './pages/MyPage/MyInfo';
 
 const App = () => {
   return (
@@ -35,6 +42,13 @@ const App = () => {
         <Route path="/tourist-attraction-search" element={<SearchPage />} />
         <Route path="/search" element={<IntegrateSearch />} />
         <Route path="/course-details" element={<CourseDetailPage />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/favorite-attractions" element={<FavAttraction />} />
+        <Route path="/mypage/favorite-courses" element={<FavCourse />} />
+        <Route path="/mypage/my-QnA" element={<MyQnA />} />
+        <Route path="/frequent-QnA" element={<FrequentQnA />} />
+        <Route path="/1:1-QnA" element={<PersonalQnA />} />
+        <Route path="/mypage/info" element={<MyInfo />} />
       </Routes>
       <Footer />  
     </BrowserRouter>
