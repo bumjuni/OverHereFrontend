@@ -18,7 +18,7 @@ function NoticeTable({data, visibleCount}) {
             <th className="date">작성일</th>
             </StyledTHead>
             <tbody>
-            {data.slice(0, visibleCount).map((notice) => (
+            {data.map((notice) => (
                 <BodyTr 
                 onClick={() => handleRowClick(notice.id)}
                 >
