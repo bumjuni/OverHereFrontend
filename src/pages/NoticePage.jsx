@@ -47,7 +47,11 @@ const NoticePage = () => {
 
   useEffect(() => {
     axios.get('api/v1/notices')
-    .then(res => setNotices(res.data))
+    .then(res => {
+      setNotices(res.data);
+      console.log(res);
+      console.log(res.data);
+    })
     .catch(err => alert("공지사항을 불러오는데 실패했습니다."));
 
     const sortedNotices = notices.sort((a, b) => (a.id - b.id));  // id역순(최신순)으로 정렬
