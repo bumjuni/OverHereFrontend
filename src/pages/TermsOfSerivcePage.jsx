@@ -1,55 +1,35 @@
 //푸터 내 이용약관 페이지
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import termsOfService from'../assets/docs/TermsOfService.json'
-
+import ReactMarkDown from "react-markdown";
 
 const TermsOfServicePage = () => {
+  const [data, setData] = useState("");
 
-  const printParagraph = (list) => {
-    const result = [];
-    list.map((item) => {
-      if (item.subParagraph)  result.push(printParagraph(item.subParagraph));
-      else                    result.push(<Paragraph>{item}</Paragraph>)
-    })
-    return <Section>{result}</Section>;
-  }
+  useEffect(() => {
+    fetch(`/docs/TermsofService.md`)
+      .then((response) => response.text())
+      .then((text) => setData(text))
+      .catch((error) => console.error("Markdown 파일 읽기 오류:", error));
+  })
 
   return (
-    <>
-      <h1>{termsOfService.title}</h1>
-      <Container>
-        <p>{termsOfService.introduction}</p>
-        <p>{termsOfService.effectiveDate}</p>
+    <Container>
+      <ReactMarkDown>
+        {data}
+      </ReactMarkDown>
+    </Container>
 
-        {termsOfService.sections.map((section, index) => (
-          <div key={index}>
-            <h2 style={{ fontWeight: "bold", fontSize: "20px", marginTop: "20px" }}>{section.article}</h2>
-            <p>{section.introduction}</p>
-            {printParagraph(section.paragraph)}
-          </div>
-        ))}
-      </Container>
-    </>
-  );
+  )
 };
 
 export default TermsOfServicePage;
 
 const Container = styled.div`
-  font-size: 14px;
-  line-height: 1.5; 
-`
-const Section = styled.ol`
-  margin: 1.5em 0;
-  list-style-position: outside;
-  ol {
-    list-style-type: lower-roman;
-    line-height: 1;
-    font-size: 12px;
-  }
-`
-const Paragraph = styled.li`
-  margin: 1em 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 3em;
 `
