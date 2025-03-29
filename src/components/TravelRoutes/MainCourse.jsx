@@ -1,3 +1,4 @@
+// frontend/src/components/TravelRoutes/MainCourse.jsx
 import {React, useState} from "react";
 import styled from "styled-components";
 import ArrowButton from "./ArrowButton";
@@ -9,8 +10,13 @@ import { useNavigate } from "react-router-dom";
 function MainCourse({data}) {
     const [currentPage, setCurrentPage] = useState(0);
     const navigate = useNavigate();
+    
     const toDetails = () => {
-      navigate(`/course-details/${data.courseId}`);
+      if (data[currentPage] && data[currentPage].courseId) {
+        navigate(`/course-details/${data[currentPage].courseId}`);
+      } else {
+        console.error("courseId가 없습니다:", data[currentPage]);
+      }
     }
     
     return (
@@ -19,7 +25,6 @@ function MainCourse({data}) {
         <div className="route-info">
           <div className="travelroutespageheader">
             <Badge text={data[currentPage].region} color="gray" />
-            <Badge text={data[currentPage].courseType} color="yellow" />
           </div>
           <h1>{data[currentPage].title}</h1>
           <DefaultInfo>
@@ -48,7 +53,7 @@ function MainCourse({data}) {
         {/* Right Column */}
         <div className="image-section">
           <Image 
-            src={data[currentPage].image || dummyImg} 
+            src={data[currentPage].thumbnailUrl || dummyImg} 
             alt={data[currentPage].title} 
             onClick={toDetails}
           />
@@ -58,7 +63,6 @@ function MainCourse({data}) {
 }
 
 export default MainCourse;
-
 const DefaultInfo = styled.div`
   display: flex;
   gap: 3em;

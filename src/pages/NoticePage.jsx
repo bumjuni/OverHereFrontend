@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import NoticeTable from "../components/Notice/NoticeTable";
+import axiosInstance from '../api/axios';  // 커스텀 axios 인스턴스 import
 
 // 초기 공지사항 데이터 (20개 중 처음엔 10개만 표시)
 const initialNotices = Array(20).fill({
@@ -28,9 +28,9 @@ const StyledButton = styled.button`
 `
 
 const NoticePage = () => {
-  const [notices, setNotices] = useState(initialNotices);
-  const [visibleCount, setVisibleCount] = useState(10); // 처음 10개만 표시
-  const [isExpanded, setIsExpanded] = useState(false); // 버튼 상태 (더보기=0/창 줄이기=1)
+  const [notices, setNotices] = useState([]); // 초기값을 빈 배열로 설정
+  const [visibleCount, setVisibleCount] = useState(10);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // 버튼 클릭 시 10개 ↔ 20개 토글
   const toggleView = () => {
@@ -45,18 +45,26 @@ const NoticePage = () => {
   // 게시글 클릭 시 페이지 이동
 
 
-  useEffect(() => {
-    axios.get('api/v1/notices')
-    .then(res => {
-      setNotices(res.data);
-      console.log(res);
-      console.log(res.data);
-    })
-    .catch(err => alert("공지사항을 불러오는데 실패했습니다."));
+  // useEffect(() => {
+  //   axios.get('api/v1/notices')
+  //   .then(res => setNotices(res.data))
+  //   .catch(err => alert("공지사항을 불러오는데 실패했습니다."));
 
-    const sortedNotices = notices.sort((a, b) => (a.id - b.id));  // id역순(최신순)으로 정렬
-    setNotices(sortedNotices);
-  }, [])
+  //   const sortedNotices = notices.sort((a, b) => (a.id - b.id));  // id역순(최신순)으로 정렬
+  //   setNotices(sortedNotices);
+  // }, [])
+
+  useEffect(() => {
+    axiosInstance.get('/api/v1/notices')
+      .then(res => {
+        // contents 배열 추출
+        const noticesData = res.data.contents || [];
+        // id 기준 내림차순 정렬 (최신순)
+        const sortedNotices = noticesData.sort((a, b) => b.id - a.id);
+        setNotices(sortedNotices);
+      })
+      .catch(err => alert("공지사항을 불러오는데 실패했습니다."));
+  }, []);
 
   return (
     <div>

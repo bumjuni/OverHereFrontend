@@ -1,13 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import axios from "axios";
+import axiosInstance from "../../api/axios";
 import SideBar from "../../components/MyPage/SideBar";
 
 function MyInfo() {
-    useEffect(() => {
-        // axios.get(`/api/v1/`)
-    }, [])
+    const [data, setData] = useState([]);
 
+    // useEffect(() => {
+    //     axiosInstance.get('/api/v1/mypage/')
+    //       .then((res) => {
+    //         setData(res.data);
+    //       })
+    //       .catch((err) => {
+    //         alert(`${err.status}: 나의 정보를 불러오는데 실패했습니다`);
+    //       });
+    // }, []);
 
     return (
         <Container>

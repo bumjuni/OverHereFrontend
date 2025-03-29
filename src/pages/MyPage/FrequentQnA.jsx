@@ -1,24 +1,28 @@
-import {React, useEffect, useState} from "react";
+import {React, useEffect, useState, useRef} from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios";
+import axiosInstance from "../../api/axios";
 import SideBar from "../../components/MyPage/SideBar";
 import MoreContentsButton from "../../components/common/MoreContentsButton";
 import formatDate from "../../components/common/formatDate";
+import paging from "../../components/common/paging";
 
-const initData =[{
-    id: 1,
-    title: "회원은 어떤 서비스를 이용할 수 있나요?",
-    createdAt: "2025.01.01",
-  }, {
-    id: 1,
-    title: "서울숲에 휠체어 타고 갈 수 있나요?",
-    createdAt: "2025.01.01",
-  }];
-
+const responseExample = {
+  "totalPages": 0,
+  "contents": [
+    {
+      "faqId": 0,
+      "title": "string",
+      "content": "string",
+      "createdAt": "2025-03-29T12:18:24.973Z",
+      "updatedAt": "2025-03-29T12:18:24.973Z"
+    }
+  ]
+};
 
 function FrequentQnA() {
-    const [data, setData] = useState(initData);
+    const page = useRef(0);
+    const [data, setData] = useState(responseExample.contents);
     const navigate = useNavigate();
 
     const handleRowClick = (id) => {
@@ -26,10 +30,24 @@ function FrequentQnA() {
     }
 
     useEffect(() => {
-      axios.get(`/api/v1/mypage/faqs`)
-        .then(res => setData(res.data))
-        .catch(err => alert(`${err.status}: 나의 정보를 불러오는데 실패했습니다`))
+        axiosInstance.get(`/api/v1/mypage/faqspage=${page.current}`)
+          .then((res) => {
+            setData(res.data);
+          })
+          .catch((err) => {
+            alert(`${err.status}: 자주 묻는 질문 리스트를 불러오는데 실패했습니다`);
+          });
     }, []);
+
+
+      const handleMoreContents = () => {
+            page.current += 1;
+            axiosInstance.get(`/api/v1/mypage/faqspage=${page.current}`)
+                .then(res => setData(...res.data.contentss))
+                .catch(err => alert("자주 묻는 질문 리스트를 불러오는데 실패했습니다."));
+        }
+    
+    
 
     return (
         <Container>
@@ -52,7 +70,7 @@ function FrequentQnA() {
                 </StyledTable>
                 
                 <div>
-                    <MoreContentsButton shape="square"/>
+                  {paging(data.totalPages, page.current) && <MoreContentsButton shape="square" onClick={handleMoreContents}/> }
                 </div>
             </Contents>
         </Container>

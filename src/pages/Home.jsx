@@ -1,6 +1,7 @@
 import {React, useState, useEffect, useRef} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import axiosInstance from '../api/axios';
 import bannerImage from '../assets/image/banner.jpg';
 import './Home.css';
 import Card from '../components/common/Card';
@@ -13,7 +14,7 @@ import getRegion from '../components/common/getRegion';
 
 import dummy1 from '../assets/image/dummy/dummy_img3.jpg';
 
-const nonObstacleOptions = ["HELPDOG", "PARKING", "WHEELCHAIR", "RESTROOM", "AUDIOGUIDE"];
+const nonObstacleOptions = ["HELPDOG", "AUDIOGUIDE" , "WHEELCHAIR", "RESTROOM", "PARKING"];
 const temp = [true, true, true, true, true];
 
 const initCardData = [{
@@ -54,6 +55,17 @@ const initTourData = [{
   "exits": "string"
 }]
 
+// 지역 코드 매핑 추가
+const AREA_CODES = {
+  0: 1,    // 서울
+  1: 31,   // 경기도
+  2: 32,   // 강원도
+  3: 37,   // 전라도
+  4: 33,   // 충청도
+  5: 35,   // 경상도
+  6: 39    // 제주도
+};
+
 // Banner Section 컴포넌트
 const Banner = () => {
   return (
@@ -66,45 +78,47 @@ const Banner = () => {
 };
 
 const Home = () => {
-  // const [cardData, setCardData] = useState(initCardData);
-  // const [tourCardData, setTourCardData] = useState(initTourData);
-
-  const cardData = useRef(initCardData);
-  const tourData = useRef(initTourData);
-  const [filteredCardData, setFilteredCardData] = useState(cardData.current);
-  const [selectedRegion, setSelectedRegion] = useState(0); // Default selected region
-  const [filteredTourData, setFilteredTourData] = useState(tourData.current);
+  const [cardData, setCardData] = useState(initCardData);
+  const [tourCardData, setTourCardData] = useState(initTourData);
+  const [filteredCardData, setFilteredCardData] = useState(cardData);
+  const [selectedRegion, setSelectedRegion] = useState(0);
+  const [filteredTourData, setFilteredTourData] = useState(tourCardData);
   const [selectedIcon, setSelectedIcon] = useState(0);
 
-  // useEffect(() => {
-  //   axios.get('/api/v1/attraction/popular')
-  //       .then((res) => {
-  //         setCardData(res.data);
-  //       })
-  //       .catch((err) => {
-  //         alert("Error: 실시간 인기 급상승 데이터를 불러오는 데 실패했습니다.");
-  //       });
-
-  //   for (let i = 0; i<5; i++){
-  //     axios.get(`api/v1/search/non-obstacle/type=${nonObstacleOptions[i]}`)
-  //         .then((res) => {
-  //           setTourCardData(...res.data.contents);
-  //         })
-  //         .catch((err) => {
-  //           alert("Error: 나를 위한 맞춤 여행지 데이터를 불러오는 데 실패했습니다");
-  //         });
-  //       }
-  // }, []);
-
+  // 지역 선택시 API 호출
   useEffect(() => {
-    const newCardData = cardData.current.filter((item) => item.areaCode === selectedRegion);
-    setFilteredCardData(newCardData);
-  }, [selectedRegion])
+    axiosInstance.get('/api/v1/attraction/popular', {
+      params: {
+        areaCode: AREA_CODES[selectedRegion]
+      }
+    })
+      .then((res) => {
+        setCardData(res.data);
+        setFilteredCardData(res.data);
+      })
+      .catch((err) => {
+        alert("Error: 실시간 인기 급상승 데이터를 불러오는 데 실패했습니다.");
+      });
+  }, [selectedRegion]);
 
+  // 무장애 관련 API 호출 수정
   useEffect(() => {
-    const newTourData = tourData.current.slice(selectedIcon*6, (selectedIcon+1)*6);
-    setFilteredTourData(newTourData);
-  }, [selectedIcon])
+    const selectedType = nonObstacleOptions[selectedIcon];
+    console.log('Selected Type:', selectedType); // 디버깅용
+
+    axiosInstance.get('/api/v1/search/non-obstacle', {
+      params: {
+        type: selectedType
+      }
+    })
+      .then((res) => {
+        setTourCardData(res.data.contents);
+        setFilteredTourData(res.data.contents.slice(0, 6));
+      })
+      .catch((err) => {
+        alert("Error: 나를 위한 맞춤 여행지 데이터를 불러오는 데 실패했습니다");
+      });
+  }, [selectedIcon]);
 
   return (
     <>

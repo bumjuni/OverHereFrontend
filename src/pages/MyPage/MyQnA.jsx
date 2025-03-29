@@ -1,35 +1,53 @@
-import {React, useState, useEffect} from "react";
+import {React, useState, useEffect, useRef} from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import SideBar from "../../components/MyPage/SideBar";
 import MoreContentsButton from "../../components/common/MoreContentsButton";
 import formatDate from "../../components/common/formatDate";
 import Badge from "../../components/common/Badge";
-import axios from "axios";
+import axiosInstance from "../../api/axios";
+import paging from "../../components/common/paging";
 
-const initData =[{
-    id: 1,
-    category: "문의유형",
-    title: "서울숲에 휠체어 타고 갈 수 있나요?",
-    createdAt: "2025.01.01",
-    done: "asdf",
-  }];
+const responseExample = {
+  "totalPages": 0,
+  "contents": [
+    {
+      "id": 0,
+      "title": "string",
+      "createdAt": "2025-03-29T11:53:36.770Z",
+      "inquiryType": "string",
+      "answered": true
+    }
+  ]
+};
 
 function MyQnA() {
-    const [data, setData] = useState(initData);
+    const page = useRef(0);
+    const [data, setData] = useState(responseExample.contents);
     const navigate = useNavigate();
 
     const handleRowClick = (id) => {
-        navigate(`/notice/${id}`);
+        navigate(`/QnA/${id}`);
     }
 
-    useEffect (() => {
-      axios.get(`/api/v1/mypage/inquiries`)
-        .then(res => setData(res.data))
-        .catch(error => alert(`${error.status}: 나의 문의내역을 불러오는데 실패했습니다`))
-    });
+    useEffect(() => {
+      axiosInstance.get(`api/v1/mypage/inquiries?page=${page.current}`)
+        .then((res) => {
+          setData(res.data.contents);
+        })
+        .catch((err) => {
+          alert(`${err.status}: 나의 문의내역을 불러오는데 실패했습니다`);
+        });
+  }, []);
 
-    return (
+    const handleMoreContents = () => {
+        page.current += 1;
+        axiosInstance.get(`api/v1/mypage/inquiries?page=${page.current}`)
+            .then(res => setData(...res.data.contentss))
+            .catch(err => alert("검색 결과를 불러오는데 실패했습니다."));
+    }
+
+  return (
         <Container>
             <SideBar />
             <Contents>
@@ -60,7 +78,7 @@ function MyQnA() {
                 </StyledTable>
                 
                 <div>
-                    <MoreContentsButton shape="square"/>
+                  {paging(data.totalPages, page.current) && <MoreContentsButton shape="square" onClick={handleMoreContents}/> }
                 </div>
             </Contents>
         </Container>

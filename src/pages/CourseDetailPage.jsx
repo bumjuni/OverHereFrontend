@@ -1,5 +1,5 @@
 import {React, useState, useEffect} from "react";
-import axios from "axios";
+import axiosInstance from '../api/axios';
 import styled from "styled-components";
 import CourseDetailInfo from "../components/CourseDetail/CourseDetailInfo";
 import SimilarCourseCard from "../components/CourseDetail/SimilarCourseCard";
@@ -10,6 +10,7 @@ import {ReactComponent as LikeButton} from '../assets/svg/LikeButton.svg';
 import dummy from '../assets/svg/dummy.svg';
 import InfoIcons from "../components/TravelRoutes/InfoIcons";
 import UserSatisfaction from "../components/CourseDetail/UserSatisfaction";
+import { useParams } from 'react-router-dom';
 
 const initData = {
   courseId: 0,
@@ -26,19 +27,19 @@ const initData = {
       detailInfo: "string",
       imageUrl: "string",
       place: "백엔드 부재" ,
-      nonObstacleinfo: {helpdog: true, parking: true, wheelchair: true, restroom: true, audioguide: true}
+      nonObstacleInfo: {helpdog: true, parking: true, wheelchair: true, restroom: true, audioguide: true}
     }, {          
       place: "00시 00구",
       title: "다른 텍스트",
       imgUrl: dummy,
       detailInfo: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
-      nonObstacleinfo: {helpdog: true, parking: true, wheelchair: true, restroom: true, audioguide: false}
+      nonObstacleInfo: {helpdog: true, parking: true, wheelchair: true, restroom: true, audioguide: false}
     }, {          
       place: "00시 00구",
       title: "다른 텍스트",
       imgUrl: dummy,
       detailInfo: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
-      nonObstacleinfo: {helpdog: true, parking: false, wheelchair: false, restroom: false, audioguide: true}
+      nonObstacleInfo: {helpdog: true, parking: false, wheelchair: false, restroom: false, audioguide: true}
     }
   ]
 }
@@ -56,29 +57,30 @@ const initSimilarData = [
   }
 ]
 
-const CourseDetailPage = ({courseId}) => {
+const CourseDetailPage = () => {
+  const { courseId } = useParams();
   // API연결 후 더미이미지 작업
   const [data, setData] = useState(initData);
   const [simData, setSimData] = useState(initSimilarData);  // API 없음음
   
   useEffect(() => {
-    axios.get(`/api/v1/course/detail/courseId=${courseId}`)
-      .then (res => setData(res.data))
-      .catch (err => alert(`${err.status}: 코스 상세 데이터를 불러오늗데 실패했습니다`));
-  }, [])
+    axiosInstance.get(`/api/v1/course/detail?courseId=${courseId}`)
+      .then(res => setData(res.data))
+      .catch(err => alert(`코스 상세 데이터를 불러오는데 실패했습니다`));
+  }, [courseId])
 
   return (
     <Container>
       {/* Header Section */}
       <Title>
-          <p>지역(백엔드 부재)</p>       {/* 백엔드 부재 */}
+          <p>{data.region}</p>       {/* 백엔드 부재 */}
           <h1>{data.title}</h1>
       </Title>
 
       {/* Icon Info Section */}
       <Participations>
         <div>
-          <span> <View /> 12,345회 (백엔드 부재)</span> 
+          <span> <View /> {data.view}</span> 
           <span> <Like /> {data.likeNumber.toLocaleString()}</span>
         </div>
         <div>
@@ -99,7 +101,7 @@ const CourseDetailPage = ({courseId}) => {
       </Description>
 
       {/* Placeholder Section */}     {/*백엔드 부재*/}
-      <Image src={data.imgUrl || dummy} alt={data.title}/>
+      <Image src={data.thumbnailUrl || dummy} alt={data.title}/>
 
       {/* Course Details */}
       <CardsContainer>
@@ -107,17 +109,19 @@ const CourseDetailPage = ({courseId}) => {
         <Cards>
           {data.touristSummary.map((item) => 
             <CourseDetailInfo
+              key={item.touristId}
               contentId={item.touristId}
               place={item.place}
               title={item.title}
-              img={item.imgUrl || dummy}
+              img={item.imageUrl || dummy}
               description={item.detailInfo}
-              nonObstacle={[item.nonObstacleinfo.helpdog,
-                            item.nonObstacleinfo.audioguide,
-                            item.nonObstacleinfo.wheelchair,
-                            item.nonObstacleinfo.restroom,
-                            item.nonObstacleinfo.parking
-               ]}
+              nonObstacle={[
+                item.nonObstacleInfo?.helpdog || false,
+                item.nonObstacleInfo?.audioguide || false,
+                item.nonObstacleInfo?.wheelchair || false,
+                item.nonObstacleInfo?.restroom || false,
+                item.nonObstacleInfo?.parking || false
+              ]}
             />
           )}
         </Cards>

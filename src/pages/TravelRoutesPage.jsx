@@ -3,7 +3,7 @@
 //프로그래스바랑 버튼 세로로
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../api/axios';  // axiosInstance import
 import { Link } from 'react-router-dom';
 import './TravelRoutesPage.css';
 import imgBoy from "../assets/image/img_boy.jpg";
@@ -49,7 +49,7 @@ const pick_data = [
     "region": "region1",
     "courseType": "courseType1",
     "title": "title1",
-    "description": "description1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1descr1description1description1description1description1dedescrdescrdescrdescrdescrdescrdescrdescrscription1description1",
+    "description": "description1description1description1description1descr1description1description1description1descr1",
     "attractions": ["attracion1", "attracion2", "attracion3", "attracion4", "attracion5"],
   },
   {
@@ -66,26 +66,35 @@ const pick_data = [
     "description": "description3description3description3description3description3description3description3",
     "attractions": ["attracion3", "attracion4", "attracion5"],
   },
-]
-
+];
 
 const TravelRoutesPage = () => {
-  const [courseData, setCourseData] = useState(course_data);
-  const [recCourseData, setRecCourseData] = useState(pick_data);
+  const [courseData, setCourseData] = useState([]);
+  const [recCourseData] = useState(pick_data); // 더미데이터로 초기화하고 변경하지 않음
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`/api/v1/course/popular`)
-      .then(res => setCourseData(res.data))
-      .catch(err => alert("코스 정보를 불러오는 데 실패했습니다"));
+    const fetchData = async () => {
+      try {
+        const popularRes = await axiosInstance.get('/api/v1/course/popular');
+        setCourseData(popularRes.data);
+      } catch (err) {
+        alert("코스 정보를 불러오는 데 실패했습니다");
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-    axios.get(`/api/v1/course/popular`)
-      .then(res => setRecCourseData(res.data))
-      .catch(err => alert("에디터 추천 픽 코스 정보를 불러오는 데 실패했습니다"));
+    fetchData();
   }, []);
+
+  if (isLoading) {
+    return <div>로딩중...</div>;
+  }
 
   return (
     <div className="travel-routes">
-      <MainCourse data={course_data}/>
+      <MainCourse data={courseData}/>
 
       <div className="recommend-section">
         <div className="recommend-card green-card">
@@ -116,7 +125,7 @@ const TravelRoutesPage = () => {
       </div>
 
       <h1 className="editor-pick">에디터 추천 픽 코스</h1>
-      <EditorPick data={pick_data}/>
+      <EditorPick data={recCourseData}/>
     </div>
   );
 };

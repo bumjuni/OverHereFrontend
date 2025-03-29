@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axiosInstance from "../../api/axios";
 import axios from "axios";
 import SideBar from "../../components/MyPage/SideBar";
 import DropDown from "../../components/SearchPage/DropDown";
@@ -25,7 +26,7 @@ function PersonalQnA() {
     };
 
     const onSubmit = () => {
-        axios.post(`/api/v1/mypage/inquiries`, {
+        axiosInstance.post(`/api/v1/mypage/inquiries`, {
             title: inputs[title],
             inquiryType: inputs[category],
             userId: 0,      // 추후 수정

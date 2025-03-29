@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import formatDate from "../components/common/formatDate";
+import axiosInstance from '../api/axios';
 
 const initialData = {
   id: 0,
@@ -24,10 +25,10 @@ const NoticeInsidePage = () => {
   };
 
   useEffect(() => {
-    axios.get(`/api/v1/notices/${id}`)
+    axiosInstance.get(`/api/v1/notices/${id}`)
       .then(res => setNoticeData(res.data))
       .catch(err => alert(`공지사항을 불러오는데 실패했습니다 id: ${id}`))
-  }, [])
+  }, [id])
 
   return (
     <Container>

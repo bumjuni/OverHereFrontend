@@ -1,32 +1,22 @@
-function getRegion(areaCode) {
-    let region;
-    switch(areaCode){
-        case 0: 
-            region = "서울";
-            break;
-        case 1: 
-            region = "경기도";
-            break;
-        case 2: 
-            region = "강원도";
-            break;
-        case 3: 
-            region = "전라도";
-            break;
-        case 4: 
-            region = "충청도";
-            break;
-        case 5: 
-            region = "경상도";
-            break;
-        case 6:
-            region = "제주도";
-            break;
+const getRegion = (areaCode) => {
+    switch(areaCode) {
+        case 1:
+            return "서울";
+        case 31:
+            return "경기도";
+        case 32:
+            return "강원도";
+        case 33:
+            return "충청도";
+        case 35:
+            return "경상도";
+        case 37:
+            return "전라도";
+        case 39:
+            return "제주도";
         default:
-            region = null;
-            break;
+            return "지역 정보 없음";
     }
-    return region;
-}
+};
 
 export default getRegion;

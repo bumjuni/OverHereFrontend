@@ -1,6 +1,6 @@
 import {react, useState, useEffect, useRef} from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import axiosInstance from '../api/axios';
 import dummy1 from '../assets/image/dummy/dummy_img1.jpg';
 import BestCourseCard from '../components/BestCourse/BestCourseCard';
 import MoreContentsButton from '../components/common/MoreContentsButton';
@@ -25,40 +25,66 @@ const initData = [
 ];
 
 function BestCourse(){
-    const data = useRef(initData);
+    const [bestCourses, setBestCourses] = useState([]);
+    const [detailedCourses, setDetailedCourses] = useState([]);
     const [visibleData, setVisibleData] = useState(10);
-    // 처음에 백엔드에서 30개 다 넘겨주고 더보기 버튼 누르면 API호출 없이 랜더링만
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
-        axios.get(`/api/v1/course/best`)
-            .then(res => data.current = res.data)
-            .catch(err => alert("베스트 코스 데이터를 가져오는데 실패했습니다."));
-    }, [])
+        const fetchBestCourses = async () => {
+            try {
+                // 1. 먼저 베스트 코스 목록을 가져옴
+                const bestRes = await axiosInstance.get('/api/v1/course/best');
+                setBestCourses(bestRes.data);
+
+                // 2. 각 코스의 상세 정보를 가져옴
+                const detailPromises = bestRes.data.map(course => 
+                    axiosInstance.get(`/api/v1/course/detail?courseId=${course.courseId}`)
+                );
+                
+                const detailResponses = await Promise.all(detailPromises);
+                const detailedData = detailResponses.map(res => res.data);
+                setDetailedCourses(detailedData);
+                
+            } catch (err) {
+                alert("베스트 코스 데이터를 가져오는데 실패했습니다.");
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchBestCourses();
+    }, []);
 
     const handleMoreContents = () => setVisibleData(visibleData + 10);
 
-    useEffect(() => {
-        console.log(visibleData);
-    }, [visibleData])
+    if (isLoading) {
+        return <div>로딩중...</div>;
+    }
+
     return (
         <>
             <h1>여기너머의 인기 코스</h1> 
             <StyledUl>
-                {data.current.slice(0, visibleData).map((item, index) => 
-                    <li>
-                    <BestCourseCard
-                        courseId={item.courseId}
-                        courseType={item.courseType}
-                        title={item.title}
-                        description={item.briefDescription}
-                        distance={item.distance}
-                        rank={index+1}    // 데이터 순서 => rank
-                        img={item.img}
-                    />
+                {detailedCourses.slice(0, visibleData).map((item, index) => 
+                    <li key={item.courseId}>
+                        <BestCourseCard
+                            courseId={item.courseId}
+                            courseType={item.courseType}
+                            title={item.title}
+                            description={item.overView}
+                            distance={item.distance}
+                            rank={index+1}
+                            region={item.region}
+                            attractions={item.touristSummary.map(tourist => tourist.title)}
+                            img={item.thumbnailUrl}
+                            touristSummary={item.touristSummary}
+                        />
                     </li>
                 )}
             </StyledUl>
             
-            {visibleData>=30 ? 
+            {visibleData >= 30 ? 
                 <></> : 
                 <MoreContentsButton onClick={handleMoreContents}/>
             }

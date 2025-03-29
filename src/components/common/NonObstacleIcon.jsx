@@ -40,8 +40,8 @@ const Container = styled.div`
 `
 const IconWrapper = styled.div`
     background-color: #85B8D0;
-    width: 2.8em;
-    height: 2.8em;
+    width: 2.5em;
+    height: 2.5em;
     border-radius: 50%;
     display: flex;
     align-items: center;

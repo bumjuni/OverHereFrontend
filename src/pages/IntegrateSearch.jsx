@@ -7,7 +7,7 @@ import MoreContentsButton from "../components/common/MoreContentsButton";
 import BestCourseCard from "../components/BestCourse/BestCourseCard";
 import NoticeTable from '../components/Notice/NoticeTable';
 import {ReactComponent as ArrowCircle} from '../assets/svg/ArrowCircle.svg';
-import axios from "axios";
+import axiosInstance from '../api/axios';
 
 const initRecKeyword = [
     "여행 코스", "여행 코스", "여행 코스", "여행 코스", "여행 코스", "여행 코스", "여행 코스"
@@ -32,7 +32,7 @@ const initCourseData = [
         "courseId": 0,
         "courseType": "string",
         "title": "string",
-        "briefDescription": "stringstringstringstringstringstringstringstringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringststringstringstringstringstringstringstringringstringstringstringstringstringstring",
+        "briefDescription": "stringstringstringstringstringstringstringstringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringststringstringstringstringstringstringstringringstringstringstringstringstringstring",
         "overView": "string",
         "difficulty": "string",
         "distance": 0,
@@ -80,10 +80,10 @@ function IntegrateSearch() {
     }
 
     const Search = (keyword) => {
-        axios.get(`/api/v1/search/tourist-attraction/searchParam=${keyword}`)
+        axiosInstance.get(`/api/v1/search/tourist-attraction/searchParam=${keyword}`)
             .then(res => setTourData(res.data))
             .catch(err => alert("관광지 정보를 검색하는데 실패했습니다"));
-        axios.get(`/api/v1/search/course/searchQuery=${keyword}`)
+        axiosInstance.get(`/api/v1/search/course/searchQuery=${keyword}`)
             .then(res => setCourseData(res.data))
             .catch(err => alert("코스 정보를 검색하는데 실패했습니다"));
     }

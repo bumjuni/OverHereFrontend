@@ -6,18 +6,23 @@ import { ReactComponent as VehicleIcon } from "../../assets/svg/TravelRoutes/Bus
 import { ReactComponent as DifficultyIcon } from "../../assets/svg/TravelRoutes/DifficultyLevel_Pictogram.svg"; // 난이도 아이콘
 
 
-const InfoIcons = ({mode, distance, count, difficulty}) => {
+const InfoIcons = ({mode, distance, count, difficulty, data}) => {
+  // data 객체가 전달된 경우 해당 값을 사용, 아니면 개별 props 사용
+  const distanceValue = data?.distance || distance || "0";
+  const countValue = data?.number || count || "0";
+  const difficultyValue = data?.difficulty || difficulty || "중";
+  
   const infoOptions = [
-    { id: 0, label: "코스 거리", value: `총 ${distance}KM`, icon: <RouteIcon /> },
-    { id: 1, label: "관광지 개수", value: `${count}개`, icon: <MapIcon /> },
+    { id: 0, label: "코스 거리", value: `총 ${distanceValue}KM`, icon: <RouteIcon /> },
+    { id: 1, label: "관광지 개수", value: `${countValue}개`, icon: <MapIcon /> },
     // { id: 2, value: "이동수단", icon: <VehicleIcon /> },
-    { id: 3, label: "난이도", value: `${difficulty}`, icon: <DifficultyIcon /> },
+    { id: 3, label: "난이도", value: `${difficultyValue}`, icon: <DifficultyIcon /> },
   ];
   
   return (
     <>
       {infoOptions.map((option) => (
-        <Wrapper mode={mode}>
+        <Wrapper key={option.id} mode={mode}>
           {option.icon}
           <Texts>
             {mode==="detail"? 
