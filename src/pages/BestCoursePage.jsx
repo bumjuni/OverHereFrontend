@@ -4,6 +4,7 @@ import axiosInstance from '../api/axios';
 import dummy1 from '../assets/image/dummy/dummy_img1.jpg';
 import BestCourseCard from '../components/BestCourse/BestCourseCard';
 import MoreContentsButton from '../components/common/MoreContentsButton';
+import getRegion from '../components/common/getRegion';
 
 const initData = [
     {
@@ -75,7 +76,7 @@ function BestCourse(){
                             description={item.overView}
                             distance={item.distance}
                             rank={index+1}
-                            region={item.region}
+                            region={getRegion(item.areaCode)}
                             attractions={item.touristSummary.map(tourist => tourist.title)}
                             img={item.thumbnailUrl}
                             touristSummary={item.touristSummary}

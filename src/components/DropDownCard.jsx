@@ -4,25 +4,47 @@ import Badge from './common/Badge';
 import {ReactComponent as ArrowDown} from '../assets/svg/ArrowDown.svg';
 import {ReactComponent as Marker} from '../assets/svg/Marker.svg';
 import dummyImg from '../assets/svg/dummy.svg';
-import DropDown from './SearchPage/DropDown';
 import InfoIcons from './TravelRoutes/InfoIcons';
 import CourseDetailInfo from './CourseDetail/CourseDetailInfo';
+import { useNavigate } from 'react-router-dom';
 
-function DropDownCard({ data }){
+function DropDownCard(props){
     const [clicked, setClicked] = useState(false);
-    const imgSrc = data.image? data.image : dummyImg;
+
+    // 이미지 URL 확인 및 처리
+    const getImageUrl = () => {
+        if (props.img && props.img.trim() !== '') {
+            return props.img;
+        }
+        
+        // 관광지 이미지 중 첫 번째 이미지 사용 (대체 방법)
+        if (props.attractions && props.attractions.length > 0 && 
+            props.touristSummary && props.touristSummary.length > 0) {
+            const firstTourist = props.touristSummary[0];
+            if (firstTourist.imageUrl) {
+                return firstTourist.imageUrl;
+            }
+        }
+        return dummyImg;
+    };
+
+
+    const navigate = useNavigate();
+    const toDetails = () => {
+        navigate(`/course-details/${props.contentId}`);
+    }
 
     return (
         <Container>
             <Card>
-                <Image src={imgSrc} alt={data.title} />
+                <Image src={getImageUrl()} alt={props.title} onClick={toDetails} />
                 <Wrapper>
                     <div>
                         <div>
-                            <Badge text="지역 00시" color="gray" />      {/* 백엔드 부재 */}
-                            <Badge text={`총 ${data.distance}KM`} color="gray" />
+                            <Badge text={props.region} color="gray" />      {/* 백엔드 부재 */}
+                            <Badge text={`총 ${props.distance}KM`} color="gray" />
                         </div>
-                        <h3 style={{margin: 0}}> {data.title} </h3>
+                        <h3 style={{margin: 0}}> {props.title} </h3>
                     </div>
                     <DropDownButton onClick={() => (setClicked(!clicked))}> <ArrowDown /> </DropDownButton>
                 </Wrapper>
@@ -33,10 +55,10 @@ function DropDownCard({ data }){
                         <IconWrapper>
                             <InfoIcons />
                         </IconWrapper>
-                        {data.attractions.map((item) => 
+                        {props.attractions && props.attractions.map((attraction) => 
                             <Attractions>
                                 <Marker />
-                                <Title>{item.title}</Title>
+                                <Title>{attraction}</Title>
                             </Attractions>
                         )}
                         <MarkerLine />
@@ -89,7 +111,7 @@ const DropDownPosition = styled.div`
     position: relative;
     overflow: hidden;
     grid-row: span 2;
-    // width: 100%;
+    width: 100%;
 `
 const Details = styled.div`
     display: flex;
@@ -98,7 +120,7 @@ const Details = styled.div`
     margin:  2px 0;
     border: 1px solid #D4D8DC;
     border-radius: 3px;
-    // width: 100%;    
+    width: 100%;    
     // animation: smoothEmerge 2s ease-in-out;
     max-height: 0;
     transition: max-height 0.3s ease-in-out;
