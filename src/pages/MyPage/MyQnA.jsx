@@ -8,44 +8,35 @@ import Badge from "../../components/common/Badge";
 import axiosInstance from "../../api/axios";
 import paging from "../../components/common/paging";
 
-const responseExample = {
-  "totalPages": 0,
-  "contents": [
-    {
-      "id": 0,
-      "title": "string",
-      "createdAt": "2025-03-29T11:53:36.770Z",
-      "inquiryType": "string",
-      "answered": true
-    }
-  ]
-};
-
 function MyQnA() {
     const page = useRef(0);
-    const [data, setData] = useState(responseExample.contents);
+    const totalPages = useRef(0);
+    const [data, setData] = useState([]);
     const navigate = useNavigate();
 
     const handleRowClick = (id) => {
         navigate(`/QnA/${id}`);
     }
 
-    useEffect(() => {
+    const fetchRes = () => {
       axiosInstance.get(`api/v1/mypage/inquiries?page=${page.current}`)
         .then((res) => {
-          setData(res.data.contents);
+          totalPages.current = res.data.totalPages;
+          setData(...res.data.contents);
         })
         .catch((err) => {
           alert(`${err.status}: 나의 문의내역을 불러오는데 실패했습니다`);
         });
+    }
+
+  useEffect(()  => {
+      fetchRes();
   }, []);
 
-    const handleMoreContents = () => {
-        page.current += 1;
-        axiosInstance.get(`api/v1/mypage/inquiries?page=${page.current}`)
-            .then(res => setData(...res.data.contentss))
-            .catch(err => alert("검색 결과를 불러오는데 실패했습니다."));
-    }
+  const handleMoreContents = () => {
+    page.current += 1;
+    fetchRes();
+  }
 
   return (
         <Container>
@@ -78,7 +69,7 @@ function MyQnA() {
                 </StyledTable>
                 
                 <div>
-                  {paging(data.totalPages, page.current) && <MoreContentsButton shape="square" onClick={handleMoreContents}/> }
+                  {paging(totalPages.current, page.current) && <MoreContentsButton shape="square" onClick={handleMoreContents}/> }
                 </div>
             </Contents>
         </Container>

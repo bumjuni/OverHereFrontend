@@ -8,15 +8,8 @@ import styled from "styled-components";
 import formatDate from "../components/common/formatDate";
 import axiosInstance from '../api/axios';
 
-const initialData = {
-  id: 0,
-  title: "[공지사항] 여기너머 시스템 점검 안내(0214~)",
-  content: "null",
-  createdAt: "2025-01-01T00:00:00",
-}
-
 const NoticeInsidePage = () => {
-  const [noticeData, setNoticeData] = useState(initialData);
+  const [noticeData, setNoticeData] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
 

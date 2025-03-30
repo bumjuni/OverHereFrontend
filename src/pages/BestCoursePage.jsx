@@ -36,7 +36,7 @@ function BestCourse(){
             try {
                 // 1. 먼저 베스트 코스 목록을 가져옴
                 const bestRes = await axiosInstance.get('/api/v1/course/best');
-                setBestCourses(bestRes.data);
+                setBestCourses(...bestRes.data);
 
                 // 2. 각 코스의 상세 정보를 가져옴
                 const detailPromises = bestRes.data.map(course => 
@@ -45,7 +45,7 @@ function BestCourse(){
                 
                 const detailResponses = await Promise.all(detailPromises);
                 const detailedData = detailResponses.map(res => res.data);
-                setDetailedCourses(detailedData);
+                setDetailedCourses(...detailedData);
                 
             } catch (err) {
                 alert("베스트 코스 데이터를 가져오는데 실패했습니다.");

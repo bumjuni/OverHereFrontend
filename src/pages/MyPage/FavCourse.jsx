@@ -14,146 +14,12 @@ import formatTwoDigits from '../../components/common/formatTwoDigits';
 const region = ['서울', '경기도', '충청도', '강원도', '전라도', '경상도', '제주'];
 const type = ['자연 속 휴식', '액티비티', '체험 여행', '역사 탐방', '핫플 모음', '가족 여행', '커플 여행'];
 
-const responseExample = {
-    "totalPages": 0,
-    "contents": [
-      {
-        "courseId": 0,
-        "courseType": "string",
-        "title": "string",
-        "briefDescription": "string",
-        "overView": "string",
-        "difficulty": "string",
-        "distance": 0
-      }
-    ]
-  };
-  const responseExampleDetail = {
-    "courseId": 0,
-    "courseType": "string",
-    "likeNumber": 0,
-    "title": "string",
-    "overView": "string",
-    "difficulty": "string",
-    "distance": 0,
-    "touristSummary": [
-      {
-        "touristId": 0,
-        "title": "string",
-        "detailInfo": "string",
-        "imageUrl": "string",
-        "nonObstacleInfo": {
-          "id": 0,
-          "touristAttraction": {
-            "id": 0,
-            "nonObstacleInfo": "string",
-            "galleries": [
-              {
-                "id": 0,
-                "touristAttraction": "string",
-                "imageUrl": "string"
-              }
-            ],
-            "nonObstacleInfoList": [
-              {
-                "id": 0,
-                "touristAttraction": "string",
-                "course": {
-                  "id": 0,
-                  "courseType": "string",
-                  "title": "string",
-                  "briefDescription": "string",
-                  "overview": "string",
-                  "difficulty": "string",
-                  "courseLikes": [
-                    {
-                      "id": 0,
-                      "user": "string",
-                      "course": "string",
-                      "createdAt": "2025-03-29T11:14:40.987Z"
-                    }
-                  ],
-                  "touristAttractionCourses": [
-                    "string"
-                  ],
-                  "distance": 0
-                },
-                "orders": 0
-              }
-            ],
-            "detailInfo": {
-              "id": 0,
-              "useTime": "string",
-              "useFee": "string",
-              "stroller": true,
-              "elevator": true,
-              "lactationroom": true,
-              "signguide": true,
-              "braileblock": true,
-              "guidehuman": true
-            },
-            "likes": [
-              {
-                "id": 0,
-                "user": {
-                  "id": 0,
-                  "email": "string",
-                  "nickname": "string",
-                  "password": "string",
-                  "likes": [
-                    "string"
-                  ],
-                  "courseLikes": [
-                    {
-                      "id": 0,
-                      "user": "string",
-                      "course": "string",
-                      "createdAt": "2025-03-29T11:14:40.987Z"
-                    }
-                  ],
-                  "role": "string",
-                  "provider": "string",
-                  "providerId": "string"
-                },
-                "touristAttraction": "string",
-                "createdAt": "2025-03-29T11:14:40.987Z"
-              }
-            ],
-            "contentId": 0,
-            "contentTypeId": 0,
-            "areaCode": 0,
-            "cat1": "string",
-            "cat2": "string",
-            "cat3": "string",
-            "thumbnail1": "string",
-            "thumbnail2": "string",
-            "title": "string",
-            "tel": "string",
-            "address1": "string",
-            "address2": "string",
-            "view": 0,
-            "homepage": "string",
-            "mapx": 0,
-            "mapy": 0,
-            "sigungucode": "string",
-            "overview": "string"
-          },
-          "helpdog": true,
-          "parking": true,
-          "wheelchair": true,
-          "restroom": true,
-          "audioguide": true,
-          "exits": "string"
-        }
-      }
-    ]
-  };
-
 function FavCourse() {
     const page = useRef(0);
+    const totalPages = useRef(0);
     const [selectedReg, setSelectedReg] = useState();
     const [selectedType, setSelectedType] = useState();
-    const [data, setData] = useState(responseExample);
+    const [data, setData] = useState([]);
     const [detailedCourses, setDetailedCourses] = useState([]);
     const [count, setCount] = useState(formatTwoDigits(0));
     
@@ -162,6 +28,7 @@ function FavCourse() {
         try {
             // 1. 먼저 fav 코스 목록을 가져옴
             const favRes = await axiosInstance.get(`/api/v1/mypage/course/likes?page=${page.current}`);
+            totalPages.current = favRes.data.totalPages;
             setData(...favRes.data.contents);
 
             // 2. 각 코스의 상세 정보를 가져옴
@@ -233,7 +100,7 @@ function FavCourse() {
                 )}
             </StyledUl>
                 <ButtonWrapper>
-                    {paging(data.totalPages, page.current) && <MoreContentsButton onClick={handleMoreContents} /> }
+                    {paging(totalPages.current, page.current) && <MoreContentsButton onClick={handleMoreContents} /> }
                 </ButtonWrapper>
 
             </Contents>

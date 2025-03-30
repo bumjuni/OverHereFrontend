@@ -7,47 +7,35 @@ import MoreContentsButton from "../../components/common/MoreContentsButton";
 import formatDate from "../../components/common/formatDate";
 import paging from "../../components/common/paging";
 
-const responseExample = {
-  "totalPages": 0,
-  "contents": [
-    {
-      "faqId": 0,
-      "title": "string",
-      "content": "string",
-      "createdAt": "2025-03-29T12:18:24.973Z",
-      "updatedAt": "2025-03-29T12:18:24.973Z"
-    }
-  ]
-};
-
 function FrequentQnA() {
     const page = useRef(0);
-    const [data, setData] = useState(responseExample.contents);
+    const totalPages = useRef(0);
+    const [data, setData] = useState([]);
     const navigate = useNavigate();
 
     const handleRowClick = (id) => {
         navigate(`/QnA/${id}`);
     }
 
+    const fetchRes = () => {
+      axiosInstance.get(`/api/v1/mypage/faqspage=${page.current}`)
+      .then((res) => {
+        totalPages.current = res.data.totalPages;
+        setData(...res.data.contents);
+      })
+      .catch((err) => {
+        alert(`${err.status}: 자주 묻는 질문 리스트를 불러오는데 실패했습니다`);
+      });
+  }
+
     useEffect(() => {
-        axiosInstance.get(`/api/v1/mypage/faqspage=${page.current}`)
-          .then((res) => {
-            setData(res.data);
-          })
-          .catch((err) => {
-            alert(`${err.status}: 자주 묻는 질문 리스트를 불러오는데 실패했습니다`);
-          });
+      fetchRes();
     }, []);
 
-
-      const handleMoreContents = () => {
-            page.current += 1;
-            axiosInstance.get(`/api/v1/mypage/faqspage=${page.current}`)
-                .then(res => setData(...res.data.contentss))
-                .catch(err => alert("자주 묻는 질문 리스트를 불러오는데 실패했습니다."));
-        }
-    
-    
+    const handleMoreContents = () => {
+      page.current += 1;
+      fetchRes();
+    }
 
     return (
         <Container>
@@ -70,7 +58,7 @@ function FrequentQnA() {
                 </StyledTable>
                 
                 <div>
-                  {paging(data.totalPages, page.current) && <MoreContentsButton shape="square" onClick={handleMoreContents}/> }
+                  {paging(totalPages.current, page.current) && <MoreContentsButton shape="square" onClick={handleMoreContents}/> }
                 </div>
             </Contents>
         </Container>

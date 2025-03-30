@@ -13,37 +13,19 @@ import formatTwoDigits from '../../components/common/formatTwoDigits';
 const region = ['서울', '경기도', '충청도', '강원도', '전라도', '경상도', '제주'];
 const type = ['자연', '문화/역사', '음식/미식', '축제/이벤트'];
 
-const responseExample = {
-    "totalPages": 0,
-    "contents": [
-        {
-        "title": "string",
-        "areaCode": 0,
-        "overView": "string",
-        "contentId": 0,
-        "contentTypeId": 0,
-        // "thumbnailUrl": "string",
-        "helpdog": true,
-        "parking": true,
-        "wheelchair": true,
-        "restroom": true,
-        "audioguide": true,
-        "exits": "string"
-        }
-    ]
-};
-
 function FavAttraction() {
     const page = useRef(0);
+    const totalPages = useRef(0);
     const [selectedReg, setSelectedReg] = useState();
     const [selectedType, setSelectedType] = useState();
-    const [data, setData] = useState(responseExample.contents);
+    const [data, setData] = useState([]);
     const [count, setCount] = useState(formatTwoDigits(0));
 
     const fetchFavAttraction = async () => {
         try{
             const favAttraction = await axiosInstance.get(`/api/v1/mypage/touristAttraction/likes?page=${page.current}`);
-            setData(favAttraction.data.contents);
+            totalPages.current = favAttraction.data.totalaPages;
+            setData(...favAttraction.data.contents);
         } catch (err) {
             console.log(err);
             alert(`${err.code}: 관광지 즐겨찾기 데이터를 불러오는 데 실패했습니다.`);
@@ -99,7 +81,7 @@ function FavAttraction() {
                     ))}
                 </CardList>
                 <ButtonWrapper>
-                    {paging(data.totalPages, page.current) && <MoreContentsButton onClick={handleMoreContents} /> }
+                    {paging(totalPages.current, page.current) && <MoreContentsButton onClick={handleMoreContents} /> }
                 </ButtonWrapper>
 
             </Contents>

@@ -61,7 +61,7 @@ const CourseDetailPage = () => {
   const { courseId } = useParams();
   // API연결 후 더미이미지 작업
   const [data, setData] = useState(initData);
-  const [simData, setSimData] = useState(initSimilarData);  // API 없음음
+  const [simData, setSimData] = useState(initSimilarData);  // API 없음
   
   useEffect(() => {
     axiosInstance.get(`/api/v1/course/detail?courseId=${courseId}`)
@@ -73,7 +73,7 @@ const CourseDetailPage = () => {
     <Container>
       {/* Header Section */}
       <Title>
-          <p>{data.region}</p>       {/* 백엔드 부재 */}
+          <p>{data.areaCode}</p>       {/* 백엔드 부재 */}
           <h1>{data.title}</h1>
       </Title>
 
@@ -127,7 +127,8 @@ const CourseDetailPage = () => {
         </Cards>
       </CardsContainer>
 
-      <h1>비슷한 코스 찾아보기</h1>
+      {/* 백엔드 구현이 불가하여 폐기한 기능 */}
+      {/* <h1>비슷한 코스 찾아보기</h1>
 
       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
         {simData.map((item) => 
@@ -141,7 +142,7 @@ const CourseDetailPage = () => {
 
         )}
       </div>
-      <UserSatisfaction />
+      <UserSatisfaction /> */}
     </Container>
   );
 };

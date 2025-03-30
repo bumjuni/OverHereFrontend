@@ -5,28 +5,6 @@ import styled from "styled-components";
 import NoticeTable from "../components/Notice/NoticeTable";
 import axiosInstance from '../api/axios';  // 커스텀 axios 인스턴스 import
 
-// 초기 공지사항 데이터 (20개 중 처음엔 10개만 표시)
-const initialNotices = Array(20).fill({
-  id: 1,
-  category: "[공지사항]",
-  title: "서울숲에 휠체어 타고 갈 수 있나요?",
-  createdAt: "2025.01.01",
-});
-
-
-const StyledButton = styled.button`
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #fff;
-  border: 1px solid #505458;
-  border-radius: 3px;
-  cursor: pointer;
-  white-space: nowrap;
-  width: auto;
-  display: inline-block;
-  text-align: center;
-`
-
 const NoticePage = () => {
   const [notices, setNotices] = useState([]); // 초기값을 빈 배열로 설정
   const [visibleCount, setVisibleCount] = useState(10);
@@ -44,21 +22,12 @@ const NoticePage = () => {
 
   // 게시글 클릭 시 페이지 이동
 
-
-  // useEffect(() => {
-  //   axios.get('api/v1/notices')
-  //   .then(res => setNotices(res.data))
-  //   .catch(err => alert("공지사항을 불러오는데 실패했습니다."));
-
-  //   const sortedNotices = notices.sort((a, b) => (a.id - b.id));  // id역순(최신순)으로 정렬
-  //   setNotices(sortedNotices);
-  // }, [])
-
   useEffect(() => {
     axiosInstance.get('/api/v1/notices')
       .then(res => {
         // contents 배열 추출
         const noticesData = res.data.contents || [];
+        setNotices(...noticesData);
         // id 기준 내림차순 정렬 (최신순)
         const sortedNotices = noticesData.sort((a, b) => b.id - a.id);
         setNotices(sortedNotices);
@@ -89,3 +58,16 @@ const NoticePage = () => {
 };
 
 export default NoticePage;
+
+const StyledButton = styled.button`
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #fff;
+  border: 1px solid #505458;
+  border-radius: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+  width: auto;
+  display: inline-block;
+  text-align: center;
+`

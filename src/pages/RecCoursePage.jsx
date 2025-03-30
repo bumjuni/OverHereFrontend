@@ -23,7 +23,7 @@ function RecCoursePage(){
         try {
             // 1. 먼저 코스 목록을 가져옴
             const response = await axiosInstance.get(`/api/v1/course/recommend/areacode?areacode=${selectedReg}&courseType=${selectedType}`);
-            setCourseList(response.data);
+            setCourseList(...response.data);
 
             // 2. 각 코스의 상세 정보를 가져옴
             const detailPromises = response.data.map(course => 
@@ -32,7 +32,7 @@ function RecCoursePage(){
             
             const detailResponses = await Promise.all(detailPromises);
             const detailedData = detailResponses.map(res => res.data);
-            setDetailedCourse(detailedData);
+            setDetailedCourse(...detailedData);
             
         } catch (err) {
             alert("코스 데이터를 가져오는데 실패했습니다.");
@@ -45,6 +45,8 @@ function RecCoursePage(){
     }
 
     useEffect(() => {
+        setCourseList([]);
+        setDetailedCourse([]);
         fetchCourse();
     }, [selectedReg, selectedType]);
 
