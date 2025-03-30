@@ -31,7 +31,7 @@ const Header = () => {
         <nav className="nav">
           <ul>
             <li>
-              <Link to="/search">관광지 찾기</Link>
+              <Link to="/tourist-attraction-search">관광지 찾기</Link>
             </li>
             <li>
               <Link to="/travel-routes">여행 코스</Link>

@@ -1,32 +1,22 @@
 import {react, useState, useEffect, useRef} from'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import axiosInstance from '../api/axios';
 import {ReactComponent as SearchOff} from '../assets/svg/Search/SearchOff.svg';
 import SearchGroup from '../components/SearchPage/SearchGroup';
 import formatTwoDigits from '../components/common/formatTwoDigits';
 import MoreContentsButton from '../components/common/MoreContentsButton';
 import Card from '../components/common/Card';
+import paging from '../components/common/paging';
 
-const initialData = [
-    {
-        "title": "관광지 이름",
-        "areaCode": "지역",
-        "overView": "string",
-        "contentId": 0,
-        "contentTypeId": "string",
-        "thumbnailUrl": "string",
-        "helpdog": true,
-        "parking": true,
-        "wheelchair": true,
-        "restroom": false,
-        "audioguide": false,
-        "exits": "string"
-    }, {
+const responseExample = {
+    "totalPages": 0,
+    "contents": [
+      {
         "title": "string",
-        "areaCode": "string",
+        "areaCode": 0,
         "overView": "string",
         "contentId": 0,
-        "contentTypeId": "string",
+        "contentTypeId": 0,
         "thumbnailUrl": "string",
         "helpdog": true,
         "parking": true,
@@ -34,21 +24,9 @@ const initialData = [
         "restroom": true,
         "audioguide": true,
         "exits": "string"
-    }, {
-        "title": "string",
-        "areaCode": "string",
-        "overView": "string",
-        "contentId": 0,
-        "contentTypeId": "string",
-        "thumbnailUrl": "string",
-        "helpdog": true,
-        "parking": true,
-        "wheelchair": true,
-        "restroom": true,
-        "audioguide": true,
-        "exits": "string"
-    }
-]
+      }
+    ]
+  };
 
 function SearchPage(){
     const page = useRef(0);
@@ -56,27 +34,33 @@ function SearchPage(){
     const [selectedType, setSelectedType] = useState();
     const [searchWord, setSearchWord] = useState();
 
-    const [result, setResult] = useState(initialData); 
+    const [result, setResult] = useState(responseExample); 
+
+    const fetchResult = () => {
+        axiosInstance.get(`/api/v1/search/tourist-attraction?areacode=${selectedReg}&type=${selectedType}&searchParam=${searchWord}&page=${page.current}`)
+            .then(res => setResult(res.data))
+            .catch(err => alert("검색 결과를 불러오는데 실패했습니다."));
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         page.current = 0;
         // 검색 당시에는 무조건 page=0, 더보기 버튼 호출 시 같은 조건에서 page 수 늘려서 호출
-        axios.get(`/api/v1/search/tourist-attraction&areacode=${selectedReg}&type=${selectedType}&searchParam=${searchWord}&page=${page.current}`)
-            .then(res => setResult(res.data))
-            .catch(err => alert("검색 결과를 불러오는데 실패했습니다."));
+        fetchResult();
     }
 
     const handleMoreContents = () => {
         page.current += 1;
-        axios.get(`/api/v1/search/tourist-attraction&areacode=${selectedReg}&type=${selectedType}&searchParam=${searchWord}&page=${page.current}`)
+        axiosInstance.get(`/api/v1/search/tourist-attraction&areacode=${selectedReg}&type=${selectedType}&searchParam=${searchWord}&page=${page.current}`)
             .then(res => setResult(...res.data))
             .catch(err => alert("검색 결과를 불러오는데 실패했습니다."));
     }
 
     useEffect(() => {
-        console.log(result);
-    }, [result])
+        console.log(selectedReg, selectedType, searchWord, result);
+        page.current = 0;
+        fetchResult();
+    }, [selectedReg, selectedType, searchWord, result])
 
     return (
         <>
@@ -90,11 +74,11 @@ function SearchPage(){
                 searchWord={searchWord}
                 setSearchWord={setSearchWord}  
             />
-            <h3>총 <span style={{color: "#4caf50"}}>{formatTwoDigits(result.length)}</span>개</h3>
+            <h3>총 <span style={{color: "#4caf50"}}>{formatTwoDigits(result.contents.length)}</span>개</h3>
             
             <CardList>
-                {result.length? 
-                    result.map(item => 
+                {result.contents.length? 
+                    result.contents.map(item => 
                     <Card 
                         title={item.title}
                         region={item.areaCode}
@@ -109,8 +93,7 @@ function SearchPage(){
                     </NoOutcome>
                 }
             </CardList>
-
-            <MoreContentsButton onClick={handleMoreContents} />
+            {paging(result.totalPages, page.current) && <MoreContentsButton onClick={handleMoreContents} /> }
         </>
     );
 }
