@@ -11,69 +11,74 @@ import dummy from '../assets/svg/dummy.svg';
 import InfoIcons from "../components/TravelRoutes/InfoIcons";
 import UserSatisfaction from "../components/CourseDetail/UserSatisfaction";
 import { useParams } from 'react-router-dom';
+import dummyCourseData from '../assets/dummyCourseData.json';
+import getRegion from "../components/common/getRegion";
 
-const initData = {
-  courseId: 0,
-  courseType: "string",
-  likeNumber: 9999,
-  title: "텍스트",
-  overView: "역사와 문화를 동시에 체험할 수 있는 특별한 관광지 코스를 소개합니다. 이 코스는 각 지역의 고유한 매력을 살린 역사적 명소들로 구성되어 있으며, 장애인 친화적인 시설과 서비스를 통해 모든 분들이 편리하게 즐길 수 있습니다.",
-  difficulty: "string",
-  distance: 0,
-  touristSummary: [
-    {
-      touristId: 0,
-      title: "string",
-      detailInfo: "string",
-      imageUrl: "string",
-      place: "백엔드 부재" ,
-      nonObstacleInfo: {helpdog: true, parking: true, wheelchair: true, restroom: true, audioguide: true}
-    }, {          
-      place: "00시 00구",
-      title: "다른 텍스트",
-      imgUrl: dummy,
-      detailInfo: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
-      nonObstacleInfo: {helpdog: true, parking: true, wheelchair: true, restroom: true, audioguide: false}
-    }, {          
-      place: "00시 00구",
-      title: "다른 텍스트",
-      imgUrl: dummy,
-      detailInfo: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
-      nonObstacleInfo: {helpdog: true, parking: false, wheelchair: false, restroom: false, audioguide: true}
-    }
-  ]
-}
-const initSimilarData = [
-  {
-    region: "지역",
-    type: "코스 유형",
-    title: "텍스트",
-    description: "코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글"
-  },  {
-    region: "지역",
-    type: "코스 유형",
-    title: "텍스트",
-    description: "코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글"
-  }
-]
+// const initData = {
+//   courseId: 0,
+//   courseType: "string",
+//   likeNumber: 9999,
+//   title: "텍스트",
+//   overView: "역사와 문화를 동시에 체험할 수 있는 특별한 관광지 코스를 소개합니다. 이 코스는 각 지역의 고유한 매력을 살린 역사적 명소들로 구성되어 있으며, 장애인 친화적인 시설과 서비스를 통해 모든 분들이 편리하게 즐길 수 있습니다.",
+//   difficulty: "string",
+//   distance: 0,
+//   touristSummary: [
+//     {
+//       touristId: 0,
+//       title: "string",
+//       detailInfo: "string",
+//       imageUrl: "string",
+//       place: "백엔드 부재" ,
+//       nonObstacleInfo: {helpdog: true, parking: true, wheelchair: true, restroom: true, audioguide: true}
+//     }, {          
+//       place: "00시 00구",
+//       title: "다른 텍스트",
+//       imgUrl: dummy,
+//       detailInfo: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
+//       nonObstacleInfo: {helpdog: true, parking: true, wheelchair: true, restroom: true, audioguide: false}
+//     }, {          
+//       place: "00시 00구",
+//       title: "다른 텍스트",
+//       imgUrl: dummy,
+//       detailInfo: "다른 관광지 설명 다른 관광지 설명 다른 관광지 설명 다른 관광지 설명",    
+//       nonObstacleInfo: {helpdog: true, parking: false, wheelchair: false, restroom: false, audioguide: true}
+//     }
+//   ]
+// }
+// const initSimilarData = [
+//   {
+//     region: "지역",
+//     type: "코스 유형",
+//     title: "텍스트",
+//     description: "코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글"
+//   },  {
+//     region: "지역",
+//     type: "코스 유형",
+//     title: "텍스트",
+//     description: "코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글 코스 설명 글"
+//   }
+// ]
 
 const CourseDetailPage = () => {
   const { courseId } = useParams();
   // API연결 후 더미이미지 작업
-  const [data, setData] = useState(initData);
-  const [simData, setSimData] = useState(initSimilarData);  // API 없음
+  const [data, setData] = useState([]);
+  // const [simData, setSimData] = useState(initSimilarData);  // API 없음
   
   useEffect(() => {
-    axiosInstance.get(`/api/v1/course/detail?courseId=${courseId}`)
-      .then(res => setData(res.data))
-      .catch(err => alert(`코스 상세 데이터를 불러오는데 실패했습니다`));
+    // axiosInstance.get(`/api/v1/course/detail?courseId=${courseId}`)
+    //   .then(res => setData(res.data))
+    //   .catch(err => alert(`코스 상세 데이터를 불러오는데 실패했습니다`));
+    setData(dummyCourseData[courseId-1])
   }, [courseId])
+
+  if (data.length==0)  return <></>;
 
   return (
     <Container>
       {/* Header Section */}
       <Title>
-          <p>{data.areaCode}</p>       {/* 백엔드 부재 */}
+          <p>{getRegion(data.areaCode)}</p>       {/* 백엔드 부재 */}
           <h1>{data.title}</h1>
       </Title>
 

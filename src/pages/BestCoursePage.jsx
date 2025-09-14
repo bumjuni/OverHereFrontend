@@ -5,31 +5,17 @@ import dummy1 from '../assets/image/dummy/dummy_img1.jpg';
 import BestCourseCard from '../components/BestCourse/BestCourseCard';
 import MoreContentsButton from '../components/common/MoreContentsButton';
 import getRegion from '../components/common/getRegion';
-
-const initData = [
-    {
-      "courseId": 0,
-      "courseType": "string",
-      "title": "string",
-      "briefDescription": "stringstringstringstringstringstringstringstringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringststringstringstringstringstringstringstringringstringstringstringstringstringstring",
-      "difficulty": "string",
-      "distance": 0,
-      "img": dummy1
-    }, {
-        "courseId": 0,
-        "courseType": "string",
-        "title": "string",
-        "briefDescription": "string",
-        "difficulty": "string",
-        "distance": 0,
-    }
-];
+import dummyCourseData from '../assets/dummyCourseData.json';
 
 function BestCourse(){
     const [bestCourses, setBestCourses] = useState([]);
     const [detailedCourses, setDetailedCourses] = useState([]);
     const [visibleData, setVisibleData] = useState(10);
-    const [isLoading, setIsLoading] = useState(true);
+    // const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setBestCourses(dummyCourseData);
+    })
 
     useEffect(() => {
         const fetchBestCourses = async () => {
@@ -54,14 +40,14 @@ function BestCourse(){
             }
         };
 
-        fetchBestCourses();
+        // fetchBestCourses();
     }, []);
 
     const handleMoreContents = () => setVisibleData(visibleData + 10);
 
-    if (isLoading) {
-        return <div>로딩중...</div>;
-    }
+    // if (isLoading) {
+    //     return <div>로딩중...</div>;
+    // }
 
     return (
         <>

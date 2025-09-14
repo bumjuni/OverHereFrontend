@@ -9,7 +9,7 @@ import { ReactComponent as DifficultyIcon } from "../../assets/svg/TravelRoutes/
 const InfoIcons = ({mode, distance, count, difficulty, data}) => {
   // data 객체가 전달된 경우 해당 값을 사용, 아니면 개별 props 사용
   const distanceValue = data?.distance || distance || "0";
-  const countValue = data?.number || count || "0";
+  const countValue = data?.touristSummary.length || "0";
   const difficultyValue = data?.difficulty || difficulty || "중";
   
   const infoOptions = [

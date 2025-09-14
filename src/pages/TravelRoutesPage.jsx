@@ -10,68 +10,68 @@ import imgBoy from "../assets/image/img_boy.jpg";
 import imgGirl from "../assets/image/img_girl.jpg";
 import EditorPick from '../components/TravelRoutes/EditorPick';
 import MainCourse from '../components/TravelRoutes/MainCourse';
+import dummyCourseData from '../assets/dummyCourseData.json'
 
-const course_data = [
-  {
-    "region": "region1",
-    "courseType": "courseType1",
-    "title": "title1",
-    "courseInfo": {
-      "distance": "37",
-      "number": "3",
-      "difficulty": "상",
-    },
-  },
-  {
-    "region": "region2",
-    "courseType": "courseType2",
-    "title": "title2",
-    "courseInfo": {
-      "distance": "33247",
-      "number": "332",
-      "difficulty": "중",
-    },
-  },
-  {
-    "region": "region3",
-    "courseType": "courseType3",
-    "title": "title3",
-    "courseInfo": {
-      "distance": "327",
-      "number": "30",
-      "difficulty": "하",
-    },
-  },
-]
+// const course_data = [
+//   {
+//     "region": "region1",
+//     "courseType": "courseType1",
+//     "title": "title1",
+//     "courseInfo": {
+//       "distance": "37",
+//       "number": "3",
+//       "difficulty": "상",
+//     },
+//   },
+//   {
+//     "region": "region2",
+//     "courseType": "courseType2",
+//     "title": "title2",
+//     "courseInfo": {
+//       "distance": "33247",
+//       "number": "332",
+//       "difficulty": "중",
+//     },
+//   },
+//   {
+//     "region": "region3",
+//     "courseType": "courseType3",
+//     "title": "title3",
+//     "courseInfo": {
+//       "distance": "327",
+//       "number": "30",
+//       "difficulty": "하",
+//     },
+//   },
+// ]
 
-const pick_data = [
-  {
-    "region": "region1",
-    "courseType": "courseType1",
-    "title": "title1",
-    "description": "description1description1description1description1descr1description1description1description1descr1",
-    "attractions": ["attracion1", "attracion2", "attracion3", "attracion4", "attracion5"],
-  },
-  {
-    "region": "region2",
-    "courseType": "courseType2",
-    "title": "title2",
-    "description": "description2description2description2description2description2description2description2",
-    "attractions": ["attracion2", "attracion3", "attracion4", "attracion5"],
-  },
-  {
-    "region": "region3",
-    "courseType": "courseType3",
-    "title": "title3",
-    "description": "description3description3description3description3description3description3description3",
-    "attractions": ["attracion3", "attracion4", "attracion5"],
-  },
-];
+// const pick_data = [
+//   {
+//     "region": "region1",
+//     "courseType": "courseType1",
+//     "title": "title1",
+//     "description": "description1description1description1description1descr1description1description1description1descr1",
+//     "attractions": ["attracion1", "attracion2", "attracion3", "attracion4", "attracion5"],
+//   },
+//   {
+//     "region": "region2",
+//     "courseType": "courseType2",
+//     "title": "title2",
+//     "description": "description2description2description2description2description2description2description2",
+//     "attractions": ["attracion2", "attracion3", "attracion4", "attracion5"],
+//   },
+//   {
+//     "region": "region3",
+//     "courseType": "courseType3",
+//     "title": "title3",
+//     "description": "description3description3description3description3description3description3description3",
+//     "attractions": ["attracion3", "attracion4", "attracion5"],
+//   },
+// ];
 
 const TravelRoutesPage = () => {
   const [courseData, setCourseData] = useState([]);
-  const [recCourseData] = useState(pick_data); // 더미데이터로 초기화하고 변경하지 않음
-  const [isLoading, setIsLoading] = useState(true);
+  const [recCourseData, setRecCourseData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,12 +85,12 @@ const TravelRoutesPage = () => {
       }
     };
 
-    fetchData();
+    // fetchData();
+    setCourseData(dummyCourseData);
+    setRecCourseData(dummyCourseData);
   }, []);
 
-  if (isLoading) {
-    return <div>로딩중...</div>;
-  }
+  if (courseData.length==0 || recCourseData.length==0)  return <></>;
 
   return (
     <div className="travel-routes">

@@ -6,6 +6,7 @@ import Badge from "../common/Badge";
 import InfoIcons from "./InfoIcons";
 import dummyImg from '../../assets/svg/dummy.svg';
 import { useNavigate } from "react-router-dom";
+import getRegion from "../common/getRegion";
 
 function MainCourse({data}) {
     const [currentPage, setCurrentPage] = useState(0);
@@ -19,16 +20,18 @@ function MainCourse({data}) {
       }
     }
     
+    if (!data || data.length==0)  return <></>;
+
     return (
         <div className="content-container">
         {/* Left Column */}
         <div className="route-info">
           <div className="travelroutespageheader">
-            <Badge text={data[currentPage].region} color="gray" />
+            <Badge text={getRegion(data[currentPage].areaCode)} color="gray" />
           </div>
           <h1>{data[currentPage].title}</h1>
           <DefaultInfo>
-            <InfoIcons data={data[currentPage].courseInfo}/>
+            <InfoIcons data={data[currentPage]}/>
           </DefaultInfo>
           
           <div className="navigation">

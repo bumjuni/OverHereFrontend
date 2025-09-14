@@ -1,0 +1,102 @@
+[
+  {
+    "touristAttractionId": 1,
+    "areaCode": 1,
+    "title": "한강 공원",
+    "weeklyLikeCount": 245,
+    "helpdog": true,
+    "parking": true,
+    "wheelchair": true,
+    "restroom": true,
+    "audioguide": false,
+
+    "overView": "서울 도심 속에서 즐길 수 있는 대규모 공원으로 산책과 자전거를 즐기기 좋은 장소.",
+    "contentId": 5001,
+    "contentTypeId": 12,
+    "exits": "강변역 1번 출구",
+    "nonObstacle": [true, true, true, true, false]
+  },
+  {
+    "touristAttractionId": 2,
+    "areaCode": 35,
+    "title": "부산 해운대 해수욕장",
+    "weeklyLikeCount": 389,
+    "helpdog": false,
+    "parking": true,
+    "wheelchair": false,
+    "restroom": true,
+    "audioguide": false,
+
+    "overView": "대한민국에서 가장 유명한 해수욕장 중 하나로 여름철 많은 관광객이 찾는다.",
+    "contentId": 5002,
+    "contentTypeId": 76,
+    "exits": "해운대역 5번 출구",
+    "nonObstacle": [false, true, false, true, false]
+  },
+  {
+    "touristAttractionId": 3,
+    "areaCode": 1,
+    "title": "경복궁",
+    "weeklyLikeCount": 512,
+    "helpdog": true,
+    "parking": false,
+    "wheelchair": true,
+    "restroom": true,
+    "audioguide": true,
+
+    "overView": "조선 시대의 대표 궁궐로 한국 전통 건축의 아름다움을 느낄 수 있다.",
+    "contentId": 5003,
+    "contentTypeId": 14,
+    "exits": "경복궁역 4번 출구",
+    "nonObstacle": [true, false, true, true, true]
+  },
+  {
+    "touristAttractionId": 4,
+    "areaCode": 39,
+    "title": "제주 성산일출봉",
+    "weeklyLikeCount": 721,
+    "helpdog": true,
+    "parking": true,
+    "wheelchair": false,
+    "restroom": false,
+    "audioguide": true,
+
+    "overView": "유네스코 세계자연유산으로 지정된 제주도의 대표 관광지 중 하나.",
+    "contentId": 5004,
+    "contentTypeId": 12,
+    "exits": "성산버스터미널",
+    "nonObstacle": [true, true, false, false, true]
+  },
+  {
+    "touristAttractionId": 5,
+    "areaCode": 32,
+    "title": "설악산 국립공원",
+    "weeklyLikeCount": 634,
+    "helpdog": false,
+    "parking": true,
+    "wheelchair": false,
+    "restroom": true,
+    "audioguide": false,
+
+    "overView": "사계절마다 다른 풍경을 보여주는 산으로 등산객과 관광객에게 인기 있는 명소.",
+    "contentId": 5005,
+    "contentTypeId": 76,
+    "exits": "속초 시외버스터미널",
+    "nonObstacle": [false, true, true, false, false]
+  }, {
+    "touristAttractionId": 6,
+    "areaCode": 31,
+    "title": "남이섬",
+    "weeklyLikeCount": 412,
+    "helpdog": true,
+    "parking": true,
+    "wheelchair": true,
+    "restroom": true,
+    "audioguide": false,
+
+    "overView": "아름다운 숲길과 호수 풍경으로 유명한 섬으로 가족 여행과 데이트 코스로 인기 있는 장소.",
+    "contentId": 5006,
+    "contentTypeId": 12,
+    "exits": "가평 터미널",
+    "nonObstacle": [true, true, true, false, true]
+}]

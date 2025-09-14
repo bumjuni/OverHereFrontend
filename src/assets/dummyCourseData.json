@@ -1,0 +1,206 @@
+[
+  {
+    "courseId": 1,
+    "courseType": "산책 코스",
+    "areaCode": 1,
+    "likeNumber": 3245,
+    "title": "서울숲 무장애길",
+    "overView": "도심 속 숲길을 평탄하게 정비해 누구나 편리하게 걸을 수 있는 산책 코스입니다.",
+    "difficulty": "쉬움",
+    "distance": 3,
+    "touristSummary": [
+      {
+        "touristId": 101,
+        "title": "서울숲 입구 광장",
+        "detailInfo": "넓은 광장과 평탄한 산책로가 있어 접근성이 우수합니다.",
+        "imageUrl": "dummy",
+        "place": "서울 성동구",
+        "nonObstacleInfo": { "helpdog": true, "parking": true, "wheelchair": true, "restroom": true, "audioguide": true }
+      },
+      {
+        "place": "서울 성동구",
+        "title": "곤충식물원",
+        "imgUrl": "dummy",
+        "detailInfo": "도심 속 자연 체험 공간으로 휠체어 동선이 잘 마련되어 있습니다.",
+        "nonObstacleInfo": { "helpdog": true, "parking": true, "wheelchair": true, "restroom": true, "audioguide": false }
+      },
+      {
+        "place": "서울 성동구",
+        "title": "서울숲 갤러리",
+        "imgUrl": "dummy",
+        "detailInfo": "작은 전시관과 문화 체험 공간으로 엘리베이터가 설치되어 있습니다.",
+        "nonObstacleInfo": { "helpdog": true, "parking": false, "wheelchair": false, "restroom": false, "audioguide": true }
+      }
+    ]
+  },
+  {
+    "courseId": 2,
+    "courseType": "호수 산책로",
+    "areaCode": 31,
+    "likeNumber": 2879,
+    "title": "일산 호수공원 순환로",
+    "overView": "넓은 호수를 따라 조성된 순환 산책로로 장애인도 편리하게 이용할 수 있습니다.",
+    "difficulty": "쉬움",
+    "distance": 4,
+    "touristSummary": [
+      {
+        "touristId": 201,
+        "title": "호수 전망대",
+        "detailInfo": "호수를 한눈에 조망할 수 있으며 경사로가 잘 설치되어 있습니다.",
+        "imageUrl": "dummy",
+        "place": "경기 고양시",
+        "nonObstacleInfo": { "helpdog": true, "parking": true, "wheelchair": true, "restroom": true, "audioguide": true }
+      },
+      {
+        "place": "경기 고양시",
+        "title": "장미광장",
+        "imgUrl": "dummy",
+        "detailInfo": "사계절 꽃이 피는 정원으로 평탄한 보행로가 조성되어 있습니다.",
+        "nonObstacleInfo": { "helpdog": true, "parking": true, "wheelchair": true, "restroom": true, "audioguide": false }
+      },
+      {
+        "place": "경기 고양시",
+        "title": "자연학습원",
+        "imgUrl": "dummy",
+        "detailInfo": "아이들과 함께 자연을 학습할 수 있는 체험형 공간.",
+        "nonObstacleInfo": { "helpdog": true, "parking": false, "wheelchair": false, "restroom": false, "audioguide": true }
+      }
+    ]
+  },
+  {
+    "courseId": 3,
+    "courseType": "도심 산책 코스",
+    "areaCode": 1,
+    "likeNumber": 3981,
+    "title": "청계천 무장애길",
+    "overView": "역서울 도심 속 청계천을 따라 평탄하게 이어지는 무장애 산책로입니다.",
+    "difficulty": "쉬움",
+    "distance": 6,
+    "touristSummary": [
+      {
+        "touristId": 301,
+        "title": "청계광장",
+        "detailInfo": "도심 속 청계천의 시작점으로 접근성이 뛰어납니다.",
+        "imageUrl": "dummy",
+        "place": "서울 종로구",
+        "nonObstacleInfo": { "helpdog": true, "parking": true, "wheelchair": true, "restroom": true, "audioguide": true }
+      },
+      {
+        "place": "서울 중구",
+        "title": "광통교",
+        "imgUrl": "dummy",
+        "detailInfo": "청계천의 대표 다리로 보행로가 잘 정비되어 있습니다.",
+        "nonObstacleInfo": { "helpdog": true, "parking": true, "wheelchair": true, "restroom": true, "audioguide": false }
+      },
+      {
+        "place": "서울 중구",
+        "title": "청계천 분수대",
+        "imgUrl": "dummy",
+        "detailInfo": "야간에 화려한 조명과 분수쇼를 감상할 수 있습니다.",
+        "nonObstacleInfo": { "helpdog": true, "parking": false, "wheelchair": false, "restroom": false, "audioguide": true }
+      }
+    ]
+  },
+  {
+    "courseId": 4,
+    "courseType": "해안 산책로",
+    "areaCode": 35,
+    "likeNumber": 5120,
+    "title": "부산 광안리 해변 산책로",
+    "overView": "바다 전망을 즐기며 걸을 수 있는 무장애 해변 산책로입니다.",
+    "difficulty": "쉬움",
+    "distance": 2,
+    "touristSummary": [
+      {
+        "touristId": 401,
+        "title": "광안리 해변 데크길",
+        "detailInfo": "바다를 따라 이어지는 무장애 데크길로 휠체어도 이용 가능합니다.",
+        "imageUrl": "dummy",
+        "place": "부산 수영구",
+        "nonObstacleInfo": { "helpdog": true, "parking": true, "wheelchair": true, "restroom": true, "audioguide": true }
+      },
+      {
+        "place": "부산 수영구",
+        "title": "광안대교 전망 포인트",
+        "imgUrl": "dummy",
+        "detailInfo": "광안대교 야경을 감상할 수 있는 포인트.",
+        "nonObstacleInfo": { "helpdog": true, "parking": true, "wheelchair": true, "restroom": true, "audioguide": false }
+      },
+      {
+        "place": "부산 수영구",
+        "title": "해변 카페거리",
+        "imgUrl": "dummy",
+        "detailInfo": "바다 전망 카페들이 모여 있는 명소.",
+        "nonObstacleInfo": { "helpdog": true, "parking": false, "wheelchair": false, "restroom": false, "audioguide": true }
+      }
+    ]
+  },
+  {
+    "courseId": 5,
+    "courseType": "공원 산책 코스",
+    "areaCode": 1,
+    "likeNumber": 2768,
+    "title": "올림픽공원 평화의 길",
+    "overView": "넓은 보행로와 잔디광장을 따라 누구나 편안하게 걸을 수 있는 공원 산책 코스입니다.",
+    "difficulty": "쉬움",
+    "distance": 5,
+    "touristSummary": [
+      {
+        "touristId": 501,
+        "title": "평화의 광장",
+        "detailInfo": "넓은 잔디광장과 평탄한 동선이 특징입니다.",
+        "imageUrl": "dummy",
+        "place": "서울 송파구",
+        "nonObstacleInfo": { "helpdog": true, "parking": true, "wheelchair": true, "restroom": true, "audioguide": true }
+      },
+      {
+        "place": "서울 송파구",
+        "title": "세계평화의 문",
+        "imgUrl": "dummy",
+        "detailInfo": "올림픽 상징 조형물로 사진 명소입니다.",
+        "nonObstacleInfo": { "helpdog": true, "parking": true, "wheelchair": true, "restroom": true, "audioguide": false }
+      },
+      {
+        "place": "서울 송파구",
+        "title": "나홀로나무",
+        "imgUrl": "dummy",
+        "detailInfo": "올림픽공원의 상징적인 큰 나무.",
+        "nonObstacleInfo": { "helpdog": true, "parking": false, "wheelchair": false, "restroom": false, "audioguide": true }
+      }
+    ]
+  },
+  {
+    "courseId": 6,
+    "courseType": "숲속 산책 코스",
+    "areaCode": 39,
+    "likeNumber": 3421,
+    "title": "제주 곶자왈 무장애길",
+    "overView": "제주의 독특한 숲 생태를 무장애 데크길을 통해 체험할 수 있는 코스입니다.",
+    "difficulty": "중간",
+    "distance": 3,
+    "touristSummary": [
+      {
+        "touristId": 601,
+        "title": "곶자왈 숲길 입구",
+        "detailInfo": "데크로 조성된 입구 구간으로 휠체어 접근이 가능합니다.",
+        "imageUrl": "dummy",
+        "place": "제주 서귀포시",
+        "nonObstacleInfo": { "helpdog": true, "parking": true, "wheelchair": true, "restroom": true, "audioguide": true }
+      },
+      {
+        "place": "제주 서귀포시",
+        "title": "숲속 전망대",
+        "imgUrl": "dummy",
+        "detailInfo": "숲의 전경을 내려다볼 수 있는 전망대.",
+        "nonObstacleInfo": { "helpdog": true, "parking": true, "wheelchair": true, "restroom": true, "audioguide": false }
+      },
+      {
+        "place": "제주 서귀포시",
+        "title": "생태 학습장",
+        "imgUrl": "dummy",
+        "detailInfo": "곶자왈의 생태를 배울 수 있는 체험 공간.",
+        "nonObstacleInfo": { "helpdog": true, "parking": false, "wheelchair": false, "restroom": false, "audioguide": true }
+      }
+    ]
+  }
+]

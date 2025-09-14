@@ -11,49 +11,48 @@ import TourCardList from '../components/Home/TourCardList';
 import GreenBorderButton from '../components/Home/GreenBorderButton';
 import getNonObstacleList from '../components/common/getNonObstacleList';
 import getRegion from '../components/common/getRegion';
-
-import dummy1 from '../assets/image/dummy/dummy_img3.jpg';
+import dummyData from '../assets/dummyData.json';
 
 const nonObstacleOptions = ["HELPDOG", "AUDIOGUIDE" , "WHEELCHAIR", "RESTROOM", "PARKING"];
 const temp = [true, true, true, true, true];
 
-const initCardData = [{
-  "touristAttractionId": 0,
-  "areaCode": 0,
-  "title": "string",
-  "thumbnailUrl": dummy1,
-  "weeklyLikeCount": 0,
-  "helpdog": true,
-  "parking": true,
-  "wheelchair": true,
-  "restroom": true,
-  "audioguide": true
-},{
-  "touristAttractionId": 0,
-  "areaCode": 0,
-  "title": "string",
-  // "thumbnailUrl": dummy1,
-  "weeklyLikeCount": 0,
-  "helpdog": true,
-  "parking": true,
-  "wheelchair": true,
-  "restroom": true,
-  "audioguide": true
-}]
-const initTourData = [{
-  "title": "string",
-  "areaCode": 0,
-  "overView": "string",
-  "contentId": 0,
-  "contentTypeId": 0,
-  // "thumbnailUrl": "string",
-  "helpdog": true,
-  "parking": true,
-  "wheelchair": true,
-  "restroom": true,
-  "audioguide": true,
-  "exits": "string"
-}]
+// const initCardData = [{
+//   "touristAttractionId": 0,
+//   "areaCode": 0,
+//   "title": "string",
+//   "thumbnailUrl": dummy1,
+//   "weeklyLikeCount": 0,
+//   "helpdog": true,
+//   "parking": true,
+//   "wheelchair": true,
+//   "restroom": true,
+//   "audioguide": true
+// },{
+//   "touristAttractionId": 0,
+//   "areaCode": 0,
+//   "title": "string",
+//   // "thumbnailUrl": dummy1,
+//   "weeklyLikeCount": 0,
+//   "helpdog": true,
+//   "parking": true,
+//   "wheelchair": true,
+//   "restroom": true,
+//   "audioguide": true
+// }]
+// const initTourData = [{
+//   "title": "string",
+//   "areaCode": 0,
+//   "overView": "string",
+//   "contentId": 0,
+//   "contentTypeId": 0,
+//   // "thumbnailUrl": "string",
+//   "helpdog": true,
+//   "parking": true,
+//   "wheelchair": true,
+//   "restroom": true,
+//   "audioguide": true,
+//   "exits": "string"
+// }]
 
 // 지역 코드 매핑 추가
 const AREA_CODES = {
@@ -78,47 +77,52 @@ const Banner = () => {
 };
 
 const Home = () => {
-  const [cardData, setCardData] = useState(initCardData);
-  const [tourCardData, setTourCardData] = useState(initTourData);
+  const [cardData, setCardData] = useState([]);
+  const [tourCardData, setTourCardData] = useState([]);
   const [filteredCardData, setFilteredCardData] = useState(cardData);
   const [selectedRegion, setSelectedRegion] = useState(0);
   const [filteredTourData, setFilteredTourData] = useState(tourCardData);
   const [selectedIcon, setSelectedIcon] = useState(0);
 
-  // 지역 선택시 API 호출
   useEffect(() => {
-    axiosInstance.get('/api/v1/attraction/popular', {
-      params: {
-        areaCode: AREA_CODES[selectedRegion]
-      }
-    })
-      .then((res) => {
-        setCardData(res.data);
-        setFilteredCardData(res.data);
-      })
-      .catch((err) => {
-        alert("Error: 실시간 인기 급상승 데이터를 불러오는 데 실패했습니다.");
-      });
-  }, [selectedRegion]);
+    setCardData(dummyData);
+    setTourCardData(dummyData);
+  }, [])
 
-  // 무장애 관련 API 호출 수정
-  useEffect(() => {
-    const selectedType = nonObstacleOptions[selectedIcon];
-    console.log('Selected Type:', selectedType); // 디버깅용
+  // // 지역 선택시 API 호출
+  // useEffect(() => {
+  //   axiosInstance.get('/api/v1/attraction/popular', {
+  //     params: {
+  //       areaCode: AREA_CODES[selectedRegion]
+  //     }
+  //   })
+  //     .then((res) => {
+  //       setCardData(res.data);
+  //       setFilteredCardData(res.data);
+  //     })
+  //     .catch((err) => {
+  //       alert("Error: 실시간 인기 급상승 데이터를 불러오는 데 실패했습니다.");
+  //     });
+  // }, [selectedRegion]);
 
-    axiosInstance.get('/api/v1/search/non-obstacle', {
-      params: {
-        type: selectedType
-      }
-    })
-      .then((res) => {
-        setTourCardData(res.data.contents);
-        setFilteredTourData(res.data.contents.slice(0, 6));
-      })
-      .catch((err) => {
-        alert("Error: 나를 위한 맞춤 여행지 데이터를 불러오는 데 실패했습니다");
-      });
-  }, [selectedIcon]);
+  // // 무장애 관련 API 호출 수정
+  // useEffect(() => {
+  //   const selectedType = nonObstacleOptions[selectedIcon];
+  //   console.log('Selected Type:', selectedType); // 디버깅용
+
+  //   axiosInstance.get('/api/v1/search/non-obstacle', {
+  //     params: {
+  //       type: selectedType
+  //     }
+  //   })
+  //     .then((res) => {
+  //       setTourCardData(res.data.contents);
+  //       setFilteredTourData(res.data.contents.slice(0, 6));
+  //     })
+  //     .catch((err) => {
+  //       alert("Error: 나를 위한 맞춤 여행지 데이터를 불러오는 데 실패했습니다");
+  //     });
+  // }, [selectedIcon]);
 
   return (
     <>
@@ -139,7 +143,7 @@ const Home = () => {
             // padding: '20px',
           }}
         >
-          {filteredCardData.map((card, index) => (
+          {cardData.map((card, index) => (
             <Card
               key={index}
               contentId={card.touristAttractionId}
@@ -157,7 +161,7 @@ const Home = () => {
         <h1>나를 위한 맞춤 여행지</h1>
         <AccessibilityIcons selectedIcon={selectedIcon} handleClick={setSelectedIcon}/>
         <TourCardList 
-          data={filteredTourData}
+          data={tourCardData}
         />
       </div>
 

@@ -8,46 +8,49 @@ import BestCourseCard from "../components/BestCourse/BestCourseCard";
 import NoticeTable from '../components/Notice/NoticeTable';
 import {ReactComponent as ArrowCircle} from '../assets/svg/ArrowCircle.svg';
 import axiosInstance from '../api/axios';
+import dummyData from '../assets/dummyData.json';
+import dummyCourseData from '../assets/dummyCourseData.json';
+import getRegion from "../components/common/getRegion";
 
 const initRecKeyword = [
     "여행 코스", "여행 코스", "여행 코스", "여행 코스", "여행 코스", "여행 코스", "여행 코스"
 ];
-const initTourData = [
-    {
-        title: "관광지 이름", 
-        region: "지역", 
-        nonObstacle: [true, true, true, true, true],
-    }, {
-        title: "관광지 이름", 
-        region: "지역", 
-        nonObstacle: [true, false, false, true, true],
-    }, {
-        title: "관광지 이름", 
-        region: "지역", 
-        nonObstacle: [true, true, true, false, true],
-    }
-];
-const initCourseData = [
-    {
-        "courseId": 0,
-        "courseType": "string",
-        "title": "string",
-        "briefDescription": "stringstringstringstringstringstringstringstringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringststringstringstringstringstringstringstringringstringstringstringstringstringstring",
-        "overView": "string",
-        "difficulty": "string",
-        "distance": 0,
-      }, {
-          "courseId": 0,
-          "courseType": "string",
-          "title": "string",
-          "briefDescription": "string",
-          "overView": "string",
-          "difficulty": "string",
-          "distance": 0,
-      }
+// const initTourData = [
+//     {
+//         title: "관광지 이름", 
+//         region: "지역", 
+//         nonObstacle: [true, true, true, true, true],
+//     }, {
+//         title: "관광지 이름", 
+//         region: "지역", 
+//         nonObstacle: [true, false, false, true, true],
+//     }, {
+//         title: "관광지 이름", 
+//         region: "지역", 
+//         nonObstacle: [true, true, true, false, true],
+//     }
+// ];
+// const initCourseData = [
+//     {
+//         "courseId": 0,
+//         "courseType": "string",
+//         "title": "string",
+//         "briefDescription": "stringstringstringstringstringstringstringstringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringstststringstrstringingstringststringstringstringstringstringstringstringringstringstringstringstringstringstring",
+//         "overView": "string",
+//         "difficulty": "string",
+//         "distance": 0,
+//       }, {
+//           "courseId": 0,
+//           "courseType": "string",
+//           "title": "string",
+//           "briefDescription": "string",
+//           "overView": "string",
+//           "difficulty": "string",
+//           "distance": 0,
+//       }
   
-];
-const initNoticeData = Array(20).fill({
+// ];
+const initNoticeData = Array(1).fill({
         "id": 2,
         "title": "서울숲에 휠체어 타고 갈 수 있나요?",
         "createdAt": "2025-01-01T00:00:00",
@@ -58,12 +61,18 @@ function IntegrateSearch() {
     const headerKeyWord = location.state? location.state.keyword : undefined;
     const [keyword, setKeyword] = useState(location.state?.keyword);
     const [recKeyword, setRecKeyword] = useState(initRecKeyword);
-    const [tourData, setTourData] = useState(initTourData);
-    const [courseData, setCourseData] = useState(initCourseData);
-    const [noticeData, setNoticeData] = useState(initNoticeData);
+    const [tourData, setTourData] = useState([]);
+    const [courseData, setCourseData] = useState([]);
+    const [noticeData, setNoticeData] = useState([]);
 
     useEffect(() => {
-        // header에서 검색 시시
+        setTourData(dummyData);
+        setCourseData(dummyCourseData);
+        setNoticeData(initNoticeData);
+    })
+
+    useEffect(() => {
+        // header에서 검색 시
         setKeyword(headerKeyWord);
         Search(headerKeyWord);
     }, [headerKeyWord])
@@ -80,12 +89,12 @@ function IntegrateSearch() {
     }
 
     const Search = (keyword) => {
-        axiosInstance.get(`/api/v1/search/tourist-attraction/searchParam=${keyword}`)
-            .then(res => setTourData(res.data))
-            .catch(err => alert("관광지 정보를 검색하는데 실패했습니다"));
-        axiosInstance.get(`/api/v1/search/course/searchQuery=${keyword}`)
-            .then(res => setCourseData(res.data))
-            .catch(err => alert("코스 정보를 검색하는데 실패했습니다"));
+        // axiosInstance.get(`/api/v1/search/tourist-attraction/searchParam=${keyword}`)
+        //     .then(res => setTourData(res.data))
+        //     .catch(err => alert("관광지 정보를 검색하는데 실패했습니다"));
+        // axiosInstance.get(`/api/v1/search/course/searchQuery=${keyword}`)
+        //     .then(res => setCourseData(res.data))
+        //     .catch(err => alert("코스 정보를 검색하는데 실패했습니다"));
     }
 
     return (
@@ -104,23 +113,29 @@ function IntegrateSearch() {
 
             <h1>관광지</h1>
             <TourContainer>
-                {initTourData.map((item) => 
+                {tourData.map((item) => 
                     <Card 
                         title={item.title}
-                        region={item.region}
+                        region={getRegion(item.areaCode)}
                         nonObstacle={item.nonObstacle}
                     />
                 )}
             </TourContainer>
-            <MoreContentsButton />
+            {/* <Link to='/tourist-attraction-search'>
+                <MoreContentsButton 
+                    onClick={}/>
+            </Link> */}
+
+            {/* <MoreContentsButton /> */}
             <h1>여행 코스</h1>
             <CourseContainer>
-            {initCourseData.map((item) => 
+            {courseData.map((item) => 
                 <BestCourseCard 
                     courseId={item.courseId}
                     courseType={item.courseType}
                     title={item.title}
                     description={item.briefDescription}
+                    region={getRegion(item.areaCode)}
                     distance={item.distance}
                     img={item.img}
                 />
@@ -132,7 +147,7 @@ function IntegrateSearch() {
 
             <h1>공지사항</h1>
             <NoticeTable
-                data={initNoticeData}
+                data={noticeData}
                 visibleCount={5}
             />
             <Link to='/notice'>

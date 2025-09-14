@@ -5,14 +5,17 @@ import Badge from "../common/Badge";
 import ArrowButton from "./ArrowButton";
 import {ReactComponent as Map} from '../../assets/svg/Map.svg';
 import dummyImg from '../../assets/svg/dummy.svg';
+import getRegion from '../common/getRegion';
 
 
 function EditorPick({data}){
     const [curRecCourse, setCurRecCourse] = useState(0);
     const navigate = useNavigate();
     const toDetails = () => {
-        navigate(`/course-details/${data.courseId}`);
+        navigate(`/course-details/${data[curRecCourse].courseId}`);
     }
+
+    if (!data || data.length==0)    return <></>;
 
     return (
         <>
@@ -25,15 +28,15 @@ function EditorPick({data}){
                 <Image src={data[curRecCourse].image || dummyImg} alt={data[curRecCourse].title} />
                 {/* </div> */}
                 <Contents>
-                    <Badge text="지역" color="gray" />
-                    <Badge text="코스 유형" color="yellow" />
+                    <Badge text={getRegion(data[curRecCourse].areaCode)} color="gray" />
+                    <Badge text={data[curRecCourse].courseType} color="yellow" />
                     <h2>{data[curRecCourse].title}</h2>
                     <Description>
                         {data[curRecCourse].description} 
                     </Description>
                     <div className="badges">
-                        {data[curRecCourse].attractions.map(item => 
-                            <Badge text={item} color="gray" />
+                        {data[curRecCourse].touristSummary.map(item => 
+                            <Badge text={item.title} color="gray" />
                         )}
                     </div>
 
