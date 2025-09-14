@@ -56,7 +56,7 @@ function MainCourse({data}) {
         {/* Right Column */}
         <div className="image-section">
           <Image 
-            src={data[currentPage].thumbnailUrl || dummyImg} 
+            src={data[currentPage].touristSummary[0].imageUrl || dummyImg} 
             alt={data[currentPage].title} 
             onClick={toDetails}
           />

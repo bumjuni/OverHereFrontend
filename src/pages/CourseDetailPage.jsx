@@ -106,7 +106,7 @@ const CourseDetailPage = () => {
       </Description>
 
       {/* Placeholder Section */}     {/*백엔드 부재*/}
-      <Image src={data.thumbnailUrl || dummy} alt={data.title}/>
+      <Image src={data.touristSummary[0].imageUrl || dummyImg} alt={data.title}/>
 
       {/* Course Details */}
       <CardsContainer>

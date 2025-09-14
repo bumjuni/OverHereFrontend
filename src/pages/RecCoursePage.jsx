@@ -8,6 +8,7 @@ import RefreshButton from '../components/SearchPage/RefreshButton';
 import paging from '../components/common/paging';
 import MoreContentsButton from '../components/common/MoreContentsButton';
 import getRegion from '../components/common/getRegion';
+import dummyCourseData from '../assets/dummyCourseData.json';
 
 const region = ['서울', '경기도', '충청도', '강원도', '전라도', '경상도', '제주'];
 const type = ['자연 속 휴식', '액티비티', '체험 여행', '역사 탐방', '핫플 모음', '가족 여행', '커플 여행'];
@@ -41,14 +42,17 @@ function RecCoursePage(){
 
     const handleMoreContents = () => {
         page.current += 1;
-        fetchCourse();
+        // fetchCourse();
     }
 
     useEffect(() => {
-        setCourseList([]);
-        setDetailedCourse([]);
-        fetchCourse();
+        setCourseList(dummyCourseData);
+        setDetailedCourse(dummyCourseData);
+        // fetchCourse();
     }, [selectedReg, selectedType]);
+
+    if (courseList.length==0 || !courseList)    return <></>;
+    if (detailedCourse.length==0 || !detailedCourse)    return <></>;
 
     return (
         <>
@@ -70,7 +74,7 @@ function RecCoursePage(){
                         distance={item.distance}
                         region={getRegion(item.areaCode)}
                         attractions={item.touristSummary.map(tourist => tourist.title)}
-                        img={item.thumbnailUrl}
+                        img={item.imageUrl}
                         touristSummary={item.touristSummary}
                     />)} 
             </CardList>

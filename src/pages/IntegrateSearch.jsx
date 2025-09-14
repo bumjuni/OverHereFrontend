@@ -137,7 +137,7 @@ function IntegrateSearch() {
                     description={item.briefDescription}
                     region={getRegion(item.areaCode)}
                     distance={item.distance}
-                    img={item.img}
+                    img={item.imageUrl}
                 />
             )}
             </CourseContainer>

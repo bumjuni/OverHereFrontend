@@ -25,7 +25,7 @@ function EditorPick({data}){
             
             <CardContainer>
                 {/* <div className="img-cropped"> */}
-                <Image src={data[curRecCourse].image || dummyImg} alt={data[curRecCourse].title} />
+                <Image src={data[curRecCourse].touristSummary[0].imageUrl || dummyImg} alt={data[curRecCourse].title} />
                 {/* </div> */}
                 <Contents>
                     <Badge text={getRegion(data[curRecCourse].areaCode)} color="gray" />

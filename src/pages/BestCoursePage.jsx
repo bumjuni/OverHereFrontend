@@ -15,7 +15,8 @@ function BestCourse(){
 
     useEffect(() => {
         setBestCourses(dummyCourseData);
-    })
+        setDetailedCourses(dummyCourseData);
+    }, [])
 
     useEffect(() => {
         const fetchBestCourses = async () => {
@@ -49,6 +50,8 @@ function BestCourse(){
     //     return <div>로딩중...</div>;
     // }
 
+    // if (detailedCourses.length==0)  return <></>;
+
     return (
         <>
             <h1>여기너머의 인기 코스</h1> 
@@ -64,7 +67,7 @@ function BestCourse(){
                             rank={index+1}
                             region={getRegion(item.areaCode)}
                             attractions={item.touristSummary.map(tourist => tourist.title)}
-                            img={item.thumbnailUrl}
+                            img={item.imageUrl}
                             touristSummary={item.touristSummary}
                         />
                     </li>

@@ -7,6 +7,7 @@ import dummyImg from '../../assets/svg/dummy.svg';
 
 const CourseDetailInfo = ({ contentId, place, title, img, description, nonObstacle }) => {
   const imgSrc = img? img : dummyImg;
+  console.log(img)
   const navigate = useNavigate();
 
   const handleClick = () => {

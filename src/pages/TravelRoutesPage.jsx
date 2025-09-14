@@ -102,6 +102,7 @@ const TravelRoutesPage = () => {
           <p className="description">
             여기너머에서 인기가 많은 코스를 함께 찾아봐요. 자연 경관과 즐길거리 모두 포함한 좋은 코스들이 있습니다!
           </p>
+          
           <img src={imgBoy} alt="icon_boy" height="150" className="recommend-image" />
           <Link to='/best-course'>
             <button className="recommend-button green">
